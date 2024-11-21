@@ -1,0 +1,53 @@
+{
+  "name": "vite-react-motoko",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "dfx deploy",
+    "setup": "npm i && dfx generate backend",
+    "build": "tsc && vite build",
+    "format": "prettier --write \"src/**/*.{json,js,jsx,ts,tsx,css,scss}\" \"backend/**/*.mo\"",
+    "sources": "mops sources"
+  },
+  "dependencies": {
+    "@fontsource/roboto": "^5.1.0",
+    "@ic-reactor/react": "^1.7.8",
+    "i18next": "^23.16.6",
+    "i18next-browser-languagedetector": "^8.0.0",
+    "i18next-http-backend": "^2.6.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-i18next": "^15.1.1",
+    "react-icons": "^5.3.0",
+    "react-router-dom": "^6.28.0",
+    "react-slick": "^0.30.2",
+    "slick-carousel": "^1.8.1",
+    "swiper": "^11.1.14"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^14.0.0",
+    "@types/react": "^18.2.14",
+    "@types/react-dom": "^18.2.6",
+    "@types/react-router-dom": "^5.3.3",
+    "@types/react-slick": "^0.23.13",
+    "@vitejs/plugin-react": "^4.0.1",
+    "autoprefixer": "^10.4.20",
+    "cross-fetch": "^3.1.6",
+    "dotenv": "^16.3.1",
+    "ic-mops": "^0.39.2",
+    "jsdom": "^22.1.0",
+    "mo-dev": "^0.13.0",
+    "npm-run-all": "^4.1.5",
+    "postcss": "^8.4.49",
+    "prettier": "^2.8.8",
+    "prettier-plugin-motoko": "^0.5.3",
+    "sass": "^1.81.0",
+    "tailwindcss": "^3.4.15",
+    "typescript": "^5.1.3",
+    "vite": "^4.3.9",
+    "vite-plugin-environment": "^1.1.3",
+    "vitest": "^0.32.2"
+  }
+}

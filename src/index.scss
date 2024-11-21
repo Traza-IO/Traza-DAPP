@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Importar fuentes locales */
+@font-face {
+  font-family: "Geist Sans";
+  src: url("./assets/fonts/GeistVF.woff") format("woff");
+  font-weight: 100 900; /* Define el rango de pesos */
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("./assets/fonts/GeistMonoVF.woff") format("woff");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Configuración de Roboto si usas Google Fonts */
+@import "@fontsource/roboto/400.css"; /* Regular */
+@import "@fontsource/roboto/700.css"; /* Bold */
+
+/* Variables CSS (opcional) */
+:root {
+  --font-geist-sans: "Geist Sans", sans-serif;
+  --font-geist-mono: "Geist Mono", monospace;
+  --font-roboto: "Roboto", sans-serif;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Garantiza que los bordes se incluyan en el ancho/alto total */
+  width: 100%;
+  height: 100%;
+}
+
+img {
+  max-width: 100%; /* Evita que las imágenes se desborden */
+  height: auto; /* Mantiene la proporción de las imágenes */
+}
+
+*, *::before, *::after {
+  box-sizing: inherit; /* Hereda el box-sizing para todos los elementos */
+}
+
+.slick-slider{
+  background: none;
+}
+
+.slick-slider {
+  width: 100%; /* Asegura que el slider ocupe todo el ancho del contenedor */
+  box-sizing: border-box; /* Evita problemas de padding */
+}
+
+.slick-slide {
+  display: flex; /* Centra el contenido dentro del slide */
+  justify-content: center;
+  align-items: center;
+  width: 100%; /* Asegura que cada slide ocupe el ancho completo */
+}
