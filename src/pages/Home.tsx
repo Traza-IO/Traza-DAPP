@@ -7,10 +7,6 @@ import { useTranslation } from 'react-i18next';
 
 const Home: React.FC = () => {
   const { t, i18n } = useTranslation();
-  useEffect(() => {
-    console.log("Current language:", i18n.language); // Verifica el idioma actual
-    console.log("Available translations:", i18n.store.data); // Verifica las traducciones cargadas
-  }, [i18n.language]);
   return (
     <div className="max-w-[1024px] mx-auto mt-6 px-5">
       <Accordion>
