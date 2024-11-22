@@ -22,7 +22,7 @@ const Nav = () => {
             isActive("/") ? "bg-[#797f75] text-white" : "text-[#5f6259]"
           }`}
         >
-          <Link to="/" className="py-3 block text-center">
+          <Link to="/:lng" className="py-3 block text-center">
             <FaInfoCircle className="mx-auto" size={24} />
             <span className="text-[10px]">Producto</span>
           </Link>
@@ -34,7 +34,7 @@ const Nav = () => {
               : "text-[#5f6259]"
           }`}
         >
-          <Link to="/traceability" className="py-3 block text-center">
+          <Link to="/:lng/traceability" className="py-3 block text-center">
             <FaDashcube className="mx-auto" size={24} />
             <span className="text-[10px]">Trazabilidad</span>
           </Link>
@@ -46,7 +46,7 @@ const Nav = () => {
               : "text-[#5f6259]"
           }`}
         >
-          <Link to="/sustainability" className="py-3 block text-center">
+          <Link to="/:lng/sustainability" className="py-3 block text-center">
             <FaLeaf className="mx-auto" size={24} />
             <span className="text-[10px]">Sostenibilidad</span>
           </Link>
@@ -58,7 +58,7 @@ const Nav = () => {
               : "text-[#5f6259]"
           }`}
         >
-          <Link to="/blockchain" className="py-3 block text-center">
+          <Link to="/:lng/blockchain" className="py-3 block text-center">
             <FaInfinity className="mx-auto" size={24} />
             <span className="text-[10px]">Blockchain</span>
           </Link>
@@ -70,7 +70,7 @@ const Nav = () => {
               : "text-[#5f6259]"
           }`}
         >
-          <Link to="/compartir" className="py-3 block text-center">
+          <Link to="/:lng/share" className="py-3 block text-center">
             <FaShareAlt className="mx-auto" size={24} />
             <span className="text-[10px]">Compartir</span>
           </Link>
