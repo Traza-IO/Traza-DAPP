@@ -1,4 +1,9 @@
 import Text "mo:base/Text";
+import Trie "mo:base/Trie";
+import List "mo:base/List";
+import Option "mo:base/Option";
+import Nat32 "mo:base/Nat32";
+
 actor class Product() {
   type ModelDescription_Type={
     name: Text;
@@ -88,8 +93,38 @@ type lotdpp_type={
     update_date: Text;
   };
 
+ private stable var modelsDPP : Trie.Trie<Text, ModelDPP_Type> = Trie.empty();
+ type Key<K> = Trie.Key<K>;
+ func key(t: Text) : Key<Text> { { hash = Text.hash t; key = t } };
 
+ public func createModel(model : ModelDPP_Type) : async Text {
+    modelsDPP := Trie.replace(
+      modelsDPP,
+      key(model.id_model),
+      Text.equal,
+      ?model,
+    ).0;
+    return model.id_model;
+  };
+  public query func readModelId(idModel:Text) : async ?ModelDPP_Type {
+    let result = Trie.find(modelsDPP, key(idModel) ,Text.equal);
+    return result;
+  };
 
+ private stable var lotsDPP : Trie.Trie<Text, lotdpp_type> = Trie.empty();
 
+ public func createLot(lotDpp : lotdpp_type) : async Text {
+    lotsDPP := Trie.replace(
+      lotsDPP,
+      key(lotDpp.id_lot),
+      Text.equal,
+      ?lotDpp,
+    ).0;
+    return lotDpp.id_lot;
+  };
+  public query func readLotId(idLot:Text) : async ?lotdpp_type {
+    let result = Trie.find(lotsDPP, key(idLot) ,Text.equal);
+    return result;
+  };
 
 };
