@@ -5,6 +5,7 @@ export default {
     './src/**/*.{js,ts,jsx,tsx}',
     './src/declarations/**/*.{did,motoko}',
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       fontFamily: {

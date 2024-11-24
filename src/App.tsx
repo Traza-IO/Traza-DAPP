@@ -5,7 +5,6 @@ function App() {
   const { t, i18n } = useTranslation();
 
   const changeLanguage = (lng: string) => {
-    console.log('click')
     i18n.changeLanguage(lng);
   };
 

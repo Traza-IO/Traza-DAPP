@@ -61,3 +61,16 @@ img {
   align-items: center;
   width: 100%; /* Asegura que cada slide ocupe el ancho completo */
 }
+
+body .slick-dots li button:before{
+  content: "";
+  background-color: #fff;
+  width: 6px !important;
+  height: 6px !important;
+  transition: all .25s ease;
+}
+
+body .slick-dots li.slick-active button:before {
+  transform: scale(2);
+  opacity: 1;
+}
