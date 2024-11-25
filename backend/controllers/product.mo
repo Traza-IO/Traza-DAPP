@@ -113,7 +113,7 @@ type lotdpp_type={
 
  private stable var lotsDPP : Trie.Trie<Text, lotdpp_type> = Trie.empty();
 
- public func createLot(lotDpp : lotdpp_type) : async Text {
+ public func createLot(lotDpp    : lotdpp_type) : async Text {
     lotsDPP := Trie.replace(
       lotsDPP,
       key(lotDpp.id_lot),
@@ -127,4 +127,19 @@ type lotdpp_type={
     return result;
   };
 
+private stable var productsDPP : Trie.Trie<Text, product_dpp_type> = Trie.empty();
+
+ public func createProductDpp(prodDPP : product_dpp_type) : async Text {
+    productsDPP := Trie.replace(
+      productsDPP,
+      key(prodDPP.id_product),
+      Text.equal,
+      ?prodDPP,
+    ).0;
+    return prodDPP.id_product;
+  };
+  public query func readProductDpp(idProd:Text) : async ?product_dpp_type {
+    let result = Trie.find(productsDPP, key(idProd) ,Text.equal);
+    return result;
+  };
 };
