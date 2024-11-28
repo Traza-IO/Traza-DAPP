@@ -1,33 +1,39 @@
-"use client";
+'use client';
 
-import imgBussiness from "../../assets/logo-mestiza.svg";
-import { FaFacebookSquare } from "react-icons/fa";
-import { FaInstagram } from "react-icons/fa";
-import { FaWhatsapp } from "react-icons/fa";
-import { IoCart } from "react-icons/io5";
+import imgBussiness from '../../assets/logo-mestiza.svg';
+import { FaFacebookSquare } from 'react-icons/fa';
+import { FaInstagram } from 'react-icons/fa';
+import { FaWhatsapp } from 'react-icons/fa';
+import { IoCart } from 'react-icons/io5';
 
 const Materials = () => {
   return (
     <div className="flex items-start justify-between max-w-[1024px] mx-auto mt-4 px-4 w-full">
       <div className="max-md:text-center max-md:mb-4 w-full">
-        <h4 className="font-bold text-[#5f6259] text-[15px] text-left">
+        <h4 className="font-bold text-[#5f6259] text-[15px] text-left dark:text-white">
           Materiales
         </h4>
         <ul className="p-0 text-left">
-          <li className="text-[11px] text-[#5f6259]">100% algodón tangüis</li>
-          <li className="text-[11px] text-[#5f6259]">100% tintes ecológicos</li>
+          <li className="text-[11px] text-[#5f6259] dark:text-white">
+            100% algodón tangüis
+          </li>
+          <li className="text-[11px] text-[#5f6259] dark:text-white">
+            100% tintes ecológicos
+          </li>
         </ul>
       </div>
       <div className="max-md:text-center max-md:mb-4 w-full">
-        <h4 className="font-bold text-[#5f6259] text-[15px] uppercase">
+        <h4 className="font-bold text-[#5f6259] text-[15px] uppercase dark:text-white">
           hooded sweatshirt
         </h4>
         <ul>
-          <li className="text-[14px] mt-3">Trazable</li>
+          <li className="text-[14px] mt-3 dark:text-white">Trazable</li>
         </ul>
       </div>
       <div className="max-md:text-center max-md:mb-4 w-full">
-        <h4 className="font-bold text-[#5f6259] text-[15px]">Empresa</h4>
+        <h4 className="font-bold text-[#5f6259] text-[15px] dark:text-white">
+          Empresa
+        </h4>
         <figure>
           <img
             src={imgBussiness}

@@ -2,225 +2,169 @@ import React, { useEffect } from 'react';
 import Accordion from '../components/Accordion/Accordion';
 import AccordionHead from '../components/Accordion/components/AccordionHead';
 import AccordionContent from '../components/Accordion/components/AccordionContent';
-import { FaChevronCircleRight } from "react-icons/fa";
+import { FaChevronCircleRight } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
+import { useQueryCall, useUpdateCall } from '@ic-reactor/react';
+import { Information } from '../components/HomeComponents';
 
 const Home: React.FC = () => {
   const { t, i18n } = useTranslation();
+
+  // const { data, call } = useQueryCall({
+  //   functionName: 'readModelId',
+  //   args: ['dd6t2z'],
+  // });
+  const { data: data1, call: call1 } = useQueryCall({
+    functionName: 'readProductDpp',
+    args: ['qi0q6g'],
+  });
+
+  const { data: data2, call: call2 } = useQueryCall({
+    functionName: 'readModelId',
+    args: ['5cnqoa'],
+  });
+
+  const { data: data3, call: call3 } = useQueryCall({
+    functionName: 'readLotId',
+    args: ['xsrq2kl'],
+  });
+
+  const product = Array.isArray(data2) ? data2[0] : {};
+
+  console.log(data2, 'dasd2');
+  console.log(data1, 'dasd1');
+  console.log(data3, 'dasd3');
+
   return (
     <div className="max-w-[1024px] mx-auto mt-6 px-5">
       <Accordion>
         <AccordionHead toggleAccordion={() => {}} isOpen={false}>
-          {t("product.description")}
+          {t('product.description')}
         </AccordionHead>
         <AccordionContent isOpen={false}>
           <div className="mb-4">
-            <h3 className="text-[20px] mb-2">
-              Polerón con capucha estampado
+            <h3 className="text-[20px] mb-2 dark:text-white">
+              {product?.description_model?.name}
             </h3>
-            <h5 className="text-[15px]"> « Colección Chavín de Huántar » </h5>
+            <h5 className="text-[15px] dark:text-white">
+              {product?.description_model?.collection}
+            </h5>
           </div>
-          <p className="text-[14px] text-[#45483D]">
-            Los polerones estampados de “Mestiza” representan gráficamente la
-            inspiración en la iconografía textil andina.
-          </p>
-          <p className="text-[14px] text-[#45483D]">
-            La colección Chavín de Huántar, esta inspirada en el primer ícono
-            textil andino conocido como leitmotif andino y en el resto de
-            américa se le conoce como grecas escalonadas.
-          </p>
-          <p className="text-[14px] text-[#45483D]">
-            Los vestigios del primer ícono textil andino datan de 1500 a. C.
-            encontrados en Chavín de Huántar, en la provincia de Wari, del
-            departamento de Ancash - Perú.
-          </p>
-          <p className="text-[14px] text-[#45483D]">
-            El leitmotiv compuesto de sus simbolos básicos, la ola (agua) y
-            los andenes (tierra) muestra una expresion comprensible y tiene
-            condiciones óptimas a la configuración artistica, especialmente en
-            el campo textil.{" "}
+          <p className="text-[14px] text-[#45483D] dark:text-white">
+            {product?.description_model?.summary}
           </p>
         </AccordionContent>
       </Accordion>
+      <Information />
       <Accordion>
         <AccordionHead toggleAccordion={() => {}} isOpen={false}>
-          {t("product.information")}
+          {t('product.materials')}
         </AccordionHead>
         <AccordionContent isOpen={false}>
           <ul>
-            <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px]">
-              <strong className="text-[#45483D]">Nombre:</strong>
+            <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
+              <strong className="text-[#45483D] dark:text-white">
+                Composición:
+              </strong>
+              <p className="text-right">{product?.materials?.composition}</p>
+            </li>
+            <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
+              <strong className="text-[#45483D] dark:text-white">
+                Reciclado:
+              </strong>
+              <p className="text-right">{product?.materials?.recycling}</p>
+            </li>
+            <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
+              <strong className="text-[#45483D] dark:text-white">
+                % Reciclado:
+              </strong>
               <p className="text-right">
-                Polerón con capucha estampado “Colección Chavin de Huantar”
+                {product?.materials?.percentage_recycling}
               </p>
             </li>
-            <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px]">
-              <strong className="text-[#45483D]">Marca:</strong>
-              <p className="text-right">MESTIZA</p>
-            </li>
-            <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px]">
-              <strong className="text-[#45483D]">GTIN:</strong>
-              <p className="text-right">17751234567890</p>
-            </li>
-            <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px]">
-              <strong className="text-[#45483D]">Código de Producto:</strong>
-              <p className="text-right">000000001</p>
-            </li>
-            <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px]">
-              <strong className="text-[#45483D]">Categoría:</strong>
-              <p className="text-right">Ropa de Hombre</p>
-            </li>
-            <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px]">
-              <strong className="text-[#45483D]">Talla:</strong>
-              <p className="text-right">Mediano</p>
-            </li>
-            <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px]">
-              <strong className="text-[#45483D]">Color:</strong>
-              <p className="text-right">Blanco Natural</p>
-            </li>
-            <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px]">
-              <strong className="text-[#45483D]">Año:</strong>
-              <p className="text-right">2024</p>
-            </li>
-            <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px]">
-              <strong className="text-[#45483D]">Estación:</strong>
-              <p className="text-right">Otoño / Invierno</p>
+            <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
+              <strong className="text-[#45483D] dark:text-white">
+                Ingreso de Reciclado:
+              </strong>
+              <p className="text-right">
+                {product?.materials?.recycling_income}
+              </p>
             </li>
           </ul>
         </AccordionContent>
       </Accordion>
       <Accordion>
         <AccordionHead toggleAccordion={() => {}} isOpen={false}>
-          {t("product.materials")}
+          {t('product.package')}
         </AccordionHead>
         <AccordionContent isOpen={false}>
           <ul>
-            <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px]">
-              <strong className="text-[#45483D]">Composición:</strong>
-              <p className="text-right">100% algodón tangüis</p>
+            <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
+              <strong className="text-[#45483D] dark:text-white">Type:</strong>
+              <p className="text-right">
+                {product?.packing?.packingdescriptiontype}
+              </p>
             </li>
-            <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px]">
-              <strong className="text-[#45483D]">Reciclado:</strong>
-              <p className="text-right">No</p>
-            </li>
-            <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px]">
-              <strong className="text-[#45483D]">% Reciclado:</strong>
-              <p className="text-right">0%</p>
-            </li>
-            <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px]">
-              <strong className="text-[#45483D]">
-                Ingreso de Reciclado:
+            <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
+              <strong className="text-[#45483D] dark:text-white">
+                Weight:
               </strong>
-              <p className="text-right">Algodón Orgánico GOTS</p>
+              <p className="text-right">{product?.packing?.weight}</p>
+            </li>
+            <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
+              <strong className="text-[#45483D] dark:text-white">
+                Volume:
+              </strong>
+              <p className="text-right">{product?.packing?.volume}</p>
+            </li>
+            <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
+              <strong className="text-[#45483D] dark:text-white">
+                Recycling:
+              </strong>
+              <p className="text-right">{product?.packing?.recycling}</p>
+            </li>
+            <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
+              <strong className="text-[#45483D] dark:text-white">
+                Percentage recycling:
+              </strong>
+              <p className="text-right">
+                {product?.packing?.percentage_recycling}
+              </p>
             </li>
           </ul>
         </AccordionContent>
       </Accordion>
       <Accordion>
         <AccordionHead toggleAccordion={() => {}} isOpen={false}>
-          {t("product.package")}
+          {t('product.careful')}
         </AccordionHead>
         <AccordionContent isOpen={false}>
-          <p className="text-[14px] text-[#45483D]">
-            Bolsa, la cual está hecha de material reciclado y se puede
-            reciclar si el usuario decide no conservarlo.
-          </p>
-        </AccordionContent>
-      </Accordion>
-      <Accordion>
-        <AccordionHead toggleAccordion={() => {}} isOpen={false}>
-          {t("product.careful")}
-        </AccordionHead>
-        <AccordionContent isOpen={false}>
-          <h5 className="text-[#45483D] mb-4">Consejos para la Reventa:</h5>
-          <ul className="text-[14px] text-[#45483D]">
-            <li className="flex items-center mb-2">
-              <FaChevronCircleRight />
-              <span className="ml-3">Emplea detergentes suaves</span>
-            </li>
-            <li className="flex items-center mb-2">
-              <FaChevronCircleRight />
-              <span className="ml-3">No utilices agua caliente</span>
-            </li>
-            <li className="flex items-center mb-2">
-              <FaChevronCircleRight />
-              <span className="ml-3">Lava las prendas del reves</span>
-            </li>
-            <li className="flex items-center mb-2">
-              <FaChevronCircleRight />
-              <span className="ml-3">Evita la secadora</span>
-            </li>
+          <h5 className="text-[#45483D] mb-4">{product?.care?.description}:</h5>
+          <ul className="text-[14px] text-[#45483D] dark:text-white">
+            {product?.care?.care.map((item: string, index: number) => (
+              <li key={index} className="flex items-center mb-2">
+                <FaChevronCircleRight />
+                <span className="ml-3">{item}</span>
+              </li>
+            ))}
           </ul>
         </AccordionContent>
       </Accordion>
       <Accordion>
         <AccordionHead toggleAccordion={() => {}} isOpen={false}>
-          {t("product.tips")}
+          {t('product.tips')}
         </AccordionHead>
         <AccordionContent isOpen={false}>
-          <h5 className="text-[#45483D] mb-4">Consejos para la Reventa:</h5>
-          <ul className="text-[14px] text-[#45483D]">
-            <li className="flex items-center mb-2">
-              <FaChevronCircleRight />
-              <span className="ml-3">Prenda en buen estado</span>
-            </li>
-            <li className="flex items-center mb-2">
-              <FaChevronCircleRight />
-              <span className="ml-3">Limpieza y cuidado</span>
-            </li>
-            <li className="flex items-center mb-2">
-              <FaChevronCircleRight />
-              <span className="ml-3">Fotografías de calidad</span>
-            </li>
-            <li className="flex items-center mb-2">
-              <FaChevronCircleRight />
-              <span className="ml-3">Precio justo</span>
-            </li>
-            <li className="flex items-center mb-2">
-              <FaChevronCircleRight />
-              <span className="ml-3">Promoción en línea</span>
-            </li>
-            <li className="flex items-center mb-2">
-              <FaChevronCircleRight />
-              <span className="ml-3">Descripciones detalladas</span>
-            </li>
-            <li className="flex items-center mb-2">
-              <FaChevronCircleRight />
-              <span className="ml-3">Ofertas y descuentos</span>
-            </li>
+          <h5 className="text-[#45483D] mb-4">{product?.tips?.description}</h5>
+          <ul className="text-[14px] text-[#45483D] dark:text-white">
+            {product?.tips?.list.map((item: string, index: number) => (
+              <li key={index} className="flex items-center mb-2">
+                <FaChevronCircleRight />
+                <span className="ml-3">{item}</span>
+              </li>
+            ))}
           </ul>
           <br />
-          <h5 className="text-[#45483D] mb-4">Desecho Responsable:</h5>
-          <ul className="text-[14px] text-[#45483D]">
-            <li className="flex items-center mb-2">
-              <FaChevronCircleRight />
-              <span className="ml-3">Reciclaje de textiles</span>
-            </li>
-            <li className="flex items-center mb-2">
-              <FaChevronCircleRight />
-              <span className="ml-3">Donaciones</span>
-            </li>
-            <li className="flex items-center mb-2">
-              <FaChevronCircleRight />
-              <span className="ml-3">Reutilización creativa</span>
-            </li>
-            <li className="flex items-center mb-2">
-              <FaChevronCircleRight />
-              <span className="ml-3">Programas de recompra</span>
-            </li>
-            <li className="flex items-center mb-2">
-              <FaChevronCircleRight />
-              <span className="ml-3">Puntos de recolección de ropa</span>
-            </li>
-            <li className="flex items-center mb-2">
-              <FaChevronCircleRight />
-              <span className="ml-3">Educación sobre sostenibilidad</span>
-            </li>
-            <li className="flex items-center mb-2">
-              <FaChevronCircleRight />
-              <span className="ml-3">Compostaje textil</span>
-            </li>
-          </ul>
         </AccordionContent>
       </Accordion>
     </div>
