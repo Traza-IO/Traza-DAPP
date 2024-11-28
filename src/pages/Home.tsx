@@ -10,10 +10,6 @@ import { Information } from '../components/HomeComponents';
 const Home: React.FC = () => {
   const { t, i18n } = useTranslation();
 
-  // const { data, call } = useQueryCall({
-  //   functionName: 'readModelId',
-  //   args: ['dd6t2z'],
-  // });
   const { data: data1, call: call1 } = useQueryCall({
     functionName: 'readProductDpp',
     args: ['6tqdo2'],
@@ -26,14 +22,13 @@ const Home: React.FC = () => {
 
   const { data: data3, call: call3 } = useQueryCall({
     functionName: 'readLotId',
-    args: ['gtbgyu'],
+    args: ['0f4bpt'],
   });
 
   const product = Array.isArray(data2) ? data2[0] : {};
 
   console.log(data2, 'dasd2');
   console.log(data1, 'dasd1');
-  console.log(data3, 'dasd3');
 
   return (
     <div className="max-w-[1024px] mx-auto mt-6 px-5">
@@ -64,19 +59,19 @@ const Home: React.FC = () => {
           <ul>
             <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
               <strong className="text-[#45483D] dark:text-white">
-                Composición:
+                {t('product.composition')}:
               </strong>
               <p className="text-right">{product?.materials?.composition}</p>
             </li>
             <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
               <strong className="text-[#45483D] dark:text-white">
-                Reciclado:
+                {t('product.recycled')}:
               </strong>
               <p className="text-right">{product?.materials?.recycling}</p>
             </li>
             <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
               <strong className="text-[#45483D] dark:text-white">
-                % Reciclado:
+                {t('product.recycled_percentage')}:
               </strong>
               <p className="text-right">
                 {product?.materials?.percentage_recycling}
@@ -84,7 +79,7 @@ const Home: React.FC = () => {
             </li>
             <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
               <strong className="text-[#45483D] dark:text-white">
-                Ingreso de Reciclado:
+                {t('product.recycled_entry')}:
               </strong>
               <p className="text-right">
                 {product?.materials?.recycling_income}
@@ -100,32 +95,34 @@ const Home: React.FC = () => {
         <AccordionContent isOpen={false}>
           <ul>
             <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
-              <strong className="text-[#45483D] dark:text-white">Type:</strong>
+              <strong className="text-[#45483D] dark:text-white">
+                {t('product.type')}:
+              </strong>
               <p className="text-right">
                 {product?.packing?.packingdescriptiontype}
               </p>
             </li>
             <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
               <strong className="text-[#45483D] dark:text-white">
-                Weight:
+                {t('product.weight')}:
               </strong>
               <p className="text-right">{product?.packing?.weight}</p>
             </li>
             <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
               <strong className="text-[#45483D] dark:text-white">
-                Volume:
+                {t('product.volume')}:
               </strong>
               <p className="text-right">{product?.packing?.volume}</p>
             </li>
             <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
               <strong className="text-[#45483D] dark:text-white">
-                Recycling:
+                {t('product.recycling')}:
               </strong>
               <p className="text-right">{product?.packing?.recycling}</p>
             </li>
             <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
               <strong className="text-[#45483D] dark:text-white">
-                Percentage recycling:
+                {t('product.percentage_recycling')}:
               </strong>
               <p className="text-right">
                 {product?.packing?.percentage_recycling}
