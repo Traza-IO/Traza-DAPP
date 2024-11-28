@@ -12,7 +12,7 @@ const Home: React.FC = () => {
 
   const { data: data1, call: call1 } = useQueryCall({
     functionName: 'readProductDpp',
-    args: ['qi0q6g'],
+    args: ['rzf31q'],
   });
 
   const { data: data2, call: call2 } = useQueryCall({
