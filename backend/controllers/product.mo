@@ -43,37 +43,36 @@ actor class Product() {
     creation_date : Text;
     update_date : Text;
   };
-type trace_supplier_type={
-  title: Text;
-  ruc: Text;
-  location: Text;
-  coords: Text;
-};
-type time_line_traceability_type={
-  process: Text;
-  start_time: Text;
-  end_time: Text;
-  owner: Text;
-};
-type traceability_lot_type = {
-  location: Text;
-  time_line: [time_line_traceability_type];
-};
-type lotdpp_type={
-  id_lot: Text;
-  id_model: Text;
-  lot_number_product: Text;
-  description_lot: Text;
-  trace_supplier: [trace_supplier_type];
-  compliance_supplier: Text;
-  compliance_process: Text;
-  traceability_blockchain_lot: Text;
-  state: Text;
-  user_created: Text;
-  creation_date: Text;
-  update_date: Text;
+  type trace_supplier_type={
+    title: Text;
+    ruc: Text;
+    location: Text;
+    coords: Text;
   };
-
+  type time_line_traceability_type={
+    process: Text;
+    start_time: Text;
+    end_time: Text;
+    owner: Text;
+  };
+  type traceability_lot_type = {
+    location: Text;
+    time_line: [time_line_traceability_type];
+  };
+  type lotdpp_type={
+    id_lot: Text;
+    id_model: Text;
+    lot_number_product: Text;
+    description_lot: Text;
+    trace_supplier: [trace_supplier_type];
+    compliance_supplier: Text;
+    compliance_process: Text;
+    traceability_blockchain_lot: Text;
+    state: Text;
+    user_created: Text;
+    creation_date: Text;
+    update_date: Text;
+  };
   type product_dpp_type = {
     id_product : Text;
     id_lot : Text;
