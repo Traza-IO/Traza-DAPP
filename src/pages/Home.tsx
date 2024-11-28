@@ -16,17 +16,17 @@ const Home: React.FC = () => {
   // });
   const { data: data1, call: call1 } = useQueryCall({
     functionName: 'readProductDpp',
-    args: ['qi0q6g'],
+    args: ['6tqdo2'],
   });
 
   const { data: data2, call: call2 } = useQueryCall({
     functionName: 'readModelId',
-    args: ['5cnqoa'],
+    args: ['v78ocvf'],
   });
 
   const { data: data3, call: call3 } = useQueryCall({
     functionName: 'readLotId',
-    args: ['xsrq2kl'],
+    args: ['gtbgyu'],
   });
 
   const product = Array.isArray(data2) ? data2[0] : {};
