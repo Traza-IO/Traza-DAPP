@@ -11,17 +11,17 @@ import { useTranslation } from 'react-i18next';
 const Nav = () => {
   const location = useLocation();
   const { lng } = useParams<{ lng: string }>(); // Extrae el idioma dinámico
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const pathname = location.pathname;
 
-  const isActive = (href: string) => pathname.includes(href);
+  const isActive = (href: string) => pathname === href;
 
   return (
     <nav className="fixed w-full bottom-0 left-0 right-0 bg-[#f5f5f4] shadow-lg">
       <ul className="flex w-full">
         <li
           className={`flex-1 dark:text-white ${
-            isActive('/')
+            isActive(`/${lng}`)
               ? 'bg-[#797f75] dark:bg-5f6259 text-white'
               : 'text-[#5f6259] dark:bg-black'
           }`}
@@ -33,7 +33,7 @@ const Nav = () => {
         </li>
         <li
           className={`flex-1 dark:text-white ${
-            isActive('/traceability')
+            isActive(`/${lng}/traceability`)
               ? 'bg-[#797f75] dark:bg-5f6259 text-white'
               : 'text-[#5f6259] dark:bg-black'
           }`}
@@ -45,7 +45,7 @@ const Nav = () => {
         </li>
         <li
           className={`flex-1 dark:text-white ${
-            isActive('/sustainability')
+            isActive(`/${lng}/sustainability`)
               ? 'bg-[#797f75] dark:bg-5f6259 text-white'
               : 'text-[#5f6259] dark:bg-black'
           }`}
@@ -62,7 +62,7 @@ const Nav = () => {
         </li>
         <li
           className={`flex-1 dark:text-white ${
-            isActive('/blockchain')
+            isActive(`/${lng}/blockchain`)
               ? 'bg-[#797f75] dark:bg-5f6259 text-white'
               : 'text-[#5f6259] dark:bg-black'
           }`}
@@ -74,7 +74,7 @@ const Nav = () => {
         </li>
         <li
           className={`flex-1 dark:text-white ${
-            isActive('/share')
+            isActive(`/${lng}/share`)
               ? 'bg-[#797f75] dark:bg-5f6259 text-white'
               : 'text-[#5f6259] dark:bg-black'
           }`}

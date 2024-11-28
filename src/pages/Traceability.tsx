@@ -14,7 +14,7 @@ interface IitemTrace {
 export const Traceability: React.FC = () => {
   const { data: data3, call: call3 } = useQueryCall({
     functionName: 'readLotId',
-    args: ['0f4bpt'],
+    args: ['mpcgzm9'],
   });
   const traceability = Array.isArray(data3) ? data3[0] : {};
   if (traceability?.trace_supplier) {
