@@ -1,5 +1,5 @@
 module{
-  public type ModelDescription_Type = {
+   public type ModelDescription_Type = {
     name : Text;
     collection : Text;
     summary : Text;
@@ -44,7 +44,23 @@ module{
     creation_date : Text;
     update_date : Text;
   };
-  public   type trace_supplier_type={
+   public type ModelDPP_aux_Type = {
+    id_model : Text;
+    id_model_export : Text;
+    summary_materials : Text;
+    name_model: Text;
+    brand_information : Text;
+    description_model : Text;
+    materials : Text;
+    packing : Text;
+    care : Text;
+    tips : Text;
+    state : Text;
+    user_created : Text;
+    creation_date : Text;
+    update_date : Text;
+  };
+  public type trace_supplier_type={
     title: Text;
     ruc: Text;
     location: Text;
@@ -153,5 +169,4 @@ module{
     creation_date : Text;
     update_date : Text;
   };
-
 }
