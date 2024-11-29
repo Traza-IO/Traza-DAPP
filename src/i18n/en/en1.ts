@@ -22,6 +22,8 @@ export default {
     recycled: 'Recycled',
     recycled_percentage: '% Recycled',
     recycled_entry: 'Recycled entry',
+    suppliers: 'Suppliers',
+    manufacturing: 'Manufacturing',
   },
   footer: {
     description: 'With traceability, each garment tells its story ...',

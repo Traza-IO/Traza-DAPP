@@ -21,7 +21,7 @@ import aenor from '../assets/aenor.jpg';
 
 export const Sustainability: React.FC = () => {
   return (
-    <div className="max-w-[1024px] mx-auto mt-8">
+    <div className="max-w-[1024px] mx-auto mt-8 px-5">
       <div className="text-center px-5 text-[#45483d] mb-4 dark:text-white">
         <p>
           Polerón con capucha, a sido confeccionado con el cumplimiento de los
@@ -34,7 +34,7 @@ export const Sustainability: React.FC = () => {
           Cumplimiento de Insumos
         </AccordionHead>
         <AccordionContent isOpen={true}>
-          <h5 className="mt-5 p-3 bg-[#acb2a8] font-bold dark:text-white">
+          <h5 className="mt-5 p-3 bg-[#acb2a8] font-bold dark:text-white dark:bg-[#5f6259]">
             Tela de Algodón Tanguis
           </h5>
           <div className="px-5">
@@ -49,7 +49,7 @@ export const Sustainability: React.FC = () => {
                 <img src={image1_1} alt="" className="w-auto max-w-[120px]" />
               </li>
             </ul>
-            <h6 className="mt-5 p-3 bg-[#e3e3db] dark:text-white">
+            <h6 className="mt-5 p-3 bg-[#e3e3db] dark:text-white dark:bg-[#5f6259]">
               Reconocimiento a la producción del algodón orgánico tanguis.
             </h6>
             <p className="mt-5 text-[#45483d] dark:text-white">
@@ -115,13 +115,13 @@ export const Sustainability: React.FC = () => {
                 <img src={image2_6} alt="" className="w-auto max-w-[120px]" />
               </li>
             </ul>
-            <p className="p-3 bg-[#e3e3db] text-[13px] dark:text-white">
+            <p className="p-3 bg-[#e3e3db] text-[13px] dark:text-white dark:bg-[#5f6259]">
               Reconocimiento a las mejores prácticas y cumplimiento de
               estándares internacionales.
             </p>
           </div>
 
-          <h5 className="mt-5 p-3 bg-[#acb2a8] font-bold dark:text-white">
+          <h5 className="mt-5 p-3 bg-[#acb2a8] font-bold dark:text-white dark:bg-[#5f6259]">
             Hilos de Coser
           </h5>
           <div className="px-5">
@@ -142,7 +142,7 @@ export const Sustainability: React.FC = () => {
                 </span>
               </li>
             </ul>
-            <h6 className="p-3 bg-[#e3e3db] text-[13px] dark:text-white">
+            <h6 className="p-3 bg-[#e3e3db] text-[13px] dark:text-white dark:bg-[#5f6259]">
               Empresa peruana de moda sostenible, con gran compromiso con el
               ecosistema ambiental
             </h6>
@@ -151,68 +151,72 @@ export const Sustainability: React.FC = () => {
             </p>
             <ul>
               <li className="w-full flex items-center justify-between border-b border-solid border-[#cccccc] py-2">
-                <p className="text-[13px]">
+                <p className="text-[13px] dark:text-white">
                   Huella de Carbono *<br />
                   Cálculo y generación de reporte de la huella de carbono.
                 </p>
                 <img src={huella_1} alt="" className="w-auto max-w-[120px]" />
               </li>
               <li className="w-full flex items-center justify-between border-b border-solid border-[#cccccc] py-2">
-                <p className="text-[13px]">
+                <p className="text-[13px] dark:text-white">
                   Huella de Carbono *<br />
                   Cálculo y generación de reporte de la huella de carbono.
                 </p>
                 <img src={huella_2} alt="" className="w-auto max-w-[120px]" />
               </li>
               <li className="w-full flex items-center justify-between border-b border-solid border-[#cccccc] py-2">
-                <p className="text-[13px]">
+                <p className="text-[13px] dark:text-white">
                   Huella de Carbono *<br />
                   Cálculo y generación de reporte de la huella de carbono.
                 </p>
                 <img src={huella_3} alt="" className="w-auto max-w-[120px]" />
               </li>
               <li className="w-full flex items-center justify-between border-b border-solid border-[#cccccc] py-2">
-                <p className="text-[13px]">
+                <p className="text-[13px] dark:text-white">
                   Huella de Carbono *<br />
                   Cálculo y generación de reporte de la huella de carbono.
                 </p>
                 <img src={huella_4} alt="" className="w-auto max-w-[120px]" />
               </li>
             </ul>
-            <p className="p-3 bg-[#e3e3db] text-[13px]">
+            <p className="p-3 bg-[#e3e3db] text-[13px] dark:bg-[#5f6259] dark:text-white">
               Los certificados de reconocimiento y los reportes obtenidos por EL
               TREN, para neutralizar sus emisiones de GEI. Otorgados por el
               Ministerio del Ambiente.
             </p>
-            <p className="mt-5 text-[#45483d]">Huella Hidrica Peru:</p>
+            <p className="mt-5 text-[#45483d] dark:text-white">
+              Huella Hidrica Peru:
+            </p>
             <ul>
               <li className="w-full flex items-center justify-between border-b border-solid border-[#cccccc] py-2">
-                <p className="text-[13px]">
+                <p className="text-[13px] dark:text-white">
                   Certificado otorgado por la Autoridad Nacional del Agua - ANA
                 </p>
                 <img src={image4} alt="" className="w-auto max-w-[120px]" />
               </li>
             </ul>
-            <p className="p-3 bg-[#e3e3db] text-[13px]">
+            <p className="p-3 bg-[#e3e3db] text-[13px] dark:bg-[#5f6259] dark:text-white">
               El Certificado Azul es un reconocimiento a las buenas practicas
               aplicadas por EL TREN, en el uso eficiente de los recursos
               hidricos.
             </p>
 
-            <h5 className="mt-5 p-3 bg-[#acb2a8] font-bold">
+            <h5 className="mt-5 p-3 bg-[#acb2a8] font-bold dark:text-white dark:bg-[#5f6259]">
               Pasadores de Algodón
             </h5>
             <div className="px-5">
-              <p className="mt-5 text-[#45483d]">
+              <p className="mt-5 text-[#45483d] dark:text-white">
                 Certificaciones de BERGMAN / RIBERA
               </p>
               <ul>
                 <li className="w-full flex items-center justify-between border-b border-solid border-[#cccccc] py-2">
-                  <p className="text-[13px]">Certificaciones de TEXTILASA</p>
+                  <p className="text-[13px] dark:text-white">
+                    Certificaciones de TEXTILASA
+                  </p>
                   <img src={image5} alt="" className="w-auto max-w-[120px]" />
                 </li>
               </ul>
-              <p className="p-3 bg-[#e3e3db] text-[13px]">
+              <p className="p-3 bg-[#e3e3db] text-[13px] dark:bg-[#5f6259] dark:text-white">
                 El Certificado Azul es un reconocimiento a las buenas practicas
                 aplicadas por EL TREN, en el uso eficiente de los recursos
                 hidricos.
@@ -226,14 +230,16 @@ export const Sustainability: React.FC = () => {
           Proceso de Producción
         </AccordionHead>
         <AccordionContent isOpen={false}>
-          <h5 className="mt-5 p-3 bg-[#acb2a8] font-bold">
+          <h5 className="mt-5 p-3 bg-[#acb2a8] font-bold dark:text-white">
             Tela de Algodón Tanguis
           </h5>
           <div className="px-5">
-            <p className="mt-5 text-[#45483d]">Certificado de ISO 9001:2015</p>
+            <p className="mt-5 text-[#45483d] dark:text-white">
+              Certificado de ISO 9001:2015
+            </p>
             <ul>
               <li className="w-full flex items-center justify-between border-b border-solid border-[#cccccc] py-2">
-                <p className="text-[13px]">
+                <p className="text-[13px] dark:text-white">
                   PE19/9518 <br />
                   Valido desde 16 Mayo <br />
                   2023 al 19 junio 2024
@@ -241,7 +247,7 @@ export const Sustainability: React.FC = () => {
                 <img src={odac} alt="" className="w-auto max-w-[120px]" />
               </li>
               <li className="w-full flex items-center justify-between border-b border-solid border-[#cccccc] py-2">
-                <p className="text-[13px]">
+                <p className="text-[13px] dark:text-white">
                   PE19/9518 <br />
                   Valido desde 16 Mayo <br />
                   2023 al 19 junio 2024

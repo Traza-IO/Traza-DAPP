@@ -22,6 +22,8 @@ export default {
     recycled: 'Reciclado',
     recycled_percentage: '% reciclado',
     recycled_entry: 'Ingreso de reciclado',
+    suppliers: 'Proveedores',
+    manufacturing: 'Fabricación',
   },
   footer: {
     description: 'Con trazabilidad cada prenda cuenta su historia ...',
