@@ -55,59 +55,73 @@ const Home: React.FC = () => {
               <strong className="text-[#45483D] dark:text-white">
                 {t('product.name')}
               </strong>
-              <p className="text-right">{information?.information_product}</p>
+              <p className="text-right">
+                {information?.information_product?.name}
+              </p>
             </li>
             <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
               <strong className="text-[#45483D] dark:text-white">
                 {t('product.brand')}
               </strong>
               <p className="text-right">
-                {information?.traceability_blockchain_product}
+                {information?.information_product?.brand}
               </p>
             </li>
             <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
               <strong className="text-[#45483D] dark:text-white">
                 {t('product.gtin')}
               </strong>
-              <p className="text-right">{information?.gtin_product}</p>
+              <p className="text-right">
+                {information?.information_product?.GTIN}
+              </p>
             </li>
             <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
               <strong className="text-[#45483D] dark:text-white">
                 {t('product.product_code')}
               </strong>
-              <p className="text-right">{information?.id_product}</p>
+              <p className="text-right">
+                {information?.information_product?.productcode}
+              </p>
             </li>
             <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
               <strong className="text-[#45483D] dark:text-white">
                 {t('product.category')}
               </strong>
-              <p className="text-right">{information?.information_product}</p>
+              <p className="text-right">
+                {information?.information_product?.category}
+              </p>
             </li>
             <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
               <strong className="text-[#45483D] dark:text-white">
                 {t('product.size')}
               </strong>
               <p className="text-right">
-                {information?.id_product_parent_company}
+                {information?.information_product?.size}
               </p>
             </li>
             <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
               <strong className="text-[#45483D] dark:text-white">
                 {t('product.color')}
               </strong>
-              <p className="text-right">{information?.update_date}</p>
+              <p className="text-right">
+                {information?.information_product?.color}
+              </p>
             </li>
             <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
               <strong className="text-[#45483D] dark:text-white">
                 {t('product.year')}
               </strong>
-              <p className="text-right">{information?.creation_date}</p>
+              <p className="text-right">
+                {information?.information_product?.year}
+              </p>
             </li>
             <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
               <strong className="text-[#45483D] dark:text-white">
                 {t('product.season')}
               </strong>
-              <p className="text-right">{information?.state}</p>
+              <p className="text-right">
+                {information?.information_product?.season}
+              </p>
             </li>
           </ul>
         </AccordionContent>
