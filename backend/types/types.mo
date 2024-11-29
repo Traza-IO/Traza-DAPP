@@ -1,17 +1,17 @@
 module{
-  type ModelDescription_Type = {
+  public type ModelDescription_Type = {
     name : Text;
     collection : Text;
     summary : Text;
   };
-  type materials_Type = {
+  public type materials_Type = {
     composition : Text;
     recycling : Text;
     percentage_recycling : Text;
     recycling_income : Text;
   };
 
-  type packing_Type = {
+  public type packing_Type = {
     packingdescriptiontype : Text;
     weight : Text;
     volume : Text;
@@ -19,7 +19,7 @@ module{
     percentage_recycling : Text;
   };
 
-  type care_Type = {
+  public type care_Type = {
     care : [Text];
     description : Text;
   };
@@ -32,36 +32,37 @@ module{
     id_model : Text;
     id_model_export : Text;
     summary_materials : Text;
+    name_model: Text;
     brand_information : Text;
     description_model : ModelDescription_Type;
     materials : materials_Type;
     packing : packing_Type;
     care : care_Type;
-    tips : tips_Type;
+    tips : [tips_Type];
     state : Text;
     user_created : Text;
     creation_date : Text;
     update_date : Text;
   };
-  type trace_supplier_type={
+  public   type trace_supplier_type={
     title: Text;
     ruc: Text;
     location: Text;
     coords: Text;
   };
-  type time_line_traceability_type={
+  public type time_line_traceability_type={
     process: Text;
     start_time: Text;
     end_time: Text;
     owner: Text;
   };
-  type traceability_lot_type = {
+  public type traceability_lot_type = {
     location: Text;
     time_line: [time_line_traceability_type];
   };
 
  
-  type certifications_compliance_type = {
+  public type certifications_compliance_type = {
     name: Text;
     organization: Text;
     number: Text;
@@ -70,20 +71,20 @@ module{
     link: Text;
     logo: Text;
   };
-   type compliance_supplier_type = {
+  public type compliance_supplier_type = {
     supplier: Text;
     certifications : [certifications_compliance_type];
   };
-  type compliance_process_type = {
+  public type compliance_process_type = {
     process: Text;
     certifications: [certifications_compliance_type]
   };
-  type time_line_traceability_lot_type = {
+  public type time_line_traceability_lot_type = {
     process: Text;
     hash: Text;
 
   };
-  type traceability_blockchain_lot_type = {
+  public type traceability_blockchain_lot_type = {
     time_line: [time_line_traceability_lot_type]
   };
   public type lotdpp_type={
@@ -101,13 +102,13 @@ module{
     creation_date: Text;
     update_date: Text;
   };
-  type photo_product_type = {
+  public type photo_product_type = {
     frontal: Text;
     left: Text;
     later: Text;
     right: Text;
   };
-  type information_product_type = {
+  public type information_product_type = {
     name: Text;
     brand: Text;
     GTIN: Text;
@@ -119,21 +120,21 @@ module{
     year: Text;
     season: Text;
   };
-  type time_line_product_type = {
+  public type time_line_product_type = {
     process: Text;
     start_time: Text;
     end_time: Text;
     owner: Text;
   };
-  type traceability_product_dpp_type = {
+  public type traceability_product_dpp_type = {
       time_line: [time_line_product_type];
   };
 
-  type traceability_blockchain_product_dpp_time_line_type = {
+  public type traceability_blockchain_product_dpp_time_line_type = {
     process: Text;
     hash: Text;
   };
-  type traceability_blockchain_product_dpp_type = {
+  public type traceability_blockchain_product_dpp_type = {
     time_line: [traceability_blockchain_product_dpp_time_line_type]
   };
 

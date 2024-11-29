@@ -12,12 +12,12 @@ const Home: React.FC = () => {
 
   const { data: data1, call: call1 } = useQueryCall({
     functionName: 'readProductDpp',
-    args: ['wn165mo'],
+    args: ['sgwd0g'],
   });
 
   const { data: data2, call: call2 } = useQueryCall({
     functionName: 'readModelId',
-    args: ['tyu9i4a'],
+    args: ['gq6euce'],
   });
 
   const product = Array.isArray(data2) ? data2[0] : {};
