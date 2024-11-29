@@ -1,8 +1,9 @@
 import Text "mo:base/Text";
 import Trie "mo:base/Trie";
 import Types "../types/types";
-
 actor class Product() {
+ 
+
   private stable var modelsDPP : Trie.Trie<Text, Types.ModelDPP_Type> = Trie.empty();
   type Key<K> = Trie.Key<K>;
   func key(t : Text) : Key<Text> { { hash = Text.hash t; key = t } };

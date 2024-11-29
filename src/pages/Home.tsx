@@ -12,12 +12,12 @@ const Home: React.FC = () => {
 
   const { data: data1, call: call1 } = useQueryCall({
     functionName: 'readProductDpp',
-    args: ['sgwd0g'],
+    args: ['M0000001'],
   });
 
   const { data: data2, call: call2 } = useQueryCall({
     functionName: 'readModelId',
-    args: ['gq6euce'],
+    args: ['M0000001'],
   });
 
   const product = Array.isArray(data2) ? data2[0] : {};
@@ -26,7 +26,7 @@ const Home: React.FC = () => {
   console.log(data1, 'dasd1');
 
   return (
-    <div className="max-w-[1024px] mx-auto mt-6 px-5">
+     <div className="max-w-[1024px] mx-auto mt-6 px-5">
       <Accordion>
         <AccordionHead toggleAccordion={() => {}} isOpen={false}>
           {t('product.description')}
@@ -254,7 +254,7 @@ const Home: React.FC = () => {
         </AccordionContent>
       </Accordion>
     </div>
-  );
+   );
 };
 
 export default Home;
