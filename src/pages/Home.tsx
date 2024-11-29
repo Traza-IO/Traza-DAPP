@@ -225,7 +225,7 @@ const Home: React.FC = () => {
             {product?.care?.description}:
           </h5>
           <ul className="text-[14px] text-[#45483D] dark:text-white">
-            {product?.care?.care.map((item: string, index: number) => (
+            {product?.care?.care?.map((item: string, index: number) => (
               <li key={index} className="flex items-center mb-2">
                 <FaChevronCircleRight />
                 <span className="ml-3">{item}</span>
@@ -243,7 +243,7 @@ const Home: React.FC = () => {
             {product?.tips?.description}
           </h5>
           <ul className="text-[14px] text-[#45483D] dark:text-white">
-            {product?.tips?.list.map((item: string, index: number) => (
+            {product?.tips?.list?.map((item: string, index: number) => (
               <li key={index} className="flex items-center mb-2">
                 <FaChevronCircleRight />
                 <span className="ml-3">{item}</span>
