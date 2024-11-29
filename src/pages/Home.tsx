@@ -21,7 +21,7 @@ const Home: React.FC = () => {
   });
 
   const product = Array.isArray(data2) ? data2[0] : {};
-
+  const information = Array.isArray(data1) ? data1[0] : {};
   console.log(data2, 'dasd2');
   console.log(data1, 'dasd1');
 
@@ -45,7 +45,73 @@ const Home: React.FC = () => {
           </p>
         </AccordionContent>
       </Accordion>
-      <Information />
+      <Accordion>
+        <AccordionHead toggleAccordion={() => {}} isOpen={false}>
+          {t('product.information')}
+        </AccordionHead>
+        <AccordionContent isOpen={false}>
+          <ul>
+            <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
+              <strong className="text-[#45483D] dark:text-white">
+                {t('product.name')}
+              </strong>
+              <p className="text-right">{information?.information_product}</p>
+            </li>
+            <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
+              <strong className="text-[#45483D] dark:text-white">
+                {t('product.brand')}
+              </strong>
+              <p className="text-right">
+                {information?.traceability_blockchain_product}
+              </p>
+            </li>
+            <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
+              <strong className="text-[#45483D] dark:text-white">
+                {t('product.gtin')}
+              </strong>
+              <p className="text-right">{information?.gtin_product}</p>
+            </li>
+            <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
+              <strong className="text-[#45483D] dark:text-white">
+                {t('product.product_code')}
+              </strong>
+              <p className="text-right">{information?.id_product}</p>
+            </li>
+            <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
+              <strong className="text-[#45483D] dark:text-white">
+                {t('product.category')}
+              </strong>
+              <p className="text-right">{information?.information_product}</p>
+            </li>
+            <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
+              <strong className="text-[#45483D] dark:text-white">
+                {t('product.size')}
+              </strong>
+              <p className="text-right">
+                {information?.id_product_parent_company}
+              </p>
+            </li>
+            <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
+              <strong className="text-[#45483D] dark:text-white">
+                {t('product.color')}
+              </strong>
+              <p className="text-right">{information?.update_date}</p>
+            </li>
+            <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
+              <strong className="text-[#45483D] dark:text-white">
+                {t('product.year')}
+              </strong>
+              <p className="text-right">{information?.creation_date}</p>
+            </li>
+            <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
+              <strong className="text-[#45483D] dark:text-white">
+                {t('product.season')}
+              </strong>
+              <p className="text-right">{information?.state}</p>
+            </li>
+          </ul>
+        </AccordionContent>
+      </Accordion>
       <Accordion>
         <AccordionHead toggleAccordion={() => {}} isOpen={false}>
           {t('product.materials')}
