@@ -17,7 +17,7 @@ const Nav = () => {
   const isActive = (href: string) => pathname === href;
 
   return (
-    <nav className="fixed w-full bottom-0 left-0 right-0 bg-[#f5f5f4] shadow-lg">
+    <nav className="fixed w-full bottom-0 left-0 right-0 bg-[#f5f5f4] shadow-lg z-10">
       <ul className="flex w-full">
         <li
           className={`flex-1 dark:text-white ${

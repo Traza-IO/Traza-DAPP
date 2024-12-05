@@ -7,6 +7,11 @@ import { useTranslation } from 'react-i18next';
 import { useQueryCall, useUpdateCall } from '@ic-reactor/react';
 import { Information } from '../components/HomeComponents';
 
+type Ttips = {
+  description: string;
+  list: string[];
+};
+
 const Home: React.FC = () => {
   const { t, i18n } = useTranslation();
 
@@ -22,11 +27,9 @@ const Home: React.FC = () => {
 
   const product = Array.isArray(data2) ? data2[0] : {};
   const information = Array.isArray(data1) ? data1[0] : {};
-  console.log(data2, 'dasd2');
-  console.log(data1, 'dasd1');
 
   return (
-     <div className="max-w-[1024px] mx-auto mt-6 px-5">
+    <div className="max-w-[1024px] mx-auto mt-6 px-5">
       <Accordion>
         <AccordionHead toggleAccordion={() => {}} isOpen={false}>
           {t('product.description')}
@@ -41,7 +44,11 @@ const Home: React.FC = () => {
             </h5>
           </div>
           <p className="text-[14px] text-[#45483D] dark:text-white">
-            {product?.description_model?.summary}
+            <div
+              dangerouslySetInnerHTML={{
+                __html: product?.description_model?.summary,
+              }}
+            />
           </p>
         </AccordionContent>
       </Accordion>
@@ -55,7 +62,7 @@ const Home: React.FC = () => {
               <strong className="text-[#45483D] dark:text-white">
                 {t('product.name')}
               </strong>
-              <p className="text-right">
+              <p className="text-right dark:text-white">
                 {information?.information_product?.name}
               </p>
             </li>
@@ -63,7 +70,7 @@ const Home: React.FC = () => {
               <strong className="text-[#45483D] dark:text-white">
                 {t('product.brand')}
               </strong>
-              <p className="text-right">
+              <p className="text-right dark:text-white">
                 {information?.information_product?.brand}
               </p>
             </li>
@@ -71,7 +78,7 @@ const Home: React.FC = () => {
               <strong className="text-[#45483D] dark:text-white">
                 {t('product.gtin')}
               </strong>
-              <p className="text-right">
+              <p className="text-right dark:text-white">
                 {information?.information_product?.GTIN}
               </p>
             </li>
@@ -79,7 +86,7 @@ const Home: React.FC = () => {
               <strong className="text-[#45483D] dark:text-white">
                 {t('product.product_code')}
               </strong>
-              <p className="text-right">
+              <p className="text-right dark:text-white">
                 {information?.information_product?.productcode}
               </p>
             </li>
@@ -87,7 +94,7 @@ const Home: React.FC = () => {
               <strong className="text-[#45483D] dark:text-white">
                 {t('product.category')}
               </strong>
-              <p className="text-right">
+              <p className="text-right dark:text-white">
                 {information?.information_product?.category}
               </p>
             </li>
@@ -95,7 +102,7 @@ const Home: React.FC = () => {
               <strong className="text-[#45483D] dark:text-white">
                 {t('product.size')}
               </strong>
-              <p className="text-right">
+              <p className="text-right dark:text-white">
                 {information?.information_product?.size}
               </p>
             </li>
@@ -103,7 +110,7 @@ const Home: React.FC = () => {
               <strong className="text-[#45483D] dark:text-white">
                 {t('product.color')}
               </strong>
-              <p className="text-right">
+              <p className="text-right dark:text-white">
                 {information?.information_product?.color}
               </p>
             </li>
@@ -111,7 +118,7 @@ const Home: React.FC = () => {
               <strong className="text-[#45483D] dark:text-white">
                 {t('product.year')}
               </strong>
-              <p className="text-right">
+              <p className="text-right dark:text-white">
                 {information?.information_product?.year}
               </p>
             </li>
@@ -119,7 +126,7 @@ const Home: React.FC = () => {
               <strong className="text-[#45483D] dark:text-white">
                 {t('product.season')}
               </strong>
-              <p className="text-right">
+              <p className="text-right dark:text-white">
                 {information?.information_product?.season}
               </p>
             </li>
@@ -145,7 +152,7 @@ const Home: React.FC = () => {
                 {t('product.recycled')}:
               </strong>
               <p className="text-right dark:text-white">
-                {product?.materials?.recycling}
+                {product?.materials?.recycling ? 'Yes' : 'No'}
               </p>
             </li>
             <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
@@ -202,7 +209,7 @@ const Home: React.FC = () => {
                 {t('product.recycling')}:
               </strong>
               <p className="text-right dark:text-white">
-                {product?.packing?.recycling}
+                {product?.packing?.recycling ? 'Yes' : 'No'}
               </p>
             </li>
             <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
@@ -239,14 +246,18 @@ const Home: React.FC = () => {
           {t('product.tips')}
         </AccordionHead>
         <AccordionContent isOpen={false}>
-          <h5 className="text-[#45483D] mb-4 dark:text-white">
-            {product?.tips?.description}
-          </h5>
           <ul className="text-[14px] text-[#45483D] dark:text-white">
-            {product?.tips?.list?.map((item: string, index: number) => (
-              <li key={index} className="flex items-center mb-2">
-                <FaChevronCircleRight />
-                <span className="ml-3">{item}</span>
+            {product?.tips?.map((item: Ttips, index: number) => (
+              <li key={index}>
+                <h5 className="text-[#45483D] mt-6 mb-4 dark:text-white">
+                  {item?.description}
+                </h5>
+                {item?.list?.map((i: string, index: number) => (
+                  <p key={index} className="flex items-center mb-2">
+                    <FaChevronCircleRight />
+                    <span className="ml-3">{i}</span>
+                  </p>
+                ))}
               </li>
             ))}
           </ul>
@@ -254,7 +265,7 @@ const Home: React.FC = () => {
         </AccordionContent>
       </Accordion>
     </div>
-   );
+  );
 };
 
 export default Home;

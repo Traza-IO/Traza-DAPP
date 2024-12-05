@@ -230,8 +230,8 @@ export const Sustainability: React.FC = () => {
           Proceso de Producción
         </AccordionHead>
         <AccordionContent isOpen={false}>
-          <h5 className="mt-5 p-3 bg-[#acb2a8] font-bold dark:text-white">
-            Tela de Algodón Tanguis
+          <h5 className="mt-5 p-3 bg-[#acb2a8] font-bold dark:text-white dark:bg-[#5f6259]">
+            Pasadores de Algodón
           </h5>
           <div className="px-5">
             <p className="mt-5 text-[#45483d] dark:text-white">

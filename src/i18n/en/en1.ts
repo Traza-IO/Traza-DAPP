@@ -33,6 +33,19 @@ export default {
     color: 'Color',
     year: 'Year',
     season: 'Season',
+    traceable: 'Traceable',
+    company: 'Company',
+    date_and_time_start: 'Date and time start',
+    date_and_time_end: 'Date and time end',
+    responsible: 'Responsible',
+    confection: 'Confection',
+    location: 'Location',
+    coockie_text:
+      'We use cookies to improve your experience on our website. By browsing this website, you agree to our use of cookies.',
+    coockie_button: 'Accept',
+    title_social: 'Share Social Networks',
+    description_social:
+      'Together we can make a positive difference in the fashion industry!',
   },
   footer: {
     description: 'With traceability, each garment tells its story ...',

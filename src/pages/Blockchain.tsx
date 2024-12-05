@@ -1,6 +1,20 @@
 import { MdOutlineContentCopy } from 'react-icons/md';
 import icp from '../assets/icp.png';
+import { t } from 'i18next';
+import { useTranslation } from 'react-i18next';
+import { useQueryCall } from '@ic-reactor/react';
+
+type TtraceabilityItem = {
+  hash: string;
+  process: string;
+};
 const Blockchain = () => {
+  const { t, i18n } = useTranslation();
+  const { data: data3, call: call3 } = useQueryCall({
+    functionName: 'readLotId',
+    args: ['M0000001'],
+  });
+  const blockchain = Array.isArray(data3) ? data3[0] : {};
   return (
     <div className="max-w-[1024px] mx-auto mt-8 px-5">
       <figure className="flex items-center justify-center max-w-[220px] mx-auto">
@@ -13,39 +27,31 @@ const Blockchain = () => {
         <p className="text-[#45483d] dark:text-white"> GTIN: 17751234567890 </p>
       </div>
       <h5 className="mt-5 p-3 bg-[#acb2a8] font-bold dark:bg-[#5f6259] dark:text-white">
-        Confección
+        {t('product.confection')}
       </h5>
       <div className="px-5">
-        <p className="mt-5 text-[#45483d] font-bold mb-3 dark:text-white">
-          Localizacion y Diseño:
-        </p>
+        {/* <p className="mt-5 text-[#45483d] font-bold mb-3 dark:text-white">
+          {blockchain?.process}
+        </p> */}
         <ul className="mb-3">
-          <li className="mb-4">
-            <p className="text-[13px] mb-2 dark:text-white">
-              Código de transacción de Localización e inicio de Diseño (Hash):
-            </p>
-            <div className="border border-solid border-[#acb2a8] px-5 py-3 flex justify-between">
-              <span className="text-[13px] dark:text-white">
-                0xwefbqwubggkagaighierheigwii2er
-              </span>
-              <button>
-                <MdOutlineContentCopy className="text-[#45483d] text-[20px] ml-3" />
-              </button>
-            </div>
-          </li>
-          <li className="mb-4">
-            <p className="text-[13px] mb-2 dark:text-white">
-              Código de transacción de Localización e inicio de Diseño (Hash):
-            </p>
-            <div className="border border-solid border-[#acb2a8] dark:border-[#ffffff] px-5 py-3 flex justify-between">
-              <span className="text-[13px] dark:text-white">
-                0xwefbqwubggkagaighierheigwii2er
-              </span>
-              <button>
-                <MdOutlineContentCopy className="text-[#45483d] text-[20px] ml-3" />
-              </button>
-            </div>
-          </li>
+          {blockchain?.traceability_blockchain_lot?.time_line.map(
+            (item: TtraceabilityItem, index: number) => (
+              <li className="mb-4" key={index}>
+                <p className="text-[13px] mb-2 dark:text-white">
+                  Código de transacción de Localización e inicio de Diseño
+                  (Hash):
+                </p>
+                <div className="border border-solid border-[#acb2a8] px-5 py-3 flex justify-between">
+                  <span className="text-[13px] dark:text-white overflow-hidden max-w-[100%] text-ellipsis">
+                    {item?.hash}
+                  </span>
+                  <button>
+                    <MdOutlineContentCopy className="text-[#45483d] text-[20px] ml-3" />
+                  </button>
+                </div>
+              </li>
+            ),
+          )}
         </ul>
       </div>
     </div>
