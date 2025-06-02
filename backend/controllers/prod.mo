@@ -1,7 +1,12 @@
 import Text "mo:base/Text";
 import Trie "mo:base/Trie";
+import Principal "mo:base/Principal";
+import Debug "mo:base/Debug";
 import Types "../types/types";
+
+
 actor class Product() {
+
   private stable var modelsDPP : Trie.Trie<Text, Types.ModelDPP_Type> = Trie.empty();
   type Key<K> = Trie.Key<K>;
   func key(t : Text) : Key<Text> { { hash = Text.hash t; key = t } };
@@ -51,4 +56,15 @@ actor class Product() {
     let result = Trie.find(productsDPP, key(idProd) ,Text.equal);
     return result;
   };
+
+ public shared  func getInfo(gtin_product: Text) : async ?Types.traceability_consolidate {
+  Debug.print("getInfo called with gtin_product: " # gtin_product);
+  // This function retrieves the traceability information for a product based on its GTIN.
+    let Bar = actor("uxrrr-q7777-77774-qaaaq-cai") : actor {
+      readModelById: (Text) -> async ?Types.traceability_consolidate;
+    };
+    let value = await Bar.readModelById(gtin_product);
+    return value;
+  };
+
 };

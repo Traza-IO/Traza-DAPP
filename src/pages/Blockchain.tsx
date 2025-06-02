@@ -2,18 +2,20 @@ import { MdOutlineContentCopy } from 'react-icons/md';
 import icp from '../assets/icp.png';
 import { t } from 'i18next';
 import { useTranslation } from 'react-i18next';
-import { useQueryCall } from '@ic-reactor/react';
+
+import  {backend}  from '../declarations/backend';
+
 
 type TtraceabilityItem = {
   hash: string;
   process: string;
 };
-const Blockchain = () => {
+const Blockchain =   () => {
   const { t, i18n } = useTranslation();
-  const { data: data3, call: call3 } = useQueryCall({
-    functionName: 'readLotId',
-    args: ['M0000001'],
-  });
+  
+  const data3 = backend.getInfo('17751234567890').then;
+  ;
+  console.log(data3, 'data3');
   const blockchain = Array.isArray(data3) ? data3[0] : {};
   return (
     <div className="max-w-[1024px] mx-auto mt-8 px-5">

@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 import Accordion from '../components/Accordion/Accordion';
 import AccordionHead from '../components/Accordion/components/AccordionHead';
 import AccordionContent from '../components/Accordion/components/AccordionContent';
 import { FaChevronCircleRight } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
-import { useQueryCall, useUpdateCall } from '@ic-reactor/react';
+
+import  {backend}  from '../declarations/backend';
 import { Information } from '../components/HomeComponents';
 
 type Ttips = {
@@ -12,22 +13,31 @@ type Ttips = {
   list: string[];
 };
 
-const Home: React.FC = () => {
+const  Home: React.FC = () => {
   const { t, i18n } = useTranslation();
+  const [data, setData] = useState<Object | null>(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        let res = await backend.getInfo('17751234567890');
+        
+        if (!res.ok) {
+          throw new Error("Error en la solicitud");
+        }
+        const json: Post = await res.json();
+        setData(json);
+      } catch (err) {
+        setError((err as Error).message);
+      }
+    };
 
-  const { data: data1, call: call1 } = useQueryCall({
-    functionName: 'readProductDpp',
-    args: ['M0000001'],
-  });
-
-  const { data: data2, call: call2 } = useQueryCall({
-    functionName: 'readModelId',
-    args: ['M0000001'],
-  });
+    fetchData();
+  }, []);
 
   const product = Array.isArray(data2) ? data2[0] : {};
+  console.log(product, 'product');
   const information = Array.isArray(data1) ? data1[0] : {};
-
+console.log(information, 'information');
   return (
     <div className="max-w-[1024px] mx-auto mt-6 px-5">
       <Accordion>

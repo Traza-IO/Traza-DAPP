@@ -22,8 +22,8 @@ interface ItiemLine {
 export const Traceability: React.FC = () => {
   const { t, i18n } = useTranslation();
   const { data: data3, call: call3 } = useQueryCall({
-    functionName: 'readLotId',
-    args: ['M0000001'],
+    functionName: 'getInfo',
+    args: ['17751234567890'],
   });
   const traceability = Array.isArray(data3) ? data3[0] : {};
   console.log(traceability, 'dasd3');
