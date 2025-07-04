@@ -5,7 +5,9 @@ import { useTranslation } from 'react-i18next';
 
 import  {backend}  from '../declarations/backend';
 import { useEffect, useState } from 'react';
-
+import { useTraceabilityStore } from '../store/useTraceabilityStore';
+import Skeleton from 'react-loading-skeleton';
+import { useSearchParams } from 'react-router-dom';
 type TtraceabilityItem = {
   hash_end: string;
   hash_start: string;
@@ -15,31 +17,22 @@ type TtraceabilityItem = {
 };
 const Blockchain =   () => {
   const { t, i18n } = useTranslation();
-  const [data3, setData3] = useState<any>(null);
-  const [loading, setLoading] = useState(false);
+  const [searchParams] = useSearchParams();
+  const gtin = searchParams.get('GTIN');
+  const { data, isLoading, fetchData } = useTraceabilityStore();
 
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const res = await backend.getInfo('17751234567890');
-        console.log(res, 'res');
-        setData3(res[0]);
-      } catch (error) {
-        console.error('Error al obtener data del backend:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-  
-    fetchData();
-  }, []);
+    if (gtin) {
+      fetchData(gtin);
+    }
+  }, [gtin]);
 
   return (
     <div className="max-w-[1024px] mx-auto mt-8 px-5">
-      {loading ? (
-        <div className="flex justify-center items-center h-screen">
-          <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900 dark:border-white"></div>
+      {isLoading ? (
+        <div className="flex flex-col gap-2 w-full">
+          <Skeleton count={1} height={60} width="100%" />
+          <Skeleton count={1} height={60} width="100%" />
         </div>
       ) : (
         <>
@@ -60,7 +53,7 @@ const Blockchain =   () => {
             {blockchain?.process}
           </p> */}
           <ul className="mb-3">
-            {data3?.traceability_blockchain_lot?.time_line.map(
+            {data?.traceability_blockchain_lot?.time_line.map(
               (item: TtraceabilityItem, index: number) => (
                 <li className="mb-4" key={index}>
                   <p className="text-[13px] mb-2 dark:text-white">

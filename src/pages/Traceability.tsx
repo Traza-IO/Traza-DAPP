@@ -9,6 +9,7 @@ import { useState } from 'react';
 import { backend } from '../declarations/backend';
 import { useTraceabilityStore } from '../store/useTraceabilityStore';
 import Skeleton from 'react-loading-skeleton';
+import { useSearchParams } from 'react-router-dom';
 
 interface IitemTrace {
   title: string;
@@ -26,13 +27,15 @@ interface ItiemLine {
 
 export const Traceability: React.FC = () => {
   const { t, i18n } = useTranslation();
+  const [searchParams] = useSearchParams();
+  const gtin = searchParams.get('GTIN');
   const { data, isLoading, fetchData } = useTraceabilityStore();
 
   useEffect(() => {
-    if (!data) {
-      fetchData();
+    if (gtin) {
+      fetchData(gtin);
     }
-  }, [data, fetchData]);
+  }, [gtin]);
   
   return (
     <>

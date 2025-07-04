@@ -29,11 +29,15 @@ const  Home: React.FC = () => {
   
   const { data, isLoading, fetchData } = useTraceabilityStore();
 
+  const [searchParams] = useSearchParams();
+  const gtin = searchParams.get('GTIN');
+
   useEffect(() => {
-    if (!data) {
-      fetchData();
+    console.log(gtin, 'gtin value');
+    if (gtin && !data) {
+      fetchData(gtin);
     }
-  }, [data, fetchData]);
+  }, [gtin, data, fetchData]);
 
 
   return (

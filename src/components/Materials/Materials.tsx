@@ -13,19 +13,21 @@ import { backend } from '../../declarations/backend';
 import { useTraceabilityStore } from '../../store/useTraceabilityStore';
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import { useSearchParams } from 'react-router-dom';
 
 const Materials = () => {
   const { t, i18n } = useTranslation();
-
+  const [searchParams] = useSearchParams();
+  const gtin = searchParams.get('GTIN');
   const { data, isLoading, fetchData } = useTraceabilityStore();
   const materials = data?.information_product;
   const loading = isLoading;
 
   useEffect(() => {
-    if (!data) {
-      fetchData('17751234567890');
+    if (gtin) {
+      fetchData(gtin);
     }
-  }, [data, fetchData]);
+  }, [gtin]);
   
   // useEffect(() => {
   //   const fetchData = async () => {
