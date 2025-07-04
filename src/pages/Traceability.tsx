@@ -4,6 +4,11 @@ import AccordionContent from '../components/Accordion/components/AccordionConten
 import AccordionHead from '../components/Accordion/components/AccordionHead';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { backend } from '../declarations/backend';
+import { useTraceabilityStore } from '../store/useTraceabilityStore';
+import Skeleton from 'react-loading-skeleton';
 
 interface IitemTrace {
   title: string;
@@ -21,22 +26,31 @@ interface ItiemLine {
 
 export const Traceability: React.FC = () => {
   const { t, i18n } = useTranslation();
-  const { data: data3, call: call3 } = useQueryCall({
-    functionName: 'getInfo',
-    args: ['17751234567890'],
-  });
-  const traceability = Array.isArray(data3) ? data3[0] : {};
-  console.log(traceability, 'dasd3');
+  const { data, isLoading, fetchData } = useTraceabilityStore();
+
+  useEffect(() => {
+    if (!data) {
+      fetchData();
+    }
+  }, [data, fetchData]);
+  
   return (
     <>
-      <div className="max-w-[1024px] mx-auto mt-6 px-5">
-        <Accordion>
-          <AccordionHead toggleAccordion={() => {}} isOpen={false}>
+      {isLoading ? (
+        <div className="flex flex-col gap-2 w-full">
+          <Skeleton count={1} height={60} width="100%" />
+          <Skeleton count={1} height={60} width="100%" />
+          <Skeleton count={1} height={60} width="100%" />
+        </div>
+      ) : (
+        <div className="max-w-[1024px] mx-auto mt-6 px-5">
+          <Accordion>
+            <AccordionHead toggleAccordion={() => {}} isOpen={false}>
             {t('product.suppliers')}
           </AccordionHead>
           <AccordionContent isOpen={false}>
             <>
-              {traceability?.trace_supplier?.map(
+              {data?.trace_supplier?.map(
                 (item: IitemTrace, index: number) => (
                   <div key={index} className="mb-6">
                     <h3 className="text-[#45483D] text-[15px] mb-6 dark:text-white">
@@ -83,7 +97,7 @@ export const Traceability: React.FC = () => {
           <AccordionContent isOpen={false}>
             <div className="mb-6">
               <h3 className="text-[#45483D] text-[15px] mb-6 dark:text-white">
-                {traceability?.location}
+                {data?.location}
               </h3>
               <div className="flex items-start">
                 <div className="mr-3 mt-1">
@@ -105,7 +119,7 @@ export const Traceability: React.FC = () => {
                 </div>
               </div>
               <ul>
-                {traceability?.traceability_lot?.time_line?.map(
+                  {data?.traceability_lot?.time_line?.map(
                   (item: ItiemLine, index: number) => (
                     <li
                       key={index}
@@ -154,7 +168,7 @@ export const Traceability: React.FC = () => {
             </div>
           </AccordionContent>
         </Accordion>
-      </div>
+      </div>)}
     </>
   );
 };
