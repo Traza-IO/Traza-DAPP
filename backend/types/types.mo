@@ -1,178 +1,196 @@
-module{
-   public type ModelDescription_Type = {
+import Time "mo:base/Time";
+
+module {
+  public type Timestamp = Time.Time;
+
+  public type ModelDescription = {
     name : Text;
     collection : Text;
     summary : Text;
   };
-  public type materials_Type = {
+
+  public type Materials = {
     composition : Text;
     recycling : Text;
-    percentage_recycling : Text;
-    recycling_income : Text;
+    percentageRecycling : Text;
+    recyclingIncome : Text;
   };
 
-  public type packing_Type = {
-    packingdescriptiontype : Text;
+  public type Packing = {
+    descriptionType : Text;
     weight : Text;
     volume : Text;
     recycling : Text;
-    percentage_recycling : Text;
+    percentageRecycling : Text;
   };
 
-  public type care_Type = {
+  public type Care = {
     care : [Text];
     description : Text;
   };
-  public type tips_Type = {
+
+  public type Tip = {
     description : Text;
     list : [Text];
   };
 
-  public type ModelDPP_Type = {
-    id_model : Text;
-    id_model_export : Text;
-    summary_materials : Text;
-    name_model: Text;
-    brand_information : Text;
-    description_model : ModelDescription_Type;
-    materials : materials_Type;
-    packing : packing_Type;
-    care : care_Type;
-    tips : [tips_Type];
+  public type ModelDpp = {
+    idModel : Text;
+    idModelExport : Text;
+    summaryMaterials : Text;
+    nameModel : Text;
+    brandInformation : Text;
+    descriptionHeader : Text;
+    descriptionModel : ModelDescription;
+    materials : Materials;
+    packing : Packing;
+    care : Care;
+    tips : [Tip];
     state : Text;
-    user_created : Text;
-    creation_date : Text;
-    update_date : Text;
+    userCreated : Text;
+    creationDate : Timestamp;
+    updateDate : Timestamp;
   };
-   public type ModelDPP_aux_Type = {
-    id_model : Text;
-    id_model_export : Text;
-    summary_materials : Text;
-    name_model: Text;
-    brand_information : Text;
-    description_model : Text;
+
+  public type ModelDppAux = {
+    idModel : Text;
+    idModelExport : Text;
+    summaryMaterials : Text;
+    nameModel : Text;
+    brandInformation : Text;
+    descriptionModel : Text;
     materials : Text;
     packing : Text;
     care : Text;
     tips : Text;
     state : Text;
-    user_created : Text;
-    creation_date : Text;
-    update_date : Text;
-  };
-  public type trace_supplier_type={
-    title: Text;
-    ruc: Text;
-    location: Text;
-    coords: Text;
-  };
-  public type time_line_traceability_type={
-    process: Text;
-    start_time: Text;
-    end_time: Text;
-    owner: Text;
-  };
-  public type traceability_lot_type = {
-    location: Text;
-    time_line: [time_line_traceability_type];
+    userCreated : Text;
+    creationDate : Timestamp;
+    updateDate : Timestamp;
   };
 
- 
-  public type certifications_compliance_type = {
-    name: Text;
-    organization: Text;
-    number: Text;
-    audit_date: Text;
-    effective_date: Text;
-    link: Text;
-    logo: Text;
-  };
-  public type compliance_supplier_type = {
-    supplier: Text;
-    certifications : [certifications_compliance_type];
-  };
-  public type compliance_process_type = {
-    process: Text;
-    certifications: [certifications_compliance_type]
-  };
-  public type time_line_traceability_lot_type = {
-    process: Text;
-    hash: Text;
-
-  };
-  public type traceability_blockchain_lot_type = {
-    time_line: [time_line_traceability_lot_type]
-  };
-  public type lotdpp_type={
-    id_lot: Text;
-    id_model: Text;
-    lot_number_product: Text;
-    description_lot: Text;
-    trace_supplier: [trace_supplier_type];
-    traceability_lot: traceability_lot_type;
-    compliance_supplier: [compliance_supplier_type];
-    compliance_process: compliance_process_type;
-    traceability_blockchain_lot: traceability_blockchain_lot_type;
-    state: Text;
-    user_created: Text;
-    creation_date: Text;
-    update_date: Text;
-  };
-  public type photo_product_type = {
-    frontal: Text;
-    left: Text;
-    later: Text;
-    right: Text;
-  };
-  public type information_product_type = {
-    name: Text;
-    brand: Text;
-    GTIN: Text;
-    productcode: Text;
-    productcode_EU: Text;
-    category: Text;
-    size: Text;
-    color: Text;
-    year: Text;
-    season: Text;
-  };
-  public type time_line_product_type = {
-    process: Text;
-    start_time: Text;
-    end_time: Text;
-    owner: Text;
-  };
-  public type traceability_product_dpp_type = {
-      time_line: [time_line_product_type];
+  public type TraceSupplier = {
+    title : Text;
+    ruc : Text;
+    location : Text;
+    coords : Text;
   };
 
-  public type traceability_blockchain_product_dpp_time_line_type = {
-    process: Text;
-    hash: Text;
-  };
-  public type traceability_blockchain_product_dpp_type = {
-    time_line: [traceability_blockchain_product_dpp_time_line_type]
+  public type TraceabilityTimeline = {
+    process : Text;
+    startTime : Text;
+    endTime : Text;
+    owner : Text;
   };
 
-  public type product_dpp_type = {
-    id_product : Text;
-    id_lot : Text;
-    gtin_product : Text;
-    id_product_parent_company : Text;
-    id_product_system_eu : Text;
-    photo_product : photo_product_type;
-    information_product : information_product_type;
-    traceability_product : traceability_product_dpp_type;
-    traceability_blockchain_product : traceability_blockchain_product_dpp_type;
+  public type TraceabilityLot = {
+    location : Text;
+    timeline : [TraceabilityTimeline];
+  };
+
+  public type Certification = {
+    name : Text;
+    organization : Text;
+    number : Text;
+    auditDate : Text;
+    effectiveDate : Text;
+    link : Text;
+    logo : Text;
+  };
+
+  public type ComplianceSupplier = {
+    supplier : Text;
+    certifications : [Certification];
+  };
+
+  public type ComplianceProcess = {
+    process : Text;
+    certifications : [Certification];
+  };
+
+  public type BlockchainTimelineEntry = {
+    process : Text;
+    hash : Text;
+  };
+
+  public type BlockchainTraceabilityLot = {
+    timeline : [BlockchainTimelineEntry];
+  };
+
+  public type LotDpp = {
+    idLot : Text;
+    idModel : Text;
+    lotNumber : Text;
+    description : Text;
+    traceSuppliers : [TraceSupplier];
+    traceability : TraceabilityLot;
+    complianceSuppliers : [ComplianceSupplier];
+    complianceProcess : ComplianceProcess;
+    blockchainTraceability : BlockchainTraceabilityLot;
     state : Text;
-    user_created : Text;
-    creation_date : Text;
-    update_date : Text;
+    userCreated : Text;
+    creationDate : Timestamp;
+    updateDate : Timestamp;
+  };
+
+  public type ProductPhotos = {
+    front : Text;
+    left : Text;
+    back : Text;
+    right : Text;
+  };
+
+  public type ProductInfo = {
+    name : Text;
+    brand : Text;
+    gtin : Text;
+    productCode : Text;
+    productCodeEU : Text;
+    category : Text;
+    size : Text;
+    color : Text;
+    year : Text;
+    season : Text;
+  };
+
+  public type ProductTimeline = {
+    process : Text;
+    startTime : Text;
+    endTime : Text;
+    owner : Text;
+  };
+
+  public type ProductTraceability = {
+    timeline : [ProductTimeline];
+  };
+
+  public type BlockchainProductTimelineEntry = {
+    process : Text;
+    hash : Text;
+  };
+
+  public type BlockchainProductTraceability = {
+    timeline : [BlockchainProductTimelineEntry];
+  };
+
+  public type ProductDpp = {
+    idProduct : Text;
+    idLot : Text;
+    gtinProduct : Text;
+    idProductParentCompany : Text;
+    idProductSystemEU : Text;
+    photo : ProductPhotos;
+    information : ProductInfo;
+    traceability : ProductTraceability;
+    blockchainTraceability : BlockchainProductTraceability;
+    state : Text;
+    userCreated : Text;
+    creationDate : Timestamp;
+    updateDate : Timestamp;
   };
 
 
-
-    public type traceability_consolidate = {
+  public type traceability_consolidate = {
     id_model: Text;
     id_model_export: Text;
     summary_materials: Text;
@@ -241,8 +259,7 @@ module{
         }
       ]
     }];
-    compliance_process:
-      {
+    compliance_process:{
         process: Text;
         certifications:[{
           name: Text;
@@ -310,4 +327,4 @@ module{
       ]
     }
   };
-}
+};
