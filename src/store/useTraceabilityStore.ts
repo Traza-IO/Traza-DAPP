@@ -33,7 +33,7 @@ export const useTraceabilityStore = create<TraceabilityStore>((set) => ({
       const res = await backend.getInfo(gtin);
       if (!res || res.length === 0) throw new Error("No data found");
       set({ data: res[0] });
-      console.log(res[0], 'res');
+      console.log(res, 'res');
     } catch (error) {
       console.error('Error fetching product data:', error);
     } finally {

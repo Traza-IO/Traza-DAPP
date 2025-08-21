@@ -18,7 +18,8 @@ type TtraceabilityItem = {
 const Blockchain =   () => {
   const { t, i18n } = useTranslation();
   const [searchParams] = useSearchParams();
-  const gtin = searchParams.get('GTIN');
+  // const gtin = searchParams.get('gtin');
+  const gtin = '17751234567890';
   const { data, isLoading, fetchData } = useTraceabilityStore();
 
   useEffect(() => {

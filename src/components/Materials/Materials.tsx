@@ -18,9 +18,9 @@ import { useSearchParams } from 'react-router-dom';
 const Materials = () => {
   const { t, i18n } = useTranslation();
   const [searchParams] = useSearchParams();
-  const gtin = searchParams.get('GTIN');
+  // const gtin = searchParams.get('GTIN');
+  const gtin = '17751234567890';
   const { data, isLoading, fetchData } = useTraceabilityStore();
-  const materials = data?.information_product;
   const loading = isLoading;
 
   useEffect(() => {
@@ -69,13 +69,13 @@ const Materials = () => {
           </h4>
           <ul className="p-0 text-left">
             <li className="text-[11px] text-[#5f6259] dark:text-white max-w-[120px]">
-              {materials?.summary_materials}
+              {data?.summary_materials}
             </li>
           </ul>
         </div>
         <div className="max-md:text-center max-md:mb-4 w-full">
           <h4 className="font-bold text-[#5f6259] text-[15px] uppercase dark:text-white">
-            {materials?.name_model}
+            {data?.name_model}
           </h4>
           <ul>
             <li className="text-[14px] mt-3 text-[#5f6259] font-bold dark:text-white">

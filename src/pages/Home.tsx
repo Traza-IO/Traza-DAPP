@@ -30,7 +30,8 @@ const  Home: React.FC = () => {
   const { data, isLoading, fetchData } = useTraceabilityStore();
 
   const [searchParams] = useSearchParams();
-  const gtin = searchParams.get('GTIN');
+  // const gtin = searchParams.get('gtin');
+  const gtin = '17751234567890';
 
   useEffect(() => {
     console.log(gtin, 'gtin value');

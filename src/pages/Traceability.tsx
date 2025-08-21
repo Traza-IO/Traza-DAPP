@@ -28,7 +28,8 @@ interface ItiemLine {
 export const Traceability: React.FC = () => {
   const { t, i18n } = useTranslation();
   const [searchParams] = useSearchParams();
-  const gtin = searchParams.get('GTIN');
+  // const gtin = searchParams.get('gtin');
+  const gtin = '17751234567890';
   const { data, isLoading, fetchData } = useTraceabilityStore();
 
   useEffect(() => {
@@ -40,10 +41,12 @@ export const Traceability: React.FC = () => {
   return (
     <>
       {isLoading ? (
-        <div className="flex flex-col gap-2 w-full">
-          <Skeleton count={1} height={60} width="100%" />
-          <Skeleton count={1} height={60} width="100%" />
-          <Skeleton count={1} height={60} width="100%" />
+        <div className="max-w-[1024px] mx-auto mt-6 px-5">
+          <div className="flex flex-col gap-2 w-full">
+            <Skeleton count={1} height={60} width="100%" />
+            <Skeleton count={1} height={60} width="100%" />
+            <Skeleton count={1} height={60} width="100%" />
+          </div>
         </div>
       ) : (
         <div className="max-w-[1024px] mx-auto mt-6 px-5">
