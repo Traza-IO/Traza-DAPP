@@ -60,7 +60,8 @@ actor class Product() {
  public shared  func getInfo(gtin_product: Text) : async ?Types.traceability_consolidate {
   Debug.print("getInfo called with gtin_product: " # gtin_product);
   // This function retrieves the traceability information for a product based on its GTIN.
-    let Bar = actor("4smg2-uiaaa-aaaab-aaenq-cai") : actor {
+   //let Bar = actor("4smg2-uiaaa-aaaab-aaenq-cai") : actor { prod
+    let Bar = actor("vb2j2-fp777-77774-qaafq-cai") : actor {
       readModelById: (Text) -> async ?Types.traceability_consolidate;
     };
     let value = await Bar.readModelById(gtin_product);
