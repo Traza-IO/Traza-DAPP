@@ -29,8 +29,9 @@ export const useTraceabilityStore = create<TraceabilityStore>((set) => ({
     console.log('init gtin:', gtin);
     set({ isLoading: true });
     try {
-      const { backend } = await import('../declarations/backend');
-      const res = await backend.getInfoFree(gtin);
+      const { backend } = await import('./declarations/backend');
+      console.log('backend imported:', backend);
+      const res = await backend.getInfo(gtin);
       if (!res || res.length === 0) throw new Error("No data found");
       set({ data: res[0] });
       console.log(res, 'res');

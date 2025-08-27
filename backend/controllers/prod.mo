@@ -1,8 +1,5 @@
-import Cycles "mo:base/ExperimentalCycles";
-import Nat "mo:base/Nat";
 import Text "mo:base/Text";
 import Trie "mo:base/Trie";
-import Principal "mo:base/Principal";
 import Debug "mo:base/Debug";
 import Types "../types/types";
 
@@ -16,28 +13,22 @@ private stable var traceabilityDPP : Trie.Trie<Text, Types.traceability_consolid
 
   
   public func createUnitData(unit : Types.traceability_consolidate) : async Text {
-     Debug.print("getInfo Prototipador called with balance: " # Nat.toText(Cycles.balance()));
     traceabilityDPP := Trie.replace(
       traceabilityDPP,
       key(unit.gtin_product),
       Text.equal,
       ?unit,
     ).0;
-     Debug.print("getInfo Prototipador called with balance: " # Nat.toText(Cycles.balance()));
     return unit.gtin_product;
   };
   public query  func getInfoFree(gtin_product : Text) : async ?Types.traceability_consolidate {
-  Debug.print("getInfo Prototipador called with balance: " # Nat.toText(Cycles.balance()));
   return Trie.find(traceabilityDPP, key(gtin_product), Text.equal);
   };
   public query func getImageFree(name : Text) : async ?Blob {
-      Debug.print("getInfo Prototipador called with balance: " # Nat.toText(Cycles.balance()));
    return Trie.find(imagesDPP, key(name), Text.equal);
   };
   
   public shared  func getInfo(gtin_product : Text) : async ?Types.traceability_consolidate_public {
-    let balance = Cycles.balance();
-    Debug.print("getInfo Prototipador called with balance: " # Nat.toText(Cycles.balance()));
     var traceability : ?Types.traceability_consolidate = Trie.find(traceabilityDPP, key(gtin_product), Text.equal);
     return switch (traceability) {
       case (?traceability) {
