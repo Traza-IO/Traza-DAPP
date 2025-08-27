@@ -8,14 +8,18 @@
       }
     },
     "frontend": {
-      "dependencies": ["backend"],
+      "dependencies": [
+        "backend"
+      ],
       "type": "assets",
-      "source": ["dist/"]
+      "source": [
+        "dist/"
+      ]
     }
   },
   "defaults": {
     "build": {
-      "packtool": "npm run --silent sources"
+      "packtool": "mops sources"
     }
   },
   "output_env_file": ".env",
