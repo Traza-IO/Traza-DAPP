@@ -24,7 +24,7 @@ private stable var traceabilityDPP : Trie.Trie<Text, Types.traceability_consolid
     return unit.gtin_product;
   };
 
-  public shared query func getInfo(gtin_product : Text) : async ?Types.traceability_consolidate {
+  public query func getInfo(gtin_product : Text) : async ?Types.traceability_consolidate {
     Debug.print("getInfo Prototipador called with gtin_product: " # gtin_product);
     Trie.find(traceabilityDPP, key(gtin_product), Text.equal);
   };

@@ -6,6 +6,7 @@ import { idlFactory, canisterId } from './declarations/backend';
 import AppRouter from './router';
 import "./i18n"; 
 
+console.log('canisterId:', idlFactory);
 ReactDOM.createRoot(document.getElementById('root')! as HTMLElement).render(
   <React.StrictMode>
     <AgentProvider withProcessEnv>
