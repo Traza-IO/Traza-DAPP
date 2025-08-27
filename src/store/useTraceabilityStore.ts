@@ -38,6 +38,7 @@ export const useTraceabilityStore = create<TraceabilityStore>((set) => ({
     const backend = createActor(canisterId);
       console.log('backend imported:', backend);
      const res = await backend.getInfo(gtin);
+     console.log('res:', res);
       if (!res || res.length === 0) throw new Error("No data found");
       set({ data: res[0] });
       console.log(res, 'res');
