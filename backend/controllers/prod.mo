@@ -34,6 +34,7 @@ private stable var traceabilityDPP : Trie.Trie<Text, Types.traceability_consolid
       Debug.print("getInfo Prototipador called with balance: " # Nat.toText(Cycles.balance()));
    return Trie.find(imagesDPP, key(name), Text.equal);
   };
+  
   public shared  func getInfo(gtin_product : Text) : async ?Types.traceability_consolidate_public {
     let balance = Cycles.balance();
     Debug.print("getInfo Prototipador called with balance: " # Nat.toText(Cycles.balance()));
@@ -89,7 +90,7 @@ private stable var traceabilityDPP : Trie.Trie<Text, Types.traceability_consolid
                 id_product_parent_company= traceability.id_product_parent_company;
                 id_product_system_eu= traceability.id_product_system_eu;
                 photo_product = {
-                  frontal= await getImage(traceability.photo_product.frontal);
+                  frontal= await getImageFree(traceability.photo_product.frontal);
                   left= await getImage(traceability.photo_product.left);
                   later= await getImage(traceability.photo_product.later);
                   right= await getImage(traceability.photo_product.right);

@@ -33,7 +33,7 @@ const Materials = () => {
   //   const fetchData = async () => {
   //     try {
   //       setLoading(true);
-  //       const res = await backend.getInfo('17751234567890');
+  //       const res = await backend.getInfoFree('17751234567890');
   //       setMaterials(res[0]);
   //     } catch (err) {
   //       console.error(err);
