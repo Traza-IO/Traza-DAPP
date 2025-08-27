@@ -5,7 +5,6 @@ import carousel2 from "../../assets/b2.png";
 import carousel3 from "../../assets/b3.png";
 import carousel4 from "../../assets/b4.png";
 import bgCarousel from "../../assets/fd-black.jpg";
-//import { backend } from '../../declarations/backend';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
@@ -30,8 +29,6 @@ const SliderProduct = () => {
       },
     ],
   };
-
- // console.log(backend, 'backend');
   
   return (
     <div

@@ -40,7 +40,6 @@ const  Home: React.FC = () => {
     }
   }, [gtin, data, fetchData]);
 
-
   return (
     <div className="max-w-[1024px] mx-auto mt-6 px-5">
       {isLoading ? (
@@ -102,7 +101,7 @@ const  Home: React.FC = () => {
                   {t('product.gtin')}
                 </strong>
                 <p className="text-right dark:text-white">
-                  {data?.information_product?.GTIN}
+                  {data?.information_product?.gtin}
                 </p>
               </li>
               <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
@@ -110,7 +109,7 @@ const  Home: React.FC = () => {
                   {t('product.product_code')}
                 </strong>
                 <p className="text-right dark:text-white">
-                  {data?.information_product?.productcode}
+                  {data?.information_product?.product_code}
                 </p>
               </li>
               <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
@@ -208,7 +207,7 @@ const  Home: React.FC = () => {
                   {t('product.type')}:
                 </strong>
                 <p className="text-right dark:text-white">
-                  {data?.packing?.packingdescriptiontype}
+                  {data?.packing?.pack_type}
                 </p>
               </li>
               <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
