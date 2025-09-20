@@ -1,1 +1,1 @@
-export { default } from "./AccordionHead";
+export { default } from './AccordionHead';

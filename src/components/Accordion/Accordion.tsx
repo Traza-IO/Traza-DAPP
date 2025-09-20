@@ -1,5 +1,5 @@
 // components/Accordion.tsx
-import React, { useState, ReactNode } from "react";
+import React, { useState, ReactNode } from 'react';
 
 interface AccordionProps {
   children: ReactNode;

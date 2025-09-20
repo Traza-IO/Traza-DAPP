@@ -4,9 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "dfx deploy",
+    "dev": "vite",
+    "dev:dfx": "dfx start --clean --background && dfx deploy && npm run dev",
     "setup": "npm i && dfx generate backend",
     "build": "tsc && vite build",
+    "deploy": "dfx deploy",
+    "deploy:ic": "dfx deploy --network ic",
     "format": "prettier --write \"src/**/*.{json,js,jsx,ts,tsx,css,scss}\" \"backend/**/*.mo\"",
     "sources": "mops sources"
   },

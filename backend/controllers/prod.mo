@@ -3,15 +3,13 @@ import Trie "mo:base/Trie";
 import Debug "mo:base/Debug";
 import Types "../types/types";
 
-
 persistent actor class Product() {
 
-private stable var traceabilityDPP : Trie.Trie<Text, Types.traceability_consolidate> = Trie.empty();
+  private stable var traceabilityDPP : Trie.Trie<Text, Types.traceability_consolidate> = Trie.empty();
 
   type Key<K> = Trie.Key<K>;
   func key(t : Text) : Key<Text> { { hash = Text.hash t; key = t } };
 
-  
   public func createUnitData(unit : Types.traceability_consolidate) : async Text {
     traceabilityDPP := Trie.replace(
       traceabilityDPP,
@@ -26,7 +24,7 @@ private stable var traceabilityDPP : Trie.Trie<Text, Types.traceability_consolid
     Debug.print("getInfo Prototipador called with gtin_product: " # gtin_product);
     Trie.find(traceabilityDPP, key(gtin_product), Text.equal);
   };
-  
+
   stable var imagesDPP : Trie.Trie<Text, Blob> = Trie.empty();
 
   public func uploadImage(name : Text, content : Blob) : async Text {
@@ -41,7 +39,7 @@ private stable var traceabilityDPP : Trie.Trie<Text, Types.traceability_consolid
   };
 
   public query func getImage(name : Text) : async ?Blob {
-   Debug.print("uploadImage Prototipador called with img name: " # name);
-   return Trie.find(imagesDPP, key(name), Text.equal);
+    Debug.print("uploadImage Prototipador called with img name: " # name);
+    return Trie.find(imagesDPP, key(name), Text.equal);
   };
 };

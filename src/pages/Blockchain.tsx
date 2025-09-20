@@ -3,7 +3,7 @@ import icp from '../assets/icp.png';
 import { t } from 'i18next';
 import { useTranslation } from 'react-i18next';
 
-import  {backend}  from '../declarations/backend';
+import { backend } from '../declarations/backend';
 import { useEffect, useState } from 'react';
 import { useTraceabilityStore } from '../store/useTraceabilityStore';
 import Skeleton from 'react-loading-skeleton';
@@ -15,7 +15,7 @@ type TtraceabilityItem = {
   label_start: string;
   process: string;
 };
-const Blockchain =   () => {
+const Blockchain = () => {
   const { t, i18n } = useTranslation();
   const [searchParams] = useSearchParams();
   // const gtin = searchParams.get('gtin');
@@ -37,42 +37,45 @@ const Blockchain =   () => {
         </div>
       ) : (
         <>
-        <figure className="flex items-center justify-center max-w-[220px] mx-auto">
-          <img src={icp} alt="" />
-        </figure>
-        <div className="text-center mt-4">
-          <h4 className="text-[#45483d] dark:text-white font-bold text-[17px]">
-            Polerón con Capucha{' '}
-          </h4>
-          <p className="text-[#45483d] dark:text-white"> GTIN: 17751234567890 </p>
-        </div>
-        <h5 className="mt-5 p-3 bg-[#acb2a8] font-bold dark:bg-[#5f6259] dark:text-white">
-          {t('product.confection')}
-        </h5>
-        <div className="px-5">
-          {/* <p className="mt-5 text-[#45483d] font-bold mb-3 dark:text-white">
+          <figure className="flex items-center justify-center max-w-[220px] mx-auto">
+            <img src={icp} alt="" />
+          </figure>
+          <div className="text-center mt-4">
+            <h4 className="text-[#45483d] dark:text-white font-bold text-[17px]">
+              Polerón con Capucha{' '}
+            </h4>
+            <p className="text-[#45483d] dark:text-white">
+              {' '}
+              GTIN: 17751234567890{' '}
+            </p>
+          </div>
+          <h5 className="mt-5 p-3 bg-[#acb2a8] font-bold dark:bg-[#5f6259] dark:text-white">
+            {t('product.confection')}
+          </h5>
+          <div className="px-5">
+            {/* <p className="mt-5 text-[#45483d] font-bold mb-3 dark:text-white">
             {blockchain?.process}
           </p> */}
-          <ul className="mb-3">
-            {data?.traceability_blockchain_lot?.time_line.map(
-              (item: TtraceabilityItem, index: number) => (
-                <li className="mb-4" key={index}>
-                  <p className="text-[13px] mb-2 dark:text-white">
-                    {item?.label_start}
-                  </p>
-                  <div className="border border-solid border-[#acb2a8] px-5 py-3 flex justify-between">
-                    <span className="text-[13px] dark:text-white overflow-hidden max-w-[100%] text-ellipsis">
-                      {item?.hash_start}
-                    </span>
-                    <button>
-                      <MdOutlineContentCopy className="text-[#45483d] text-[20px] ml-3" />
-                    </button>
-                  </div>
-                </li>
-              ),
-            )}
-          </ul>
-        </div>
+            <ul className="mb-3">
+              {data?.traceability_blockchain_lot?.time_line.map(
+                (item: TtraceabilityItem, index: number) => (
+                  <li className="mb-4" key={index}>
+                    <p className="text-[13px] mb-2 dark:text-white">
+                      {item?.label_start}
+                    </p>
+                    <div className="border border-solid border-[#acb2a8] px-5 py-3 flex justify-between">
+                      <span className="text-[13px] dark:text-white overflow-hidden max-w-[100%] text-ellipsis">
+                        {item?.hash_start}
+                      </span>
+                      <button>
+                        <MdOutlineContentCopy className="text-[#45483d] text-[20px] ml-3" />
+                      </button>
+                    </div>
+                  </li>
+                ),
+              )}
+            </ul>
+          </div>
         </>
       )}
     </div>
