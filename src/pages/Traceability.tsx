@@ -117,59 +117,102 @@ export const Traceability: React.FC = () => {
                     Localización
                   </h4>
                   <span className="text-[13px] text-[#5F6259] font-bold block dark:text-white">
-                    Ubicación:
+                    Ubicación: {data?.traceability_batch?.location}
                   </span>
                   <p className="text-[13px] text-[#5F6259] dark:text-white">
-                    Dirección, provincia, departamento, región
+                    Dirección, provincia, departamento, región {data?.traceability_batch?.location}
                   </p>
                 </div>
               </div>
               <ul>
-                  {data?.traceability_lot?.time_line?.map(
-                  (item: ItiemLine, index: number) => (
-                    <li
-                      key={index}
-                      className="flex items-start w-full justify-start relative mt-4 pb-6"
-                    >
-                      <div className="pt-2 absolute top-0 bottom-0 pt-2 h-full flex flex-col h-full">
-                        <span className="block w-[15px] h-[15px] rounded-full bg-[#acb2a8]"></span>
-                        <span className="bg-[#CCD5DB] w-[3px] h-auto flex-1 block mx-auto mt-2"></span>
+                {data?.traceability_batch?.time_line?.map((item: ItiemLine, index: number) => (
+                  <li
+                    key={index}
+                    className="flex items-start w-full justify-start relative mt-4 pb-6"
+                  >
+                    <div className="pt-2 absolute top-0 bottom-0 pt-2 h-full flex flex-col h-full">
+                      <span className="block w-[15px] h-[15px] rounded-full bg-[#acb2a8]"></span>
+                      <span className="bg-[#CCD5DB] w-[3px] h-auto flex-1 block mx-auto mt-2"></span>
+                    </div>
+                    <div className="pl-10">
+                      <h4 className="text-[20px] text-[#212529] dark:text-white font-[500] capitalize">
+                        {item?.process}
+                      </h4>
+                      <div>
+                        <strong className="text-[13px] text-[#5f6259] dark:text-white font-bold block">
+                          {t('product.date_and_time_start')}:
+                        </strong>
+                        <span className="text-[#5f6259] text-[13px] dark:text-white block">
+                          {' '}
+                          {item?.start_time}
+                        </span>
                       </div>
-                      <div className="pl-10">
-                        <h4 className="text-[20px] text-[#212529] dark:text-white font-[500]">
-                          {item?.process}
-                        </h4>
-                        <div>
-                          <strong className="text-[13px] text-[#5f6259] dark:text-white font-bold block">
-                            {t('product.date_and_time_start')}:
-                          </strong>
-                          <span className="text-[#5f6259] text-[13px] dark:text-white block">
-                            {' '}
-                            {item?.start_time}
-                          </span>
-                        </div>
-                        <div className="my-3">
-                          <strong className="text-[13px] text-[#5f6259] dark:text-white font-bold block">
-                            {t('product.date_and_time_end')}:
-                          </strong>
-                          <span className="text-[#5f6259] text-[13px] dark:text-white block">
-                            {' '}
-                            {item?.end_time}
-                          </span>
-                        </div>
-                        <div>
-                          <strong className="text-[13px] text-[#5f6259] dark:text-white font-bold">
-                            {t('product.responsible')}:
-                          </strong>
-                          <span className="text-[#5f6259] text-[13px] dark:text-white">
-                            {' '}
-                            {item?.owner}
-                          </span>
-                        </div>
+                      <div className="my-3">
+                        <strong className="text-[13px] text-[#5f6259] dark:text-white font-bold block">
+                          {t('product.date_and_time_end')}:
+                        </strong>
+                        <span className="text-[#5f6259] text-[13px] dark:text-white block">
+                          {' '}
+                          {item?.end_time}
+                        </span>
                       </div>
-                    </li>
-                  ),
-                )}
+                      <div>
+                        <strong className="text-[13px] text-[#5f6259] dark:text-white font-bold">
+                          {t('product.responsible')}:
+                        </strong>
+                        <span className="text-[#5f6259] text-[13px] dark:text-white">
+                          {' '}
+                          {item?.owner}
+                        </span>
+                      </div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+              <ul>
+                {data?.traceability_product?.time_line?.map((item: ItiemLine, index: number) => (
+                  <li
+                    key={index}
+                    className="flex items-start w-full justify-start relative mt-4 pb-6"
+                  >
+                    <div className="pt-2 absolute top-0 bottom-0 pt-2 h-full flex flex-col h-full">
+                      <span className="block w-[15px] h-[15px] rounded-full bg-[#acb2a8]"></span>
+                      <span className="bg-[#CCD5DB] w-[3px] h-auto flex-1 block mx-auto mt-2"></span>
+                    </div>
+                    <div className="pl-10">
+                      <h4 className="text-[20px] text-[#212529] dark:text-white font-[500] capitalize">
+                        {item?.process}
+                      </h4>
+                      <div>
+                        <strong className="text-[13px] text-[#5f6259] dark:text-white font-bold block">
+                          {t('product.date_and_time_start')}:
+                        </strong>
+                        <span className="text-[#5f6259] text-[13px] dark:text-white block">
+                          {' '}
+                          {item?.start_time}
+                        </span>
+                      </div>
+                      <div className="my-3">
+                        <strong className="text-[13px] text-[#5f6259] dark:text-white font-bold block">
+                          {t('product.date_and_time_end')}:
+                        </strong>
+                        <span className="text-[#5f6259] text-[13px] dark:text-white block">
+                          {' '}
+                          {item?.end_time}
+                        </span>
+                      </div>
+                      <div>
+                        <strong className="text-[13px] text-[#5f6259] dark:text-white font-bold">
+                          {t('product.responsible')}:
+                        </strong>
+                        <span className="text-[#5f6259] text-[13px] dark:text-white">
+                          {' '}
+                          {item?.owner}
+                        </span>
+                      </div>
+                    </div>
+                  </li>
+                ))}
               </ul>
             </div>
           </AccordionContent>

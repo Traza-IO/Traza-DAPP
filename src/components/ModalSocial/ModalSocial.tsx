@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { FaFacebookF } from 'react-icons/fa';
+import { FaFacebookF, FaGlobe } from 'react-icons/fa';
 import { FaInstagram } from 'react-icons/fa';
 import { FaYoutube } from 'react-icons/fa';
 import { FaWhatsapp } from 'react-icons/fa';
@@ -15,7 +15,8 @@ export const ModalSocial = () => {
         <ul className="flex items-center flex-wrap w-full justify-center mt-10">
           <li className="mx-5 mb-3">
             <Link
-              to="/"
+              to="https://www.facebook.com/profile.php?id=61556000202561"
+              target="_blank"
               className="w-[50px] h-[50px] rounded-full bg-white flex items-center justify-center shadow-md"
             >
               <FaFacebookF />
@@ -23,21 +24,32 @@ export const ModalSocial = () => {
           </li>
           <li className="mx-5 mb-3">
             <Link
-              to="/"
+              to="https://www.instagram.com/trazasuite/"
+              target="_blank"
               className="w-[50px] h-[50px] rounded-full bg-white flex items-center justify-center shadow-md"
             >
               <FaInstagram />
             </Link>
           </li>
-          <li className="mx-5 mb-3">
+          {/* <li className="mx-5 mb-3">
             <Link
               to="/"
               className="w-[50px] h-[50px] rounded-full bg-white flex items-center justify-center shadow-md"
             >
               <FaYoutube />
             </Link>
-          </li>
+          </li> */}
+          {/* icon web */}
           <li className="mx-5 mb-3">
+            <Link
+              to="https://www.trazar.io/"
+              target="_blank"
+              className="w-[50px] h-[50px] rounded-full bg-white flex items-center justify-center shadow-md"
+            >
+              <FaGlobe />
+            </Link>
+          </li>
+          {/* <li className="mx-5 mb-3">
             <Link
               to="/"
               className="w-[50px] h-[50px] rounded-full bg-white flex items-center justify-center shadow-md"
@@ -52,7 +64,7 @@ export const ModalSocial = () => {
             >
               <BsTwitterX />
             </Link>
-          </li>
+          </li> */}
         </ul>
       </div>
       <div className="bg-[#edeeed] absolute inset-0 w-full h-full opacity-[0.6]"></div>
