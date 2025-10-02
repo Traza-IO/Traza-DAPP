@@ -1,5 +1,5 @@
-import React, { useState, ReactNode } from "react";
-import { FaAngleDown } from "react-icons/fa";
+import React, { useState, ReactNode } from 'react';
+import { FaAngleDown } from 'react-icons/fa';
 interface AccordionItemProps {
   title: string;
   content: ReactNode;
@@ -54,7 +54,7 @@ const Accordion: React.FC<AccordionProps> = ({ items }) => {
 const Description: React.FC = () => {
   const items = [
     {
-      title: "Descripción",
+      title: 'Descripción',
       content: (
         <div data-bs-parent="#accordionExample3">
           <div>
@@ -83,31 +83,31 @@ const Description: React.FC = () => {
             El leitmotiv compuesto de sus simbolos básicos, la ola (agua) y los
             andenes (tierra) muestra una expresion comprensible y tiene
             condiciones óptimas a la configuración artistica, especialmente en
-            el campo textil.{" "}
+            el campo textil.{' '}
           </p>
         </div>
       ),
     },
     {
-      title: "Información",
+      title: 'Información',
       content: <p>Contenido del acordeón con JSX y otros elementos.</p>,
     },
     {
-      title: "Materiales",
+      title: 'Materiales',
       content: (
         <img src="https://via.placeholder.com/150" alt="Ejemplo de imagen" />
       ),
     },
     {
-      title: "Materiales de Empaque",
+      title: 'Materiales de Empaque',
       content: <p>Contenido del acordeón con JSX y otros elementos.</p>,
     },
     {
-      title: "Cuidado",
+      title: 'Cuidado',
       content: <p>Contenido del acordeón con JSX y otros elementos.</p>,
     },
     {
-      title: "Consejos",
+      title: 'Consejos',
       content: <p>Contenido del acordeón con JSX y otros elementos.</p>,
     },
   ];

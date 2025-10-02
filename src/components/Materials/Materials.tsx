@@ -11,15 +11,15 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { backend } from '../../declarations/backend';
 import { useTraceabilityStore } from '../../store/useTraceabilityStore';
-import Skeleton from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import { useSearchParams } from 'react-router-dom';
 
 const Materials = () => {
   const { t, i18n } = useTranslation();
   const [searchParams] = useSearchParams();
   // const gtin = searchParams.get('GTIN');
-  const gtin = '17751234567890';
+  const gtin = '17550123456789';
   const { data, isLoading, fetchData } = useTraceabilityStore();
   const loading = isLoading;
 
@@ -28,7 +28,7 @@ const Materials = () => {
       fetchData(gtin);
     }
   }, [gtin]);
-  
+
   // useEffect(() => {
   //   const fetchData = async () => {
   //     try {
@@ -62,55 +62,55 @@ const Materials = () => {
           </div>
         </div>
       ) : (
-      <>
-        <div className="max-md:text-center max-md:mb-4 w-full">
-          <h4 className="font-bold text-[#5f6259] text-[15px] text-left dark:text-white">
-            {t('product.materials')}
-          </h4>
-          <ul className="p-0 text-left">
-            <li className="text-[11px] text-[#5f6259] dark:text-white max-w-[120px]">
-              {data?.summary_materials}
-            </li>
-          </ul>
-        </div>
-        <div className="max-md:text-center max-md:mb-4 w-full">
-          <h4 className="font-bold text-[#5f6259] text-[15px] uppercase dark:text-white">
-            {data?.name_model}
-          </h4>
-          <ul>
-            <li className="text-[14px] mt-3 text-[#5f6259] font-bold dark:text-white">
-              {t('product.traceable')}
-            </li>
-          </ul>
-        </div>
-        <div className="max-md:text-center max-md:mb-4 w-full">
-          <h4 className="font-bold text-[#5f6259] text-[15px] dark:text-white text-center">
-            {t('product.company')}
-          </h4>
-          <figure>
-            <img
-              src={imgBussiness}
-              width={100}
-              alt={imgBussiness}
-              className="block mx-auto"
-            />
-          </figure>
-          <div className="w-full flex justify-between max-w-[90px] mx-auto mt-2">
-            <button>
-              <FaFacebookSquare color="#acb2a8" size={18} />
-            </button>
-            <button>
-              <FaInstagram color="#acb2a8" size={18} />
-            </button>
-            <button>
-              <FaWhatsapp color="#acb2a8" size={18} />
-            </button>
-            <button>
-              <IoCart color="#acb2a8" size={18} />
-            </button>
+        <>
+          <div className="max-md:text-center max-md:mb-4 w-full">
+            <h4 className="font-bold text-[#5f6259] text-[15px] text-left dark:text-white">
+              {t('product.materials')}
+            </h4>
+            <ul className="p-0 text-left">
+              <li className="text-[11px] text-[#5f6259] dark:text-white max-w-[120px]">
+                {data?.summary_materials}
+              </li>
+            </ul>
           </div>
-        </div>
-      </>
+          <div className="max-md:text-center max-md:mb-4 w-full">
+            <h4 className="font-bold text-[#5f6259] text-[15px] uppercase dark:text-white">
+              {data?.name_model}
+            </h4>
+            <ul>
+              <li className="text-[14px] mt-3 text-[#5f6259] font-bold dark:text-white">
+                {t('product.traceable')}
+              </li>
+            </ul>
+          </div>
+          <div className="max-md:text-center max-md:mb-4 w-full">
+            <h4 className="font-bold text-[#5f6259] text-[15px] dark:text-white text-center">
+              {t('product.company')}
+            </h4>
+            <figure>
+              <img
+                src={imgBussiness}
+                width={100}
+                alt={imgBussiness}
+                className="block mx-auto"
+              />
+            </figure>
+            <div className="w-full flex justify-between max-w-[90px] mx-auto mt-2">
+              <button>
+                <FaFacebookSquare color="#acb2a8" size={18} />
+              </button>
+              <button>
+                <FaInstagram color="#acb2a8" size={18} />
+              </button>
+              <button>
+                <FaWhatsapp color="#acb2a8" size={18} />
+              </button>
+              <button>
+                <IoCart color="#acb2a8" size={18} />
+              </button>
+            </div>
+          </div>
+        </>
       )}
     </div>
   );

@@ -189,282 +189,279 @@ module {
     updateDate : Timestamp;
   };
 
-
   public type traceability_consolidate = {
-    id_model: Text;
-    id_model_export: Text;
-    summary_materials: Text;
-    name_model:Text;
-    brand_information: {
-      logo_mestiza: Text;
-      facebook: Text;
-      instagram: Text;
-      whatsapp: Text;
-      ecommerce: Text;
+    id_model : Text;
+    id_model_export : Text;
+    summary_materials : Text;
+    name_model : Text;
+    brand_information : {
+      logo_mestiza : Text;
+      facebook : Text;
+      instagram : Text;
+      whatsapp : Text;
+      ecommerce : Text;
     };
-    description_header: Text;
-    description_model: {
-      name: Text;
-      collection: Text;
-      summary: Text;
+    description_header : Text;
+    description_model : {
+      name : Text;
+      collection : Text;
+      summary : Text;
     };
-    materials:{
-      composition: Text;
-      recycling: Text;
-      percentage_recycling: Text;
-      recycling_income: Text;
+    materials : {
+      composition : Text;
+      recycling : Text;
+      percentage_recycling : Text;
+      recycling_income : Text;
     };
-    packing:{
-      pack_type: Text;
-      weight: Text;
-      volume: Text;
-      recycling: Text;
-      percentage_recycling: Text;
+    packing : {
+      pack_type : Text;
+      weight : Text;
+      volume : Text;
+      recycling : Text;
+      percentage_recycling : Text;
     };
-    care:{
-      care:[Text];
-      description: Text;
+    care : {
+      care : [Text];
+      description : Text;
     };
-    id_lot: Text;
-    lot_number_product: Text;
-    trace_supplier:[
+    id_lot : Text;
+    lot_number_product : Text;
+    trace_supplier : [
       {
-        title: Text;
-        ruc: Text;
-        location: Text;
-        coords: Text;
+        title : Text;
+        ruc : Text;
+        location : Text;
+        coords : Text;
       }
     ];
-    traceability_batch:{
-      location: Text;
-      time_line:[{
-        process: Text;
-        start_time: Text;
-        end_time: Text;
-        owner: Text;
-      }]
+    traceability_batch : {
+      location : Text;
+      time_line : [{
+        process : Text;
+        start_time : Text;
+        end_time : Text;
+        owner : Text;
+      }];
     };
-    compliance_supplier:[
-      {
-      supplier: Text;
-      certifications:[
+    compliance_supplier : [{
+      supplier : Text;
+      certifications : [
         {
-          name: Text;
-          organization: Text;
-          number: Text;
-          audit_date: Text;
-          effective_date: Text;
-          link: Text;
-          logo: Text;
-        }
-      ]
-    }];
-    compliance_process:{
-        process: Text;
-        certifications:[{
-          name: Text;
-          organization: Text;
-          number: Text;
-          audit_date: Text;
-          effective_date: Text;
-          link: Text;
-          logo: Text;
-          }
-        ]
-      };
-    traceability_blockchain_lot: {
-      time_line:[{
-        process: Text;
-        label_start: Text;
-        hash_start:  Text;
-        label_end: Text;
-        hash_end: Text;
-      }]
-    };
-    gtin_product: Text;
-    id_product_parent_company: Text;
-    id_product_system_eu : Text;
-    photo_product: {
-      frontal: Text;
-      left: Text;
-      later: Text;
-      right: Text;
-    };
-    information_product:{
-      name: Text;
-      brand: Text;
-      gtin: Text;
-      product_code: Text;
-      product_code_eu: Text;
-      category: Text;
-      size: Text;
-      color: Text;
-      year: Text;
-      season: Text;
-    };
-    traceability_product:{
-      time_line: [
-        {
-          process:Text;
-          start_time :Text;
-          end_time :Text;
-          owner :Text;
+          name : Text;
+          organization : Text;
+          number : Text;
+          audit_date : Text;
+          effective_date : Text;
+          link : Text;
+          logo : Text;
         }
       ];
-      full_name: Text;
-      company_name : Text;
-      ruc: Text;
-    };
-    traceability_blockchain_product:{
-      time_line:[
+    }];
+    compliance_process : {
+      process : Text;
+      certifications : [
         {
-          process: Text;
-          label_start: Text;
-          hash_start: Text;
-          label_end: Text;
-          hash_end: Text;
+          name : Text;
+          organization : Text;
+          number : Text;
+          audit_date : Text;
+          effective_date : Text;
+          link : Text;
+          logo : Text;
         }
-      ]
-    }
+      ];
+    };
+    traceability_blockchain_lot : {
+      time_line : [{
+        process : Text;
+        label_start : Text;
+        hash_start : Text;
+        label_end : Text;
+        hash_end : Text;
+      }];
+    };
+    gtin_product : Text;
+    id_product_parent_company : Text;
+    id_product_system_eu : Text;
+    photo_product : {
+      frontal : Text;
+      left : Text;
+      later : Text;
+      right : Text;
+    };
+    information_product : {
+      name : Text;
+      brand : Text;
+      gtin : Text;
+      product_code : Text;
+      product_code_eu : Text;
+      category : Text;
+      size : Text;
+      color : Text;
+      year : Text;
+      season : Text;
+    };
+    traceability_product : {
+      time_line : [
+        {
+          process : Text;
+          start_time : Text;
+          end_time : Text;
+          owner : Text;
+        }
+      ];
+      full_name : Text;
+      company_name : Text;
+      ruc : Text;
+    };
+    traceability_blockchain_product : {
+      time_line : [
+        {
+          process : Text;
+          label_start : Text;
+          hash_start : Text;
+          label_end : Text;
+          hash_end : Text;
+        }
+      ];
+    };
   };
 
-
-
   public type traceability_consolidate_public = {
-    id_model: Text;
-    id_model_export: Text;
-    summary_materials: Text;
-    name_model:Text;
-    brand_information: {
-      logo_mestiza: Text;
-      facebook: Text;
-      instagram: Text;
-      whatsapp: Text;
-      ecommerce: Text;
+    id_model : Text;
+    id_model_export : Text;
+    summary_materials : Text;
+    name_model : Text;
+    brand_information : {
+      logo_mestiza : Text;
+      facebook : Text;
+      instagram : Text;
+      whatsapp : Text;
+      ecommerce : Text;
     };
-    description_header: Text;
-    description_model: {
-      name: Text;
-      collection: Text;
-      summary: Text;
+    description_header : Text;
+    description_model : {
+      name : Text;
+      collection : Text;
+      summary : Text;
     };
-    materials:{
-      composition: Text;
-      recycling: Text;
-      percentage_recycling: Text;
-      recycling_income: Text;
+    materials : {
+      composition : Text;
+      recycling : Text;
+      percentage_recycling : Text;
+      recycling_income : Text;
     };
-    packing:{
-      pack_type: Text;
-      weight: Text;
-      volume: Text;
-      recycling: Text;
-      percentage_recycling: Text;
+    packing : {
+      pack_type : Text;
+      weight : Text;
+      volume : Text;
+      recycling : Text;
+      percentage_recycling : Text;
     };
-    care:{
-      care:[Text];
-      description: Text;
+    care : {
+      care : [Text];
+      description : Text;
     };
-    id_lot: Text;
-    lot_number_product: Text;
-    trace_supplier:[
+    id_lot : Text;
+    lot_number_product : Text;
+    trace_supplier : [
       {
-        title: Text;
-        ruc: Text;
-        location: Text;
-        coords: Text;
+        title : Text;
+        ruc : Text;
+        location : Text;
+        coords : Text;
       }
     ];
-    traceability_batch:{
-      location: Text;
-      time_line:[{
-        process: Text;
-        start_time: Text;
-        end_time: Text;
-        owner: Text;
-      }]
+    traceability_batch : {
+      location : Text;
+      time_line : [{
+        process : Text;
+        start_time : Text;
+        end_time : Text;
+        owner : Text;
+      }];
     };
-    compliance_supplier:[
-      {
-      supplier: Text;
-      certifications:[
+    compliance_supplier : [{
+      supplier : Text;
+      certifications : [
         {
-          name: Text;
-          organization: Text;
-          number: Text;
-          audit_date: Text;
-          effective_date: Text;
-          link: Text;
-          logo: Text;
-        }
-      ]
-    }];
-    compliance_process:{
-        process: Text;
-        certifications:[{
-          name: Text;
-          organization: Text;
-          number: Text;
-          audit_date: Text;
-          effective_date: Text;
-          link: Text;
-          logo: Text;
-          }
-        ]
-      };
-    traceability_blockchain_lot: {
-      time_line:[{
-        process: Text;
-        label_start: Text;
-        hash_start:  Text;
-        label_end: Text;
-        hash_end: Text;
-      }]
-    };
-    gtin_product: Text;
-    id_product_parent_company: Text;
-    id_product_system_eu : Text;
-    photo_product: {
-      frontal: ?Blob ;
-      left: ?Blob ;
-      later: ?Blob ;
-      right: ?Blob ;
-    };
-    information_product:{
-      name: Text;
-      brand: Text;
-      gtin: Text;
-      product_code: Text;
-      product_code_eu: Text;
-      category: Text;
-      size: Text;
-      color: Text;
-      year: Text;
-      season: Text;
-    };
-    traceability_product:{
-      time_line: [
-        {
-          process:Text;
-          start_time :Text;
-          end_time :Text;
-          owner :Text;
+          name : Text;
+          organization : Text;
+          number : Text;
+          audit_date : Text;
+          effective_date : Text;
+          link : Text;
+          logo : Text;
         }
       ];
-      full_name: Text;
-      company_name : Text;
-      ruc: Text;
-    };
-    traceability_blockchain_product:{
-      time_line:[
+    }];
+    compliance_process : {
+      process : Text;
+      certifications : [
         {
-          process: Text;
-          label_start: Text;
-          hash_start: Text;
-          label_end: Text;
-          hash_end: Text;
+          name : Text;
+          organization : Text;
+          number : Text;
+          audit_date : Text;
+          effective_date : Text;
+          link : Text;
+          logo : Text;
         }
-      ]
-    }
+      ];
+    };
+    traceability_blockchain_lot : {
+      time_line : [{
+        process : Text;
+        label_start : Text;
+        hash_start : Text;
+        label_end : Text;
+        hash_end : Text;
+      }];
+    };
+    gtin_product : Text;
+    id_product_parent_company : Text;
+    id_product_system_eu : Text;
+    photo_product : {
+      frontal : ?Blob;
+      left : ?Blob;
+      later : ?Blob;
+      right : ?Blob;
+    };
+    information_product : {
+      name : Text;
+      brand : Text;
+      gtin : Text;
+      product_code : Text;
+      product_code_eu : Text;
+      category : Text;
+      size : Text;
+      color : Text;
+      year : Text;
+      season : Text;
+    };
+    traceability_product : {
+      time_line : [
+        {
+          process : Text;
+          start_time : Text;
+          end_time : Text;
+          owner : Text;
+        }
+      ];
+      full_name : Text;
+      company_name : Text;
+      ruc : Text;
+    };
+    traceability_blockchain_product : {
+      time_line : [
+        {
+          process : Text;
+          label_start : Text;
+          hash_start : Text;
+          label_end : Text;
+          hash_end : Text;
+        }
+      ];
+    };
   };
 };

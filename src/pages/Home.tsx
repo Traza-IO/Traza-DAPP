@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Accordion from '../components/Accordion/Accordion';
 import AccordionHead from '../components/Accordion/components/AccordionHead';
 import AccordionContent from '../components/Accordion/components/AccordionContent';
@@ -24,14 +24,14 @@ import { useSearchParams } from 'react-router-dom';
 //   tips?: Ttips[];
 // }
 
-const  Home: React.FC = () => {
+const Home: React.FC = () => {
   const { t, i18n } = useTranslation();
-  
+
   const { data, isLoading, fetchData } = useTraceabilityStore();
 
   const [searchParams] = useSearchParams();
   // const gtin = searchParams.get('gtin');
-  const gtin = '17751234567890';
+  const gtin = '17550123456789';
 
   useEffect(() => {
     console.log(gtin, 'gtin value');
@@ -52,218 +52,218 @@ const  Home: React.FC = () => {
         </div>
       ) : (
         <>
-        <Accordion>
-          <AccordionHead toggleAccordion={() => {}} isOpen={false}>
-            {t('product.description')}
-          </AccordionHead>
-          <AccordionContent isOpen={false}>
-            <div className="mb-4">
-              <h3 className="text-[20px] mb-2 dark:text-white">
-                {data?.description_model?.name}
-              </h3>
-              <h5 className="text-[15px] dark:text-white">
-                {data?.description_model?.collection}
-              </h5>
-            </div>
-            <p className="text-[14px] text-[#45483D] dark:text-white">
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: data?.description_model?.summary,
-                }}
-              />
-            </p>
-          </AccordionContent>
-        </Accordion>
-        <Accordion>
-          <AccordionHead toggleAccordion={() => {}} isOpen={false}>
-            {t('product.information')}
-          </AccordionHead>
-          <AccordionContent isOpen={false}>
-            <ul>
-              <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
-                <strong className="text-[#45483D] dark:text-white">
-                  {t('product.name')}
-                </strong>
-                <p className="text-right dark:text-white">
-                  {data?.information_product?.name}
-                </p>
-              </li>
-              <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
-                <strong className="text-[#45483D] dark:text-white">
-                  {t('product.brand')}
-                </strong>
-                <p className="text-right dark:text-white">
-                  {data?.information_product?.brand}
-                </p>
-              </li>
-              <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
-                <strong className="text-[#45483D] dark:text-white">
-                  {t('product.gtin')}
-                </strong>
-                <p className="text-right dark:text-white">
-                  {data?.information_product?.gtin}
-                </p>
-              </li>
-              <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
-                <strong className="text-[#45483D] dark:text-white">
-                  {t('product.product_code')}
-                </strong>
-                <p className="text-right dark:text-white">
-                  {data?.information_product?.product_code}
-                </p>
-              </li>
-              <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
-                <strong className="text-[#45483D] dark:text-white">
-                  {t('product.category')}
-                </strong>
-                <p className="text-right dark:text-white">
-                  {data?.information_product?.category}
-                </p>
-              </li>
-              <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
-                <strong className="text-[#45483D] dark:text-white">
-                  {t('product.size')}
-                </strong>
-                <p className="text-right dark:text-white">
-                  {data?.information_product?.size}
-                </p>
-              </li>
-              <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
-                <strong className="text-[#45483D] dark:text-white">
-                  {t('product.color')}
-                </strong>
-                <p className="text-right dark:text-white">
-                  {data?.information_product?.color}
-                </p>
-              </li>
-              <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
-                <strong className="text-[#45483D] dark:text-white">
-                  {t('product.year')}
-                </strong>
-                <p className="text-right dark:text-white">
-                  {data?.information_product?.year}
-                </p>
-              </li>
-              <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
-                <strong className="text-[#45483D] dark:text-white">
-                  {t('product.season')}
-                </strong>
-                <p className="text-right dark:text-white">
-                  {data?.information_product?.season}
-                </p>
-              </li>
-            </ul>
-          </AccordionContent>
-        </Accordion>
-        <Accordion>
-          <AccordionHead toggleAccordion={() => {}} isOpen={false}>
-            {t('product.materials')}
-          </AccordionHead>
-          <AccordionContent isOpen={false}>
-            <ul>
-              <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
-                <strong className="text-[#45483D] dark:text-white">
-                  {t('product.composition')}:
-                </strong>
-                <p className="text-right dark:text-white">
-                  {data?.materials?.composition}
-                </p>
-              </li>
-              <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
-                <strong className="text-[#45483D] dark:text-white">
-                  {t('product.recycled')}:
-                </strong>
-                <p className="text-right dark:text-white">
-                  {data?.materials?.recycling ? 'Yes' : 'No'}
-                </p>
-              </li>
-              <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
-                <strong className="text-[#45483D] dark:text-white">
-                  {t('product.recycled_percentage')}:
-                </strong>
-                <p className="text-right dark:text-white">
-                  {data?.materials?.percentage_recycling}
-                </p>
-              </li>
-              <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
-                <strong className="text-[#45483D] dark:text-white">
-                  {t('product.recycled_entry')}:
-                </strong>
-                <p className="text-right dark:text-white">
-                  {data?.materials?.recycling_income}
-                </p>
-              </li>
-            </ul>
-          </AccordionContent>
-        </Accordion>
-        <Accordion>
-          <AccordionHead toggleAccordion={() => {}} isOpen={false}>
-            {t('product.package')}
-          </AccordionHead>
-          <AccordionContent isOpen={false}>
-            <ul>
-              <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
-                <strong className="text-[#45483D] dark:text-white">
-                  {t('product.type')}:
-                </strong>
-                <p className="text-right dark:text-white">
-                  {data?.packing?.pack_type}
-                </p>
-              </li>
-              <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
-                <strong className="text-[#45483D] dark:text-white">
-                  {t('product.weight')}:
-                </strong>
-                <p className="text-right dark:text-white">
-                  {data?.packing?.weight}
-                </p>
-              </li>
-              <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
-                <strong className="text-[#45483D] dark:text-white">
-                  {t('product.volume')}:
-                </strong>
-                <p className="text-right dark:text-white">
-                  {data?.packing?.volume}
-                </p>
-              </li>
-              <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
-                <strong className="text-[#45483D] dark:text-white">
-                  {t('product.recycling')}:
-                </strong>
-                <p className="text-right dark:text-white">
-                  {data?.packing?.recycling ? 'Yes' : 'No'}
-                </p>
-              </li>
-              <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
-                <strong className="text-[#45483D] dark:text-white">
-                  {t('product.percentage_recycling')}:
-                </strong>
-                <p className="text-right dark:text-white">
-                  {data?.packing?.percentage_recycling}
-                </p>
-              </li>
-            </ul>
-          </AccordionContent>
-        </Accordion>
-        <Accordion>
-          <AccordionHead toggleAccordion={() => {}} isOpen={false}>
-            {t('product.careful')}
-          </AccordionHead>
-          <AccordionContent isOpen={false}>
-            <h5 className="text-[#45483D] mb-4 dark:text-white">
-              {data?.care?.description}:
-            </h5>
-            <ul className="text-[14px] text-[#45483D] dark:text-white">
-              {data?.care?.care?.map((item: string, index: number) => (
-                <li key={index} className="flex items-center mb-2">
-                  <FaChevronCircleRight />
-                  <span className="ml-3">{item}</span>
+          <Accordion>
+            <AccordionHead toggleAccordion={() => {}} isOpen={false}>
+              {t('product.description')}
+            </AccordionHead>
+            <AccordionContent isOpen={false}>
+              <div className="mb-4">
+                <h3 className="text-[20px] mb-2 dark:text-white">
+                  {data?.description_model?.name}
+                </h3>
+                <h5 className="text-[15px] dark:text-white">
+                  {data?.description_model?.collection}
+                </h5>
+              </div>
+              <p className="text-[14px] text-[#45483D] dark:text-white">
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: data?.description_model?.summary,
+                  }}
+                />
+              </p>
+            </AccordionContent>
+          </Accordion>
+          <Accordion>
+            <AccordionHead toggleAccordion={() => {}} isOpen={false}>
+              {t('product.information')}
+            </AccordionHead>
+            <AccordionContent isOpen={false}>
+              <ul>
+                <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
+                  <strong className="text-[#45483D] dark:text-white">
+                    {t('product.name')}
+                  </strong>
+                  <p className="text-right dark:text-white">
+                    {data?.information_product?.name}
+                  </p>
                 </li>
-              ))}
-            </ul>
-          </AccordionContent>
-        </Accordion>
-        {/* <Accordion>
+                <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
+                  <strong className="text-[#45483D] dark:text-white">
+                    {t('product.brand')}
+                  </strong>
+                  <p className="text-right dark:text-white">
+                    {data?.information_product?.brand}
+                  </p>
+                </li>
+                <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
+                  <strong className="text-[#45483D] dark:text-white">
+                    {t('product.gtin')}
+                  </strong>
+                  <p className="text-right dark:text-white">
+                    {data?.information_product?.gtin}
+                  </p>
+                </li>
+                <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
+                  <strong className="text-[#45483D] dark:text-white">
+                    {t('product.product_code')}
+                  </strong>
+                  <p className="text-right dark:text-white">
+                    {data?.information_product?.product_code}
+                  </p>
+                </li>
+                <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
+                  <strong className="text-[#45483D] dark:text-white">
+                    {t('product.category')}
+                  </strong>
+                  <p className="text-right dark:text-white">
+                    {data?.information_product?.category}
+                  </p>
+                </li>
+                <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
+                  <strong className="text-[#45483D] dark:text-white">
+                    {t('product.size')}
+                  </strong>
+                  <p className="text-right dark:text-white">
+                    {data?.information_product?.size}
+                  </p>
+                </li>
+                <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
+                  <strong className="text-[#45483D] dark:text-white">
+                    {t('product.color')}
+                  </strong>
+                  <p className="text-right dark:text-white">
+                    {data?.information_product?.color}
+                  </p>
+                </li>
+                <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
+                  <strong className="text-[#45483D] dark:text-white">
+                    {t('product.year')}
+                  </strong>
+                  <p className="text-right dark:text-white">
+                    {data?.information_product?.year}
+                  </p>
+                </li>
+                <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
+                  <strong className="text-[#45483D] dark:text-white">
+                    {t('product.season')}
+                  </strong>
+                  <p className="text-right dark:text-white">
+                    {data?.information_product?.season}
+                  </p>
+                </li>
+              </ul>
+            </AccordionContent>
+          </Accordion>
+          <Accordion>
+            <AccordionHead toggleAccordion={() => {}} isOpen={false}>
+              {t('product.materials')}
+            </AccordionHead>
+            <AccordionContent isOpen={false}>
+              <ul>
+                <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
+                  <strong className="text-[#45483D] dark:text-white">
+                    {t('product.composition')}:
+                  </strong>
+                  <p className="text-right dark:text-white">
+                    {data?.materials?.composition}
+                  </p>
+                </li>
+                <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
+                  <strong className="text-[#45483D] dark:text-white">
+                    {t('product.recycled')}:
+                  </strong>
+                  <p className="text-right dark:text-white">
+                    {data?.materials?.recycling ? 'Yes' : 'No'}
+                  </p>
+                </li>
+                <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
+                  <strong className="text-[#45483D] dark:text-white">
+                    {t('product.recycled_percentage')}:
+                  </strong>
+                  <p className="text-right dark:text-white">
+                    {data?.materials?.percentage_recycling}
+                  </p>
+                </li>
+                <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
+                  <strong className="text-[#45483D] dark:text-white">
+                    {t('product.recycled_entry')}:
+                  </strong>
+                  <p className="text-right dark:text-white">
+                    {data?.materials?.recycling_income}
+                  </p>
+                </li>
+              </ul>
+            </AccordionContent>
+          </Accordion>
+          <Accordion>
+            <AccordionHead toggleAccordion={() => {}} isOpen={false}>
+              {t('product.package')}
+            </AccordionHead>
+            <AccordionContent isOpen={false}>
+              <ul>
+                <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
+                  <strong className="text-[#45483D] dark:text-white">
+                    {t('product.type')}:
+                  </strong>
+                  <p className="text-right dark:text-white">
+                    {data?.packing?.pack_type}
+                  </p>
+                </li>
+                <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
+                  <strong className="text-[#45483D] dark:text-white">
+                    {t('product.weight')}:
+                  </strong>
+                  <p className="text-right dark:text-white">
+                    {data?.packing?.weight}
+                  </p>
+                </li>
+                <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
+                  <strong className="text-[#45483D] dark:text-white">
+                    {t('product.volume')}:
+                  </strong>
+                  <p className="text-right dark:text-white">
+                    {data?.packing?.volume}
+                  </p>
+                </li>
+                <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
+                  <strong className="text-[#45483D] dark:text-white">
+                    {t('product.recycling')}:
+                  </strong>
+                  <p className="text-right dark:text-white">
+                    {data?.packing?.recycling ? 'Yes' : 'No'}
+                  </p>
+                </li>
+                <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
+                  <strong className="text-[#45483D] dark:text-white">
+                    {t('product.percentage_recycling')}:
+                  </strong>
+                  <p className="text-right dark:text-white">
+                    {data?.packing?.percentage_recycling}
+                  </p>
+                </li>
+              </ul>
+            </AccordionContent>
+          </Accordion>
+          <Accordion>
+            <AccordionHead toggleAccordion={() => {}} isOpen={false}>
+              {t('product.careful')}
+            </AccordionHead>
+            <AccordionContent isOpen={false}>
+              <h5 className="text-[#45483D] mb-4 dark:text-white">
+                {data?.care?.description}:
+              </h5>
+              <ul className="text-[14px] text-[#45483D] dark:text-white">
+                {data?.care?.care?.map((item: string, index: number) => (
+                  <li key={index} className="flex items-center mb-2">
+                    <FaChevronCircleRight />
+                    <span className="ml-3">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </AccordionContent>
+          </Accordion>
+          {/* <Accordion>
           <AccordionHead toggleAccordion={() => {}} isOpen={false}>
             {t('product.tips')}
           </AccordionHead>
@@ -286,7 +286,7 @@ const  Home: React.FC = () => {
             <br />
           </AccordionContent>
         </Accordion> */}
-        </> 
+        </>
       )}
     </div>
   );

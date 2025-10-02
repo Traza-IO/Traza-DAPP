@@ -3,7 +3,8 @@ import { useSearchParams } from 'react-router-dom';
 import { createActor } from '../declarations/backend';
 
 // Obtener el canister ID real
-const canisterId = process.env.CANISTER_ID_BACKEND || "uxrrr-q7777-77774-qaaaq-cai";
+const canisterId =
+  process.env.CANISTER_ID_BACKEND || 'uxrrr-q7777-77774-qaaaq-cai';
 
 // Crear el actor
 
@@ -35,11 +36,11 @@ export const useTraceabilityStore = create<TraceabilityStore>((set) => ({
     console.log('init gtin:', gtin);
     set({ isLoading: true });
     try {
-    const backend = createActor(canisterId);
+      const backend = createActor(canisterId);
       console.log('backend imported:', backend);
-     const res = await backend.getInfo(gtin);
-     console.log('res:', res);
-      if (!res || res.length === 0) throw new Error("No data found");
+      const res = await backend.getInfo(gtin);
+      console.log('res:', res);
+      if (!res || res.length === 0) throw new Error('No data found');
       set({ data: res[0] });
       console.log(res, 'res');
     } catch (error) {
@@ -47,6 +48,5 @@ export const useTraceabilityStore = create<TraceabilityStore>((set) => ({
     } finally {
       set({ isLoading: false });
     }
-  }
+  },
 }));
-
