@@ -29,7 +29,7 @@ export const Traceability: React.FC = () => {
   const { t, i18n } = useTranslation();
   const [searchParams] = useSearchParams();
   // const gtin = searchParams.get('gtin');
-  const gtin = '17751234567890';
+  const gtin = '17550123456789';
   const { data, isLoading, fetchData } = useTraceabilityStore();
 
   useEffect(() => {
