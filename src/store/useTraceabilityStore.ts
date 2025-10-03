@@ -1,5 +1,4 @@
 import { create } from 'zustand';
-import { useSearchParams } from 'react-router-dom';
 import { createActor } from '../declarations/backend';
 
 // Obtener el canister ID real
@@ -26,25 +25,34 @@ interface ProductData {
 interface TraceabilityStore {
   data: ProductData | null;
   isLoading: boolean;
-  fetchData: (gtin: string) => Promise<void>;
+  fetchData: (gtin?: string) => Promise<void>;
+  error: string | null;
 }
 
 export const useTraceabilityStore = create<TraceabilityStore>((set) => ({
   data: null,
   isLoading: false,
-  fetchData: async (gtin: string) => {
-    console.log('init gtin:', gtin);
+  error: null,
+  fetchData: async (gtin?: string) => {
     set({ isLoading: true });
+    
+    // Obtener gtin del parámetro o del localStorage como fallback
+    let currentGtin = gtin;
+    if (!currentGtin) {
+      currentGtin = localStorage.getItem('gtin') || '17751234567890';
+    }
+    
+    if (!currentGtin) throw new Error('No gtin found');
+    
     try {
       const backend = createActor(canisterId);
-      console.log('backend imported:', backend);
-      const res = await backend.getInfo(gtin);
-      console.log('res:', res);
+      const res = await backend.getInfo(currentGtin);
       if (!res || res.length === 0) throw new Error('No data found');
       set({ data: res[0] });
-      console.log(res, 'res');
+      console.log(res[0], 'res');
     } catch (error) {
       console.error('Error fetching product data:', error);
+      set({ error: 'Error fetching product data' });
     } finally {
       set({ isLoading: false });
     }

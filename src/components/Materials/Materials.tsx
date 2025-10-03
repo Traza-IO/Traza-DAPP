@@ -17,17 +17,17 @@ import { useSearchParams } from 'react-router-dom';
 
 const Materials = () => {
   const { t, i18n } = useTranslation();
-  const [searchParams] = useSearchParams();
+  // const [searchParams] = useSearchParams();
   // const gtin = searchParams.get('GTIN');
-  const gtin = '17550123456789';
+  // const gtin = '17550123456789';
   const { data, isLoading, fetchData } = useTraceabilityStore();
   const loading = isLoading;
 
   useEffect(() => {
-    if (gtin) {
-      fetchData(gtin);
+    if (!data) {
+      fetchData();
     }
-  }, [gtin]);
+  }, [data, fetchData]);
 
   // useEffect(() => {
   //   const fetchData = async () => {

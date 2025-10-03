@@ -10,6 +10,7 @@ import { backend } from '../declarations/backend';
 import { useTraceabilityStore } from '../store/useTraceabilityStore';
 import Skeleton from 'react-loading-skeleton';
 import { useSearchParams } from 'react-router-dom';
+import { useGtinNavigation } from '../hooks/useGtinNavigation';
 
 interface IitemTrace {
   title: string;
@@ -27,16 +28,15 @@ interface ItiemLine {
 
 export const Traceability: React.FC = () => {
   const { t, i18n } = useTranslation();
-  const [searchParams] = useSearchParams();
-  // const gtin = searchParams.get('gtin');
-  const gtin = '17550123456789';
+  const { getCurrentGtin } = useGtinNavigation();
   const { data, isLoading, fetchData } = useTraceabilityStore();
+  const gtin = getCurrentGtin() || '17751234567890';
 
   useEffect(() => {
-    if (gtin) {
+    if (!data) {
       fetchData(gtin);
     }
-  }, [gtin]);
+  }, [data, fetchData, gtin]);
 
   return (
     <>

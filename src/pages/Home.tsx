@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next';
 import { useTraceabilityStore } from '../store/useTraceabilityStore';
 import Skeleton from 'react-loading-skeleton';
 import { useSearchParams } from 'react-router-dom';
+import { ModalError } from '../components/ModalError';
 
 // type Ttips = {
 //   description: string;
@@ -26,22 +27,28 @@ import { useSearchParams } from 'react-router-dom';
 
 const Home: React.FC = () => {
   const { t, i18n } = useTranslation();
-
-  const { data, isLoading, fetchData } = useTraceabilityStore();
-
+  const { data, isLoading, fetchData, error } = useTraceabilityStore();
   const [searchParams] = useSearchParams();
-  // const gtin = searchParams.get('gtin');
-  const gtin = '17550123456789';
+  const [showModalError, setShowModalError] = useState(false);
+  let gtin = searchParams.get('gtin') || '17751234567890'; // default gtin
+  localStorage.setItem('gtin', gtin);
+  console.log(gtin, 'gtin value');
 
   useEffect(() => {
-    console.log(gtin, 'gtin value');
-    if (gtin && !data) {
-      fetchData(gtin);
+    if (!data) {
+      try {
+        fetchData(gtin);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        console.log(error, 'error2222');
+        setShowModalError(true);
+      }
     }
-  }, [gtin, data, fetchData]);
+  }, [data, fetchData, gtin]);
 
   return (
     <div className="max-w-[1024px] mx-auto mt-6 px-5">
+      {showModalError && <ModalError />}
       {isLoading ? (
         <div className="flex flex-col gap-2 w-full">
           <Skeleton count={1} height={60} width="100%" />

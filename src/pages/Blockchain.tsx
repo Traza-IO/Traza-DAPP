@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import { useTraceabilityStore } from '../store/useTraceabilityStore';
 import Skeleton from 'react-loading-skeleton';
 import { useSearchParams } from 'react-router-dom';
+import { useGtinNavigation } from '../hooks/useGtinNavigation';
 type TtraceabilityItem = {
   hash_end: string;
   hash_start: string;
@@ -17,16 +18,15 @@ type TtraceabilityItem = {
 };
 const Blockchain = () => {
   const { t, i18n } = useTranslation();
-  const [searchParams] = useSearchParams();
-  // const gtin = searchParams.get('gtin');
-  const gtin = '17550123456789';
+  const { getCurrentGtin } = useGtinNavigation();
   const { data, isLoading, fetchData } = useTraceabilityStore();
+  const gtin = getCurrentGtin() || '17751234567890';
 
   useEffect(() => {
-    if (gtin) {
+    if (!data) {
       fetchData(gtin);
     }
-  }, [gtin]);
+  }, [data, fetchData, gtin]);
 
   return (
     <div className="max-w-[1024px] mx-auto mt-8 px-5">

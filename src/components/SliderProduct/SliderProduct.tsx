@@ -1,18 +1,12 @@
 import 'swiper/css';
-import carousel1 from '../../assets/b1.png';
-import carousel2 from '../../assets/b2.png';
-import carousel3 from '../../assets/b3.png';
-import carousel4 from '../../assets/b4.png';
 import bgCarousel from '../../assets/fd-black.jpg';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { useTraceabilityStore } from '../../store/useTraceabilityStore';
 import Slider from 'react-slick';
-import { IoConstructOutline } from 'react-icons/io5';
 import { createActor } from '../../declarations/backend';
 import { useState, useEffect, SetStateAction} from 'react';
-
-
+import Skeleton from 'react-loading-skeleton';
 
 const SliderProduct = () => {
   const canisterId = process.env.CANISTER_ID_BACKEND || 'uxrrr-q7777-77774-qaaaq-cai';
@@ -21,10 +15,13 @@ const SliderProduct = () => {
   const [carousel2, setCarousel2] = useState('');
   const [carousel3, setCarousel3] = useState('');
   const [carousel4, setCarousel4] = useState('');
+  const { data, isLoading, fetchData } = useTraceabilityStore();
+  useEffect(() => {
+    if (!data) {
+      fetchData();
+    }
+  }, [data, fetchData]);
 
-  const [inputName, setInputName] = useState('');
-  const [loading, setLoading] = useState(false);
-  
   useEffect(() => {
     // This runs once when component mounts (similar to onload)
     const fetchImage = async (name: string,component: { (value: SetStateAction<string>): void; (arg0: string): void; }) => {
@@ -33,13 +30,16 @@ const SliderProduct = () => {
       const blob = new Blob([new Uint8Array(bytes[0])], { type: 'image/jpeg' });
       component(URL.createObjectURL(blob));
     };
-    fetchImage("b1.png",setCarousel1);
-    fetchImage("b2.png",setCarousel2);
-    fetchImage("b3.png",setCarousel3);
-    fetchImage("b4.png",setCarousel4);
-  }, []); // Empty dependency array = runs once on mount
+    console.log(data, 'data initial');
+    if (data) {
+      console.log(data.photo_product, 'data images');
+      fetchImage(data.photo_product.frontal,setCarousel1);
+      fetchImage(data.photo_product.left,setCarousel2);
+      fetchImage(data.photo_product.later,setCarousel3);
+      fetchImage(data.photo_product.right,setCarousel4);
+    }
+  }, [ data ]); // Empty dependency array = runs once on mount
 
-  console.log('backend imported:', backend);
   const settings = {
     dots: true, // Activa los puntos de navegación
     infinite: true, // Carrusel infinito
@@ -64,28 +64,39 @@ const SliderProduct = () => {
       style={{ backgroundImage: `url(${bgCarousel})` }}
       className="bg-cover w-full bg-fixed bg-center bg-no-repeat py-8 max-w-[1024px] mx-auto overflow-hidden"
     >
-      <Slider {...settings} className="p-4 bg-gray-100 rounded-lg shadow-lg">
-        <div className="">
-         {carousel1 && <img src={carousel1}  width={200}
-            height={300}
-            className="mx-auto"/>}
+      {isLoading ? (
+        <div className="flex flex gap-2 w-full">
+          <Skeleton count={1} height={200} width={200} />
+          <Skeleton count={1} height={200} width={200} />
+          <Skeleton count={1} height={200} width={200} />
+          <Skeleton count={1} height={200} width={200} />
         </div>
-        <div className="">
-         {carousel2 && <img src={carousel2}  width={200}
-            height={300}
-            className="mx-auto"/>}
-        </div>
-        <div className="">
-         {carousel3 && <img src={carousel3}  width={200}
-            height={300}
-            className="mx-auto"/>}
-        </div>
-        <div className="">
-         {carousel4 && <img src={carousel4}  width={200}
-            height={300}
-            className="mx-auto"/>}
-        </div>
-      </Slider>
+      ) : (
+        <>
+          <Slider {...settings} className="p-4 bg-gray-100 rounded-lg shadow-lg">
+            <div className="">
+              {carousel1 && <img src={carousel1}  width={200}
+                height={300}
+                className="mx-auto"/>}
+            </div>
+            <div className="">
+              {carousel2 && <img src={carousel2}  width={200}
+                height={300}
+                className="mx-auto"/>}
+            </div>
+            <div className="">
+              {carousel3 && <img src={carousel3}  width={200}
+                height={300}
+                className="mx-auto"/>}
+            </div>
+            <div className="">
+              {carousel4 && <img src={carousel4}  width={200}
+                height={300}
+                className="mx-auto"/>}
+            </div>
+          </Slider>
+        </>
+      )}
     </div>
   );
 };
