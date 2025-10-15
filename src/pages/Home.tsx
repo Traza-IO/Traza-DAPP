@@ -8,8 +8,8 @@ import { useTranslation } from 'react-i18next';
 // import  {backend}  from '../declarations/backend';
 import { useTraceabilityStore } from '../store/useTraceabilityStore';
 import Skeleton from 'react-loading-skeleton';
-import { useSearchParams } from 'react-router-dom';
 import { ModalError } from '../components/ModalError';
+import { useGtinNavigation } from '../hooks/useGtinNavigation';
 
 // type Ttips = {
 //   description: string;
@@ -28,9 +28,9 @@ import { ModalError } from '../components/ModalError';
 const Home: React.FC = () => {
   const { t, i18n } = useTranslation();
   const { data, isLoading, fetchData, error } = useTraceabilityStore();
-  const [searchParams] = useSearchParams();
+  const { getCurrentGtin } = useGtinNavigation();
   const [showModalError, setShowModalError] = useState(false);
-  let gtin = searchParams.get('gtin') || '17751234567890'; // default gtin
+  const gtin = getCurrentGtin();
   localStorage.setItem('gtin', gtin);
   console.log(gtin, 'gtin value');
 

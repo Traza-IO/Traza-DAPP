@@ -1,92 +1,136 @@
-# Preservación del Parámetro GTIN en la Navegación
+# Navegación Dinámica con GTIN en las Rutas
 
-## Problema Resuelto
+## Cambio Implementado
 
-El parámetro `gtin` que viene en la URL principal (`?gtin=123456789`) se perdía al navegar entre las diferentes páginas de la aplicación.
+Se cambió el sistema de navegación de usar **query parameters** (`?gtin=123`) a usar **rutas dinámicas** con el GTIN como parte del path.
 
-## Solución Implementada
+### Antes:
 
-### 1. Hook Personalizado: `useGtinNavigation`
-
-Se creó un hook personalizado en `src/hooks/useGtinNavigation.ts` que proporciona:
-
-- `buildUrlWithGtin(path: string)`: Construye URLs preservando el parámetro gtin
-- `getCurrentGtin()`: Obtiene el valor actual del parámetro gtin
-
-### 2. Componente Nav Actualizado
-
-El componente `Nav` ahora usa el hook `useGtinNavigation` para preservar el parámetro gtin en todos los enlaces de navegación:
-
-```tsx
-const { buildUrlWithGtin } = useGtinNavigation();
-
-// Antes
-<Link to={`/${lng}/traceability`}>
-
-// Después
-<Link to={buildUrlWithGtin(`/${lng}/traceability`)}>
+```
+miurl.com.pe/en?gtin=123123123
+miurl.com.pe/en/traceability?gtin=123123123
+miurl.com.pe/en/sustainability?gtin=123123123
 ```
 
-### 3. Store Mejorado
+### Después:
 
-El store `useTraceabilityStore` ahora acepta el parámetro gtin como argumento:
+```
+miurl.com.pe/123123123/product
+miurl.com.pe/123123123/traceability
+miurl.com.pe/123123123/sustainability
+miurl.com.pe/123123123/blockchain
+miurl.com.pe/123123123/share
+```
+
+## Beneficios
+
+1. **URLs más limpias y RESTful**: Las rutas son más semánticas y fáciles de entender
+2. **Mejor SEO**: Los motores de búsqueda pueden indexar mejor las URLs con parámetros en el path
+3. **Compartir URLs**: Es más fácil compartir enlaces específicos de productos
+4. **Navegación intuitiva**: El GTIN es claramente parte de la identidad del recurso
+
+## Implementación
+
+### 1. Router Actualizado (`src/router/index.tsx`)
+
+Se eliminó el prefijo de idioma de las URLs y se añadió el GTIN como parámetro dinámico:
 
 ```tsx
-fetchData: async (gtin?: string) => {
-  // Obtener gtin del parámetro o del localStorage como fallback
-  let currentGtin = gtin;
-  if (!currentGtin) {
-    currentGtin = localStorage.getItem('gtin') || '17751234567890';
-  }
-  // ... resto de la lógica
+<Route path="/:gtin/product" element={<Layout><Home /></Layout>} />
+<Route path="/:gtin/traceability" element={<Layout><Traceability /></Layout>} />
+<Route path="/:gtin/sustainability" element={<Layout><Sustainability /></Layout>} />
+<Route path="/:gtin/blockchain" element={<Layout><Blockchain /></Layout>} />
+<Route path="/:gtin/share" element={<Layout><Share /></Layout>} />
+```
+
+### 2. Hook `useGtinNavigation` Refactorizado
+
+Ahora usa `useParams` de React Router en lugar de `useSearchParams`:
+
+```tsx
+export const useGtinNavigation = () => {
+  const { gtin } = useParams<{ gtin: string }>();
+
+  const buildUrlWithGtin = (page: string): string => {
+    const currentGtin = gtin || '17751234567890';
+    return `/${currentGtin}/${page}`;
+  };
+
+  const getCurrentGtin = (): string => {
+    return gtin || '17751234567890';
+  };
+
+  return { buildUrlWithGtin, getCurrentGtin, gtin };
 };
 ```
 
-### 4. Páginas Actualizadas
+### 3. Componentes Actualizados
 
-Todas las páginas que usan el store ahora pasan el parámetro gtin:
+Todos los componentes que necesitaban el GTIN fueron actualizados:
 
-- `Home.tsx`
-- `Traceability.tsx`
-- `Blockchain.tsx`
+- **Home.tsx**: Usa `getCurrentGtin()` para obtener el GTIN de la URL
+- **Sustainability.tsx**: Obtiene el GTIN del hook y lo pasa a `fetchData()`
+- **Blockchain.tsx**: Usa el hook para acceder al GTIN
+- **Traceability.tsx**: Actualizado para usar el nuevo sistema
+- **Nav.tsx**: Construye los enlaces usando `buildUrlWithGtin(page)`
 
-## Cómo Funciona
+### 4. Navegación
 
-1. **URL inicial**: `https://tuapp.com/en?gtin=123456789`
-2. **Navegación**: Al hacer clic en cualquier enlace del Nav, se preserva automáticamente el parámetro
-3. **URL resultante**: `https://tuapp.com/en/traceability?gtin=123456789`
+El componente de navegación ahora construye URLs de esta forma:
 
-## Uso del Hook
+```tsx
+const { buildUrlWithGtin, gtin } = useGtinNavigation();
+
+// En los enlaces:
+<Link to={buildUrlWithGtin('product')}>Producto</Link>
+<Link to={buildUrlWithGtin('traceability')}>Trazabilidad</Link>
+<Link to={buildUrlWithGtin('sustainability')}>Sostenibilidad</Link>
+```
+
+### 5. Manejo del Idioma
+
+El idioma se maneja ahora exclusivamente a través del selector en el Layout y se guarda en `localStorage` mediante `i18n`. Ya no forma parte de la URL, lo que simplifica aún más las rutas.
+
+## Uso
+
+### Para navegar a un producto específico:
+
+```
+https://tuapp.com/17751234567890/product
+```
+
+### Para acceder a una sección específica de un producto:
+
+```
+https://tuapp.com/17751234567890/sustainability
+https://tuapp.com/17751234567890/blockchain
+```
+
+### Desde el código:
 
 ```tsx
 import { useGtinNavigation } from '../hooks/useGtinNavigation';
 
 const MyComponent = () => {
-  const { buildUrlWithGtin, getCurrentGtin } = useGtinNavigation();
+  const { getCurrentGtin, buildUrlWithGtin } = useGtinNavigation();
 
-  // Construir URL con gtin preservado
-  const url = buildUrlWithGtin('/en/otra-pagina');
+  // Obtener el GTIN actual
+  const gtin = getCurrentGtin();
 
-  // Obtener gtin actual
-  const currentGtin = getCurrentGtin();
+  // Construir una URL para navegar
+  const sustainabilityUrl = buildUrlWithGtin('sustainability');
 
-  return <Link to={url}>Navegar</Link>;
+  return <Link to={sustainabilityUrl}>Ver Sostenibilidad</Link>;
 };
 ```
 
-## Beneficios
+## Migración
 
-- ✅ El parámetro gtin se preserva automáticamente en toda la navegación
-- ✅ Código reutilizable y mantenible
-- ✅ Fallback a localStorage si no hay gtin en la URL
-- ✅ Compatible con el sistema de idiomas existente
-- ✅ No afecta la funcionalidad existente
+Si tienes URLs antiguas con el formato `?gtin=123`, deberás redirigirlas al nuevo formato. Puedes añadir una ruta de redirección en el router:
 
-## Archivos Modificados
+```tsx
+// Ruta para redirigir URLs antiguas
+<Route path="/:lng" element={<RedirectToNewFormat />} />
+```
 
-- `src/hooks/useGtinNavigation.ts` (nuevo)
-- `src/components/Nav/Nav.tsx`
-- `src/store/useTraceabilityStore.ts`
-- `src/pages/Home.tsx`
-- `src/pages/Traceability.tsx`
-- `src/pages/Blockchain.tsx`
+Donde `RedirectToNewFormat` lee el query param y redirige a la nueva URL.

@@ -7,7 +7,6 @@ import { backend } from '../declarations/backend';
 import { useEffect, useState } from 'react';
 import { useTraceabilityStore } from '../store/useTraceabilityStore';
 import Skeleton from 'react-loading-skeleton';
-import { useSearchParams } from 'react-router-dom';
 import { useGtinNavigation } from '../hooks/useGtinNavigation';
 type TtraceabilityItem = {
   hash_end: string;

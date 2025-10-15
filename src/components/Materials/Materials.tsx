@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslation } from 'react-i18next';
-import imgBussiness from '../../assets/logo-mestiza.svg';
+import imgBussiness from '../../assets/logo-qapary.png';
 import { FaFacebookSquare } from 'react-icons/fa';
 import { FaInstagram } from 'react-icons/fa';
 import { FaWhatsapp } from 'react-icons/fa';
@@ -13,13 +13,10 @@ import { backend } from '../../declarations/backend';
 import { useTraceabilityStore } from '../../store/useTraceabilityStore';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
-import { useSearchParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Materials = () => {
   const { t, i18n } = useTranslation();
-  // const [searchParams] = useSearchParams();
-  // const gtin = searchParams.get('GTIN');
-  // const gtin = '17550123456789';
   const { data, isLoading, fetchData } = useTraceabilityStore();
   const loading = isLoading;
 
@@ -96,18 +93,18 @@ const Materials = () => {
               />
             </figure>
             <div className="w-full flex justify-between max-w-[90px] mx-auto mt-2">
-              <button>
+              <Link to={data?.brand_information.facebook} target="_blank">
                 <FaFacebookSquare color="#acb2a8" size={18} />
-              </button>
-              <button>
+              </Link>
+              <Link to={data?.brand_information.instagram} target="_blank">
                 <FaInstagram color="#acb2a8" size={18} />
-              </button>
-              <button>
+              </Link>
+              <Link to={data?.brand_information.whatsapp} target="_blank">
                 <FaWhatsapp color="#acb2a8" size={18} />
-              </button>
-              <button>
+              </Link>
+              <Link to={data?.brand_information.ecommerce} target="_blank">
                 <IoCart color="#acb2a8" size={18} />
-              </button>
+              </Link>
             </div>
           </div>
         </>

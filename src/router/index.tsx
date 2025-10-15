@@ -4,9 +4,7 @@ import {
   Routes,
   Route,
   Navigate,
-  useParams,
 } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 import { Traceability } from '../pages/Traceability';
 import { Sustainability } from '../pages/Sustainability';
 import Home from '../pages/Home';
@@ -14,77 +12,52 @@ import Layout from '../components/Layout';
 import Blockchain from '../pages/Blockchain';
 import Share from '../pages/Share';
 
-const LanguageWrapper: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
-  const { lng } = useParams<{ lng: string }>(); // Obtén el idioma de los parámetros
-  const { i18n } = useTranslation();
-
-  React.useEffect(() => {
-    if (lng && i18n.language !== lng) {
-      i18n.changeLanguage(lng); // Cambia el idioma si es necesario
-    }
-  }, [lng, i18n]);
-
-  return <>{children}</>;
-};
-
 const AppRouter: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Redirigir la raíz a un idioma por defecto */}
-        <Route path="/" element={<Navigate to="/en" />} />
+        {/* Redirigir la raíz a un GTIN por defecto */}
+        <Route path="/" element={<Navigate to="/17751234567890/product" />} />
 
-        {/* Rutas con prefijo de idioma */}
+        {/* Rutas dinámicas con GTIN */}
         <Route
-          path="/:lng"
+          path="/:gtin/product"
           element={
-            <LanguageWrapper>
-              <Layout>
-                <Home />
-              </Layout>
-            </LanguageWrapper>
+            <Layout>
+              <Home />
+            </Layout>
           }
         />
         <Route
-          path="/:lng/traceability"
+          path="/:gtin/traceability"
           element={
-            <LanguageWrapper>
-              <Layout>
-                <Traceability />
-              </Layout>
-            </LanguageWrapper>
+            <Layout>
+              <Traceability />
+            </Layout>
           }
         />
         <Route
-          path="/:lng/sustainability"
+          path="/:gtin/sustainability"
           element={
-            <LanguageWrapper>
-              <Layout>
-                <Sustainability />
-              </Layout>
-            </LanguageWrapper>
+            <Layout>
+              <Sustainability />
+            </Layout>
           }
         />
         <Route
-          path="/:lng/blockchain"
+          path="/:gtin/blockchain"
           element={
-            <LanguageWrapper>
-              <Layout>
-                <Blockchain />
-              </Layout>
-            </LanguageWrapper>
+            <Layout>
+              <Blockchain />
+            </Layout>
           }
         />
         <Route
-          path="/:lng/share"
+          path="/:gtin/share"
           element={
-            <LanguageWrapper>
-              <Layout>
-                <Share />
-              </Layout>
-            </LanguageWrapper>
+            <Layout>
+              <Share />
+            </Layout>
           }
         />
       </Routes>

@@ -9,7 +9,6 @@ import { useState } from 'react';
 import { backend } from '../declarations/backend';
 import { useTraceabilityStore } from '../store/useTraceabilityStore';
 import Skeleton from 'react-loading-skeleton';
-import { useSearchParams } from 'react-router-dom';
 import { useGtinNavigation } from '../hooks/useGtinNavigation';
 
 interface IitemTrace {

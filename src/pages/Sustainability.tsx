@@ -18,15 +18,42 @@ import image4 from '../assets/4.png';
 import image5 from '../assets/5.jpg';
 import odac from '../assets/odac.jpg';
 import aenor from '../assets/aenor.jpg';
+import { useEffect } from 'react';
+import { useTraceabilityStore } from '../store/useTraceabilityStore';
+import { useGtinNavigation } from '../hooks/useGtinNavigation';
+
+interface IitemComplianceSuppliers {
+  supplier: string;
+  certifications: IitemComplianceCertification[];
+}
+
+interface IitemComplianceCertification {
+  name: string;
+  organization: string;
+  number: string;
+  audit_date: string;
+  effective_date: string;
+  link: string;
+  logo: string;
+}
 
 export const Sustainability: React.FC = () => {
+  const { data, isLoading, fetchData } = useTraceabilityStore();
+  const { getCurrentGtin } = useGtinNavigation();
+  const loading = isLoading;
+  const gtin = getCurrentGtin();
+
+  useEffect(() => {
+    if (!data) {
+      fetchData(gtin);
+    }
+  }, [data, fetchData, gtin]);
+  
   return (
     <div className="max-w-[1024px] mx-auto mt-8 px-5">
       <div className="text-center px-5 text-[#45483d] mb-4 dark:text-white">
         <p>
-          Polerón con capucha, a sido confeccionado con el cumplimiento de los
-          estandares internacionales de sostenibilidad en la industria de la
-          moda.
+          {data?.description_header}
         </p>
       </div>
       <Accordion>
@@ -34,29 +61,39 @@ export const Sustainability: React.FC = () => {
           Cumplimiento de Insumos
         </AccordionHead>
         <AccordionContent isOpen={true}>
-          <h5 className="mt-5 p-3 bg-[#acb2a8] font-bold dark:text-white dark:bg-[#5f6259]">
-            Tela de Algodón Tanguis
-          </h5>
-          <div className="px-5">
-            <p className="mt-5 text-[#45483d] dark:text-white">
-              Certificaciones de BERGMAN / RIBERA
-            </p>
+          <div>
             <ul>
-              <li className="w-full flex items-center justify-between border-b border-solid border-[#cccccc] py-2">
-                <p className="text-[13px] dark:text-white">
-                  Sello de Producto Orgánico, otorgado por el SENASA.
-                </p>
-                <img src={image1_1} alt="" className="w-auto max-w-[120px]" />
-              </li>
-            </ul>
-            <h6 className="mt-5 p-3 bg-[#e3e3db] dark:text-white dark:bg-[#5f6259]">
-              Reconocimiento a la producción del algodón orgánico tanguis.
-            </h6>
-            <p className="mt-5 text-[#45483d] dark:text-white">
-              Certificaciones de BERGMAN / RIBERA
-            </p>
-            <ul>
-              <li className="w-full flex items-center justify-between border-b border-solid border-[#cccccc] py-2">
+              {
+                data?.compliance_supplier.map((item: IitemComplianceSuppliers, index: number) => (
+                  <li key={index} className="w-full">
+                    <p className="mt-5 p-3 bg-[#e3e3db] dark:text-white dark:bg-[#5f6259]">
+                      {item.supplier}
+                    </p>
+                    <div className="text-[13px] dark:text-white">
+                      {item.certifications.map((certification: IitemComplianceCertification, index: number) => (
+                        <div key={index} className="border-b border-solid border-[#cccccc] pb-2">
+                          <p className="text-[13px] dark:text-white">
+                            Certificado Numero: {certification.number} 
+                          </p>
+                          <p className="text-[13px] dark:text-white">
+                            {certification.organization} 
+                          </p>
+                          <p className="text-[13px] dark:text-white">
+                            Valido hasta: {certification.audit_date} 
+                          </p>
+                          <p className="text-[13px] dark:text-white">
+                            Valido desde: {certification.effective_date}
+                          </p>
+                          <p className="text-[13px] dark:text-white">
+                            {certification.name} 
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </li>
+                ))
+              }
+              {/* <li className="w-full flex items-center justify-between border-b border-solid border-[#cccccc] py-2">
                 <p className="text-[13px] dark:text-white">
                   Certificado Numero: <br />
                   CU808267GOTS-2023-00101959 <br />
@@ -64,165 +101,14 @@ export const Sustainability: React.FC = () => {
                   Global Organic Textile Standard (GOTS)
                 </p>
                 <img src={image2_1} alt="" className="w-auto max-w-[120px]" />
-              </li>
-              <li className="w-full flex items-center justify-between border-b border-solid border-[#cccccc] py-2">
-                <p className="text-[13px] dark:text-white">
-                  Certificado Numero: <br />
-                  CU808267GOTS-2023-00101959 <br />
-                  Valido hasta 2024-12-29 <br />
-                  Global Organic Textile Standard (GOTS)
-                </p>
-                <img src={image2_2} alt="" className="w-auto max-w-[120px]" />
-              </li>
-              <li className="w-full flex items-center justify-between border-b border-solid border-[#cccccc] py-2">
-                <p className="text-[13px] dark:text-white">
-                  Certificado Numero: <br />
-                  CU808267GOTS-2023-00101959 <br />
-                  Valido hasta 2024-12-29 <br />
-                  Global Organic Textile Standard (GOTS)
-                </p>
-                <img src={image2_3} alt="" className="w-auto max-w-[120px]" />
-              </li>
-              <li className="w-full flex items-center justify-between border-b border-solid border-[#cccccc] py-2">
-                <p className="text-[13px] dark:text-white">
-                  Certificado Numero: <br />
-                  CU808267GOTS-2023-00101959 <br />
-                  Valido hasta 2024-12-29 <br />
-                  Global Organic Textile Standard (GOTS)
-                </p>
-                <img src={image2_4} alt="" className="w-auto max-w-[80px]" />
-              </li>
-              <li className="w-full flex items-center justify-between border-b border-solid border-[#cccccc] py-2">
-                <p className="text-[13px] dark:text-white">
-                  Certificado Numero: <br />
-                  CU808267GOTS-2023-00101959 <br />
-                  Valido hasta 2024-12-29 <br />
-                  Global Organic Textile Standard (GOTS)
-                </p>
-                <img
-                  src={image2_5}
-                  alt=""
-                  className="w-auto max-w-[120px] dark:text-white"
-                />
-              </li>
-              <li className="w-full flex items-center justify-between border-b border-solid border-[#cccccc] py-2">
-                <p className="text-[13px] dark:text-white">
-                  Certificado Numero: <br />
-                  CU808267GOTS-2023-00101959 <br />
-                  Valido hasta 2024-12-29 <br />
-                  Global Organic Textile Standard (GOTS)
-                </p>
-                <img src={image2_6} alt="" className="w-auto max-w-[120px]" />
-              </li>
+              </li> */}
             </ul>
-            <p className="p-3 bg-[#e3e3db] text-[13px] dark:text-white dark:bg-[#5f6259]">
+            {/* <p className="p-3 bg-[#e3e3db] text-[13px] dark:text-white dark:bg-[#5f6259]">
               Reconocimiento a las mejores prácticas y cumplimiento de
               estándares internacionales.
-            </p>
+            </p> */}
           </div>
 
-          <h5 className="mt-5 p-3 bg-[#acb2a8] font-bold dark:text-white dark:bg-[#5f6259]">
-            Hilos de Coser
-          </h5>
-          <div className="px-5">
-            <p className="mt-5 text-[#45483d] dark:text-white">
-              Certificaciones de EL TREN
-            </p>
-            <ul className="flex justify-around">
-              <li>
-                <img src={image3_1} alt="" width={95} />
-                <span className="text-[#45483d] text-[12px] dark:text-white">
-                  -641.22t CO2e
-                </span>
-              </li>
-              <li>
-                <img src={image3_2} alt="" width={95} />
-                <span className="text-[#45483d] text-[12px] dark:text-white">
-                  -641.22t CO2e
-                </span>
-              </li>
-            </ul>
-            <h6 className="p-3 bg-[#e3e3db] text-[13px] dark:text-white dark:bg-[#5f6259]">
-              Empresa peruana de moda sostenible, con gran compromiso con el
-              ecosistema ambiental
-            </h6>
-            <p className="mt-5 text-[#45483d] dark:text-white">
-              Certificaciones de EL TREN
-            </p>
-            <ul>
-              <li className="w-full flex items-center justify-between border-b border-solid border-[#cccccc] py-2">
-                <p className="text-[13px] dark:text-white">
-                  Huella de Carbono *<br />
-                  Cálculo y generación de reporte de la huella de carbono.
-                </p>
-                <img src={huella_1} alt="" className="w-auto max-w-[120px]" />
-              </li>
-              <li className="w-full flex items-center justify-between border-b border-solid border-[#cccccc] py-2">
-                <p className="text-[13px] dark:text-white">
-                  Huella de Carbono *<br />
-                  Cálculo y generación de reporte de la huella de carbono.
-                </p>
-                <img src={huella_2} alt="" className="w-auto max-w-[120px]" />
-              </li>
-              <li className="w-full flex items-center justify-between border-b border-solid border-[#cccccc] py-2">
-                <p className="text-[13px] dark:text-white">
-                  Huella de Carbono *<br />
-                  Cálculo y generación de reporte de la huella de carbono.
-                </p>
-                <img src={huella_3} alt="" className="w-auto max-w-[120px]" />
-              </li>
-              <li className="w-full flex items-center justify-between border-b border-solid border-[#cccccc] py-2">
-                <p className="text-[13px] dark:text-white">
-                  Huella de Carbono *<br />
-                  Cálculo y generación de reporte de la huella de carbono.
-                </p>
-                <img src={huella_4} alt="" className="w-auto max-w-[120px]" />
-              </li>
-            </ul>
-            <p className="p-3 bg-[#e3e3db] text-[13px] dark:bg-[#5f6259] dark:text-white">
-              Los certificados de reconocimiento y los reportes obtenidos por EL
-              TREN, para neutralizar sus emisiones de GEI. Otorgados por el
-              Ministerio del Ambiente.
-            </p>
-            <p className="mt-5 text-[#45483d] dark:text-white">
-              Huella Hidrica Peru:
-            </p>
-            <ul>
-              <li className="w-full flex items-center justify-between border-b border-solid border-[#cccccc] py-2">
-                <p className="text-[13px] dark:text-white">
-                  Certificado otorgado por la Autoridad Nacional del Agua - ANA
-                </p>
-                <img src={image4} alt="" className="w-auto max-w-[120px]" />
-              </li>
-            </ul>
-            <p className="p-3 bg-[#e3e3db] text-[13px] dark:bg-[#5f6259] dark:text-white">
-              El Certificado Azul es un reconocimiento a las buenas practicas
-              aplicadas por EL TREN, en el uso eficiente de los recursos
-              hidricos.
-            </p>
-
-            <h5 className="mt-5 p-3 bg-[#acb2a8] font-bold dark:text-white dark:bg-[#5f6259]">
-              Pasadores de Algodón
-            </h5>
-            <div className="px-5">
-              <p className="mt-5 text-[#45483d] dark:text-white">
-                Certificaciones de BERGMAN / RIBERA
-              </p>
-              <ul>
-                <li className="w-full flex items-center justify-between border-b border-solid border-[#cccccc] py-2">
-                  <p className="text-[13px] dark:text-white">
-                    Certificaciones de TEXTILASA
-                  </p>
-                  <img src={image5} alt="" className="w-auto max-w-[120px]" />
-                </li>
-              </ul>
-              <p className="p-3 bg-[#e3e3db] text-[13px] dark:bg-[#5f6259] dark:text-white">
-                El Certificado Azul es un reconocimiento a las buenas practicas
-                aplicadas por EL TREN, en el uso eficiente de los recursos
-                hidricos.
-              </p>
-            </div>
-          </div>
         </AccordionContent>
       </Accordion>
       <Accordion>
@@ -230,7 +116,17 @@ export const Sustainability: React.FC = () => {
           Proceso de Producción
         </AccordionHead>
         <AccordionContent isOpen={false}>
-          <h5 className="mt-5 p-3 bg-[#acb2a8] font-bold dark:text-white dark:bg-[#5f6259]">
+          <h5>{data?.compliance_process?.process}</h5>
+          <ul>
+            {data?.compliance_process?.certifications.map((certification: IitemComplianceCertification, index: number) => (
+              <li key={index} className="border-b border-solid border-[#cccccc] pb-2">
+                <p className="text-[13px] dark:text-white">{certification.name}</p>
+                <p className="text-[13px] dark:text-white">{certification.organization}</p>
+                <p className="text-[13px] dark:text-white">{certification.number}</p>
+              </li>
+            ))}
+          </ul>
+          {/* <h5 className="mt-5 p-3 bg-[#acb2a8] font-bold dark:text-white dark:bg-[#5f6259]">
             Pasadores de Algodón
           </h5>
           <div className="px-5">
@@ -255,7 +151,7 @@ export const Sustainability: React.FC = () => {
                 <img src={aenor} alt="" className="w-auto max-w-[120px]" />
               </li>
             </ul>
-          </div>
+          </div> */}
         </AccordionContent>
       </Accordion>
     </div>
