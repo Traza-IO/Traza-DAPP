@@ -8,7 +8,7 @@ import { t } from 'i18next';
 
 export const ModalSocial = () => {
   return (
-    <div className="fixed inset-0 w-full h-full flex items-center justify-center z-[9]">
+    <div className="">
       <div className="relative z-[2] text-center">
         <h4 className="text-[20px]"> {t('product.title_social')} </h4>
         <p className="text-[13px] px-5">{t('product.description_social')}</p>
@@ -67,7 +67,6 @@ export const ModalSocial = () => {
           </li> */}
         </ul>
       </div>
-      <div className="bg-[#edeeed] absolute inset-0 w-full h-full opacity-[0.6]"></div>
     </div>
   );
 };
