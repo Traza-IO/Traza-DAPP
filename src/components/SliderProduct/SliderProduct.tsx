@@ -47,7 +47,7 @@ const SliderProduct = () => {
     slidesToShow: 3, // Cantidad de slides visibles (desktop)
     slidesToScroll: 1, // Cantidad de slides que se desplazan por transición
     autoplay: true, // Activar autoplay
-    autoplaySpeed: 20000000, // Velocidad del autoplay en ms
+    autoplaySpeed: 3000, // Velocidad del autoplay en ms
     responsive: [
       {
         breakpoint: 768, // Para pantallas menores a 768px

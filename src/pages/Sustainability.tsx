@@ -18,9 +18,10 @@ import image4 from '../assets/4.png';
 import image5 from '../assets/5.jpg';
 import odac from '../assets/odac.jpg';
 import aenor from '../assets/aenor.jpg';
-import { useEffect } from 'react';
+import { SetStateAction, useEffect, useState } from 'react';
 import { useTraceabilityStore } from '../store/useTraceabilityStore';
 import { useGtinNavigation } from '../hooks/useGtinNavigation';
+import { createActor } from '../declarations/backend';
 
 interface IitemComplianceSuppliers {
   supplier: string;
@@ -38,17 +39,44 @@ interface IitemComplianceCertification {
 }
 
 export const Sustainability: React.FC = () => {
+  const canisterId = process.env.CANISTER_ID_BACKEND || 'uxrrr-q7777-77774-qaaaq-cai';
+  const backend = createActor(canisterId);
   const { data, isLoading, fetchData } = useTraceabilityStore();
   const { getCurrentGtin } = useGtinNavigation();
   const loading = isLoading;
   const gtin = getCurrentGtin();
-
+  const [certificationLogos, setCertificationLogos] = useState<{[key: string]: string}>({});
   useEffect(() => {
     if (!data) {
       fetchData(gtin);
     }
   }, [data, fetchData, gtin]);
-  
+
+  useEffect(() => {
+    // This runs once when component mounts (similar to onload)
+    const fetchImage = async (name: string, certificationId: string) => {
+      const bytes = await backend.getImage(name);
+      if (!bytes || !Array.isArray(bytes) || bytes.length === 0) return;
+      const blob = new Blob([new Uint8Array(bytes[0])], { type: 'image/jpeg' });
+      const imageUrl = URL.createObjectURL(blob);
+      
+      setCertificationLogos(prev => ({
+        ...prev,
+        [certificationId]: imageUrl
+      }));
+    };
+
+    console.log(data, 'data initial');
+    if (data) {
+      console.log(data.compliance_supplier, 'data certifications');
+      data.compliance_supplier.forEach((item: IitemComplianceSuppliers) => {
+        item.certifications.forEach((certification: IitemComplianceCertification) => {
+          fetchImage(certification.logo, certification.number);
+        });
+      });
+    }
+  }, [data]); // Empty dependency array = runs once on mount
+
   return (
     <div className="max-w-[1024px] mx-auto mt-8 px-5">
       <div className="text-center px-5 text-[#45483d] mb-4 dark:text-white">
@@ -71,42 +99,36 @@ export const Sustainability: React.FC = () => {
                     </p>
                     <div className="text-[13px] dark:text-white">
                       {item.certifications.map((certification: IitemComplianceCertification, index: number) => (
-                        <div key={index} className="border-b border-solid border-[#cccccc] pb-2">
-                          <p className="text-[13px] dark:text-white">
-                            Certificado Numero: {certification.number} 
-                          </p>
-                          <p className="text-[13px] dark:text-white">
-                            {certification.organization} 
-                          </p>
-                          <p className="text-[13px] dark:text-white">
-                            Valido hasta: {certification.audit_date} 
-                          </p>
-                          <p className="text-[13px] dark:text-white">
-                            Valido desde: {certification.effective_date}
-                          </p>
-                          <p className="text-[13px] dark:text-white">
-                            {certification.name} 
-                          </p>
+                        <div className="border-b border-solid border-[#cccccc] pb-2 flex w-full">
+                          <div key={index} className="pb-2">
+                            <p className="text-[13px] dark:text-white">
+                              Certificado Numero: {certification.number} 
+                            </p>
+                            <p className="text-[13px] dark:text-white">
+                              {certification.organization} 
+                            </p>
+                            <p className="text-[13px] dark:text-white">
+                              Valido hasta: {certification.audit_date} 
+                            </p>
+                            <p className="text-[13px] dark:text-white">
+                              Valido desde: {certification.effective_date}
+                            </p>
+                            <p className="text-[13px] dark:text-white">
+                              {certification.name} 
+                            </p>
+                          </div>
+                          <div className="flex-1 flex justify-end">
+                            {certificationLogos[certification.number] && (
+                              <img src={certificationLogos[certification.number]} alt={certification.name} className="w-auto" />
+                            )}
+                          </div>
                         </div>
                       ))}
                     </div>
                   </li>
                 ))
               }
-              {/* <li className="w-full flex items-center justify-between border-b border-solid border-[#cccccc] py-2">
-                <p className="text-[13px] dark:text-white">
-                  Certificado Numero: <br />
-                  CU808267GOTS-2023-00101959 <br />
-                  Valido hasta 2024-12-29 <br />
-                  Global Organic Textile Standard (GOTS)
-                </p>
-                <img src={image2_1} alt="" className="w-auto max-w-[120px]" />
-              </li> */}
             </ul>
-            {/* <p className="p-3 bg-[#e3e3db] text-[13px] dark:text-white dark:bg-[#5f6259]">
-              Reconocimiento a las mejores prácticas y cumplimiento de
-              estándares internacionales.
-            </p> */}
           </div>
 
         </AccordionContent>
