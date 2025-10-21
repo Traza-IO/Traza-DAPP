@@ -11,6 +11,10 @@ import Home from '../pages/Home';
 import Layout from '../components/Layout';
 import Blockchain from '../pages/Blockchain';
 import Share from '../pages/Share';
+import AdminDPP from '../pages/AdminDPP';
+import AdminIMG from '../pages/AdminIMG';
+
+
 
 const AppRouter: React.FC = () => {
   return (
@@ -58,6 +62,18 @@ const AppRouter: React.FC = () => {
             <Layout>
               <Share />
             </Layout>
+          }
+        />
+        <Route
+          path="/admin/dpp"
+          element={
+            <AdminDPP />
+          }
+        />
+        <Route
+          path="/admin/img"
+          element={
+              <AdminIMG />
           }
         />
       </Routes>

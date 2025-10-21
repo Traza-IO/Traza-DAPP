@@ -25,6 +25,11 @@ persistent actor class Product() {
     Trie.find(traceabilityDPP, key(gtin_product), Text.equal);
   };
 
+  public query func getAllElements() : async  [{gtin: Text; description: Text}]{
+    let array = Trie.toArray(traceabilityDPP, func (k, v) = {gtin = v.gtin_product ; description = v.description_model.name});
+    return array;
+  };
+
   stable var imagesDPP : Trie.Trie<Text, Blob> = Trie.empty();
 
   public func uploadImage(name : Text, content : Blob) : async Text {

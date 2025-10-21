@@ -464,4 +464,10 @@ module {
       ];
     };
   };
+
+  public type TraceabilityUnit = {
+  gtin: Text;
+  description: Text;
+  };
 };
+
