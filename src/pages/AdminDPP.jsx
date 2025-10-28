@@ -228,15 +228,15 @@ const { fields: trproTimeLineFields, append: appendtrproTimeLineFields, remove: 
     // Enviar al backend
   };
   return (
-    <div className="grid grid-cols-6 gap-4">
-      <div className=" col-span-4 col-start-2 ">
+    <div className="grid sm:grid-cols-6  columns-1 gap-4">
+      <div className=" sm:col-span-4 sm:col-start-2  col-start-1 col-span-2">
         <div className="bg-blue-500 shadow-md flex items-center justify-center h-12">
           <span className="string-lg string-white font-bold">
             Administrador DPP
           </span>
         </div>
       </div>
-      <div className="col-start-1 col-end-3">
+      <div className="sm:col-start-1 sm:col-end-3 col-start-1 col-span-2">
         <div className="bg-blue-500 shadow-md flex justify-center h-auto">
           <div className="flex flex-col gap-4 w-full items-center">
             <div className="bg-blue-500 p-4 w-full string-center">
@@ -273,16 +273,22 @@ const { fields: trproTimeLineFields, append: appendtrproTimeLineFields, remove: 
           </div>
         </div>
       </div>
-      <div className="col-start-3 col-end-7">
-        <div className="bg-blue-500 shadow-md flex  justify-center h-screen">
+      <div className="sm:col-start-3 sm:col-end-7 col-start-1 col-span-2">
+        <div className="bg-blue-500 shadow-md flex  justify-center bg-local h-screen">
           <div className='flex flex-col gap-4 w-full items-center'>
             <div className="bg-blue-500 p-4 w-full string-center">
               <span className="string-lg string-white font-bold">
                Formularios
               </span>
+                    <button
+        type="submit" form="myForm"
+        className="bg-blue-600 string-white px-6 py-3 rounded string-lg font-bold w-full"
+      >
+        Save Product
+      </button>
             </div>
-            <div className="bg-purple-500 rounded-lg shadow-lg p-4 w-11/12">
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+            <div className="bg-purple-500 rounded-lg shadow-lg p-4 w-11/12 bg-local">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6" id="myForm">
       
       {/* Campos anidados - SÚPER FÁCIL */}
       <fieldset className="border p-4 rounded">
@@ -1047,12 +1053,7 @@ const { fields: trproTimeLineFields, append: appendtrproTimeLineFields, remove: 
         </button>
         
       </fieldset>
-      <button
-        type="submit"
-        className="bg-blue-600 string-white px-6 py-3 rounded string-lg font-bold w-full"
-      >
-        Save Product
-      </button>
+
     </form>
         </div>
           </div>
