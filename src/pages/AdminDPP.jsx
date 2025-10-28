@@ -1097,7 +1097,26 @@ function SupplierSection({ supplierIndex, register, control, onRemove }) {
             placeholder="Organization"
             className="border p-2 w-full mb-2"
           />
-          
+           <input
+            {...register(`compliance_supplier.${supplierIndex}.certifications.${cIndex}.audit_date`)}
+            placeholder="audit_date"
+            className="border p-2 w-full mb-2"
+          />
+            <input
+            {...register(`compliance_supplier.${supplierIndex}.certifications.${cIndex}.effective_date`)}
+            placeholder="effective_date"
+            className="border p-2 w-full mb-2"
+          />
+            <input
+            {...register(`compliance_supplier.${supplierIndex}.certifications.${cIndex}.link`)}
+            placeholder="link"
+            className="border p-2 w-full mb-2"
+          />
+              <input
+            {...register(`compliance_supplier.${supplierIndex}.certifications.${cIndex}.logo`)}
+            placeholder="logo"
+            className="border p-2 w-full mb-2"
+          />
           <button className="bg-red-400 string-white px-3 py-1 rounded mt-2" type="button" onClick={() => remove(cIndex)}>
             Remove Cert
           </button>
