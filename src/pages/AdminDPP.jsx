@@ -287,7 +287,7 @@ const { fields: trproTimeLineFields, append: appendtrproTimeLineFields, remove: 
         Save Product
       </button>
             </div>
-            <div className="bg-purple-500 rounded-lg shadow-lg p-4 w-11/12 bg-local">
+            <div className="bg-purple-500 rounded-lg shadow-lg p-4 w-11/12 bg-local h-screen overflow-y-scroll">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6" id="myForm">
       
       {/* Campos anidados - SÚPER FÁCIL */}

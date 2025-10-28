@@ -47,4 +47,9 @@ persistent actor class Product() {
     Debug.print("uploadImage Prototipador called with img name: " # name);
     return Trie.find(imagesDPP, key(name), Text.equal);
   };
+  
+  public query func getAllImages() : async  [{name: Text}]{
+    let names = Trie.toArray(imagesDPP, func (k, v) = {name = k});
+    return names;
+  };
 };
