@@ -52,4 +52,27 @@ persistent actor class Product() {
     let names = Trie.toArray(imagesDPP, func (k, v) = {name = k});
     return names;
   };
+
+  stable var colorBrandsDPP : Trie.Trie<Text, Text> = Trie.empty();
+
+  public func uploadColorBrand(gtin : Text, content : Text) : async Text {
+    Debug.print("uploadColorBrand Prototipador called with gtin: " # gtin);
+    colorBrandsDPP := Trie.replace(
+      colorBrandsDPP,
+      key(gtin),
+      Text.equal,
+      ?content,
+    ).0;
+    return gtin;
+  };
+
+  public query func getColorBrand(gtin : Text) : async ?Text {
+    Debug.print("getColorBrand Prototipador called with gtin: " # gtin);
+    return Trie.find(colorBrandsDPP, key(gtin), Text.equal);
+  };
+  
+  public query func getAllColorBrands() : async  [{gtin: Text}]{
+    let gtins = Trie.toArray(colorBrandsDPP, func (k, v) = {gtin = k});
+    return gtins;
+  };
 };

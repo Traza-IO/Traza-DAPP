@@ -2,151 +2,6 @@
 import { useState, useEffect } from 'react';
 import { createActor } from '../declarations/backend';
 import { useForm, useFieldArray } from 'react-hook-form';
-/* 
-interface respAllProducts {
-  gtin: string;
-  description: string;
-}
-
-
-
-interface ProductData {
-id_model : string;
-    id_model_export : string;
-    summary_materials : string;
-    name_model : string;
-    brand_information : {
-      logo_mestiza : string;
-      facebook : string;
-      instagram : string;
-      whatsapp : string;
-      ecommerce : string;
-    };
-    description_header : string;
-    description_model : {
-      name : string;
-      collection : string;
-      summary : string;
-    };
-    materials : {
-      composition : string;
-      recycling : string;
-      percentage_recycling : string;
-      recycling_income : string;
-    };
-    packing : {
-      pack_type : string;
-      weight : string;
-      volume : string;
-      recycling : string;
-      percentage_recycling : string;
-    };
-    care : {
-      care : string[];
-      description : string;
-    };
-    id_lot : string;
-    lot_number_product : string;
-    trace_supplier : [
-      {
-        title : string;
-        ruc : string;
-        location : string;
-        coords : string;
-      }
-    ];
-    traceability_batch : {
-      location : string;
-      time_line : [{
-        process : string;
-        start_time : string;
-        end_time : string;
-        owner : string;
-      }];
-    };
-    compliance_supplier : [{
-      supplier : string;
-      certifications : [
-        {
-          name : string;
-          organization : string;
-          number : string;
-          audit_date : string;
-          effective_date : string;
-          link : string;
-          logo : string;
-        }
-      ];
-    }];
-    compliance_process : {
-      process : string;
-      certifications : [
-        {
-          name : string;
-          organization : string;
-          number : string;
-          audit_date : string;
-          effective_date : string;
-          link : string;
-          logo : string;
-        }
-      ];
-    };
-    traceability_blockchain_lot : {
-      time_line : [{
-        process : string;
-        label_start : string;
-        hash_start : string;
-        label_end : string;
-        hash_end : string;
-      }];
-    };
-    gtin_product : string;
-    id_product_parent_company : string;
-    id_product_system_eu : string;
-    photo_product : {
-      frontal : string;
-      left : string;
-      later : string;
-      right : string;
-    };
-    information_product : {
-      name : string;
-      brand : string;
-      gtin : string;
-      product_code : string;
-      product_code_eu : string;
-      category : string;
-      size : string;
-      color : string;
-      year : string;
-      season : string;
-    };
-    traceability_product : {
-      time_line : [
-        {
-          process : string;
-          start_time : string;
-          end_time : string;
-          owner : string;
-        }
-      ];
-      full_name : string;
-      company_name : string;
-      ruc : string;
-    };
-    traceability_blockchain_product : {
-      time_line : [
-        {
-          process : string;
-          label_start : string;
-          hash_start : string;
-          label_end : string;
-          hash_end : string;
-        }
-      ];
-    };
-} */
 
 
 const AdminDPP = () => {
@@ -155,7 +10,7 @@ const AdminDPP = () => {
   const backend = createActor(canisterId);
   const [products, setProducts] = useState([]);
   const [gtinData, setGtinData] = useState({})
-
+  const [colorBrand, setColorBrand] = useState('')
 
   const { register, handleSubmit, reset, control, watch, setValue } = useForm();
    const careArray = watch('care.care') || [];
@@ -220,10 +75,14 @@ const { fields: trproTimeLineFields, append: appendtrproTimeLineFields, remove: 
     const response = await backend.getInfo(gtin);
     setGtinData(response)
      reset(response[0]);
+     const colorBrandResp = await backend.getColorBrand(gtin);
+     console.log("Color Brand:", colorBrandResp);
+      setColorBrand(colorBrandResp[0] || '')
   };
 
    const onSubmit = async (data) => {
     await backend.createUnitData(data);
+    await backend.uploadColorBrand(data.information_product.gtin, colorBrand);
     console.log("Se actualizo")
     // Enviar al backend
   };
@@ -299,9 +158,10 @@ const { fields: trproTimeLineFields, append: appendtrproTimeLineFields, remove: 
   placeholder="description_header"
   className="border p-2 rounded w-full mb-2"
 />
- <label>color_brand</label>
+   <label>color_brand</label>
 <textarea
-  {...register('color_brand')}
+  value={colorBrand}
+  onChange={(e) => setColorBrand(e.target.value)}
   placeholder="color_brand"
   className="border p-2 rounded w-full mb-2"
 />
