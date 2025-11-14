@@ -118,9 +118,6 @@ export const Traceability: React.FC = () => {
                     <span className="text-[13px] text-[#5F6259] font-bold block dark:text-white">
                       Ubicación: {data?.traceability_batch?.location}
                     </span>
-                    <p className="text-[13px] text-[#5F6259] dark:text-white">
-                      Dirección, provincia, departamento, región {data?.traceability_batch?.location}
-                    </p>
                   </div>
                 </div>
                 <ul>

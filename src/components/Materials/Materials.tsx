@@ -26,29 +26,10 @@ const Materials = () => {
     }
   }, [data, fetchData]);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       setLoading(true);
-  //       const res = await backend.getInfoFree('17751234567890');
-  //       setMaterials(res[0]);
-  //     } catch (err) {
-  //       console.error(err);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-  //   fetchData();
-  // }, []);
-
   return (
-    <div className="flex items-start justify-between max-w-[1024px] mx-auto mt-4 px-4 w-full">
+    <div className="flex flex-col-reverse items-start justify-between max-w-[1024px] mx-auto mt-4 px-4 w-full">
       {loading ? (
         <div className="flex gap-3 w-full justify-between">
-          <div className="flex flex-col gap-2">
-            <Skeleton count={1} height={20} width={100} />
-            <Skeleton count={1} height={20} width={100} />
-          </div>
           <div className="flex flex-col gap-2">
             <Skeleton count={1} height={20} width={100} />
             <Skeleton count={1} height={20} width={100} />
@@ -60,7 +41,7 @@ const Materials = () => {
         </div>
       ) : (
         <>
-          <div className="max-md:text-center max-md:mb-4 w-full">
+          {/* <div className="max-md:text-center max-md:mb-4 w-full">
             <h4 className="font-bold text-[#5f6259] text-[15px] text-left dark:text-white">
               {t('product.materials')}
             </h4>
@@ -69,21 +50,21 @@ const Materials = () => {
                 {data?.summary_materials}
               </li>
             </ul>
-          </div>
+          </div> */}
           <div className="max-md:text-center max-md:mb-4 w-full">
-            <h4 className="font-bold text-[#5f6259] text-[15px] uppercase dark:text-white">
+            <h4 className="font-normal text-[#5f6259] text-[15px] dark:text-white">
               {data?.name_model}
             </h4>
             <ul>
-              <li className="text-[14px] mt-3 text-[#5f6259] font-bold dark:text-white">
+              <li className="text-[14px] text-[#5f6259] font-normal dark:text-white">
                 {t('product.traceable')}
               </li>
             </ul>
           </div>
           <div className="max-md:text-center max-md:mb-4 w-full">
-            <h4 className="font-bold text-[#5f6259] text-[15px] dark:text-white text-center">
+            {/* <h4 className="font-bold text-[#5f6259] text-[15px] dark:text-white text-center">
               {t('product.company')}
-            </h4>
+            </h4> */}
             <figure>
               <img
                 src={imgBussiness}

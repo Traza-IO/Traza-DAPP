@@ -41,11 +41,11 @@ const Blockchain = () => {
           </figure>
           <div className="text-center mt-4">
             <h4 className="text-[#45483d] dark:text-white font-bold text-[17px]">
-              Polerón con Capucha{' '}
+              {data?.description_model?.name}
             </h4>
             <p className="text-[#45483d] dark:text-white">
               {' '}
-              GTIN: 17550123456789{' '}
+              GTIN: {data?.gtin_product}
             </p>
           </div>
           <h5 className="mt-5 p-3 bg-[#acb2a8] font-bold dark:bg-[#5f6259] dark:text-white">

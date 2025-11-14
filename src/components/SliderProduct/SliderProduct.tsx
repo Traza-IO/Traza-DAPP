@@ -32,7 +32,6 @@ const SliderProduct = () => {
     };
     console.log(data, 'data initial');
     if (data) {
-      console.log(data.photo_product, 'data images');
       fetchImage(data.photo_product.frontal,setCarousel1);
       fetchImage(data.photo_product.left,setCarousel2);
       fetchImage(data.photo_product.later,setCarousel3);

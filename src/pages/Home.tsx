@@ -264,7 +264,7 @@ const Home: React.FC = () => {
                 {data?.care?.care?.map((item: string, index: number) => (
                   <li key={index} className="flex items-center mb-2">
                     <FaChevronCircleRight />
-                    <span className="ml-3">{item}</span>
+                    <span className="ml-3 flex-1">{item}</span>
                   </li>
                 ))}
               </ul>

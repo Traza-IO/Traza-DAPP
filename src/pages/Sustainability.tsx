@@ -53,25 +53,27 @@ export const Sustainability: React.FC = () => {
   }, [data, fetchData, gtin]);
 
   useEffect(() => {
-    // This runs once when component mounts (similar to onload)
     const fetchImage = async (name: string, certificationId: string) => {
+      console.log(name, certificationId, 'name and certificationId');
       const bytes = await backend.getImage(name);
       if (!bytes || !Array.isArray(bytes) || bytes.length === 0) return;
       const blob = new Blob([new Uint8Array(bytes[0])], { type: 'image/jpeg' });
       const imageUrl = URL.createObjectURL(blob);
-      
-      setCertificationLogos(prev => ({
-        ...prev,
-        [certificationId]: imageUrl
-      }));
+      console.log(imageUrl, 'imageUrl');
+      return imageUrl;
     };
 
     console.log(data, 'data initial');
     if (data) {
-      console.log(data.compliance_supplier, 'data certifications');
-      data.compliance_supplier.forEach((item: IitemComplianceSuppliers) => {
-        item.certifications.forEach((certification: IitemComplianceCertification) => {
-          fetchImage(certification.logo, certification.number);
+      data.compliance_supplier.forEach(async (item: IitemComplianceSuppliers) => {
+        item.certifications.forEach(async (certification: IitemComplianceCertification) => {
+          const imageUrl = await fetchImage(certification.logo, certification.number);
+          if (imageUrl) {
+            setCertificationLogos(prev => ({
+              ...prev,
+              [certification.logo]: imageUrl
+            }));
+          }
         });
       });
     }
@@ -100,7 +102,7 @@ export const Sustainability: React.FC = () => {
                     <div className="text-[13px] dark:text-white">
                       {item.certifications.map((certification: IitemComplianceCertification, index: number) => (
                         <div className="border-b border-solid border-[#cccccc] pb-2 flex w-full">
-                          <div key={index} className="pb-2">
+                          <div key={index} className="flex-1 pb-2">
                             <p className="text-[13px] dark:text-white">
                               Certificado Numero: {certification.number} 
                             </p>
@@ -117,9 +119,9 @@ export const Sustainability: React.FC = () => {
                               {certification.name} 
                             </p>
                           </div>
-                          <div className="flex-1 flex justify-end">
+                          <div className="flex justify-end items-center">
                             {certificationLogos[certification.number] && (
-                              <img src={certificationLogos[certification.number]} alt={certification.name} className="w-auto" />
+                              <img src={certificationLogos[certification.number]} alt={certification.name} className="w-auto " />
                             )}
                           </div>
                         </div>
