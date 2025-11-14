@@ -299,7 +299,12 @@ const { fields: trproTimeLineFields, append: appendtrproTimeLineFields, remove: 
   placeholder="description_header"
   className="border p-2 rounded w-full mb-2"
 />
-
+ <label>color_brand</label>
+<textarea
+  {...register('color_brand')}
+  placeholder="color_brand"
+  className="border p-2 rounded w-full mb-2"
+/>
 <label>gtin_product</label>
 <textarea
   {...register('gtin_product')}

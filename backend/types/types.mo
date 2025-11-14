@@ -280,6 +280,7 @@ module {
         hash_end : Text;
       }];
     };
+    color_brand: Text;
     gtin_product : Text;
     id_product_parent_company : Text;
     id_product_system_eu : Text;
@@ -339,6 +340,7 @@ module {
       whatsapp : Text;
       ecommerce : Text;
     };
+    color_brand: Text;
     description_header : Text;
     description_model : {
       name : Text;
