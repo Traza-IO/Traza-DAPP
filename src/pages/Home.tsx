@@ -4,26 +4,10 @@ import AccordionHead from '../components/Accordion/components/AccordionHead';
 import AccordionContent from '../components/Accordion/components/AccordionContent';
 import { FaChevronCircleRight } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
-
-// import  {backend}  from '../declarations/backend';
 import { useTraceabilityStore } from '../store/useTraceabilityStore';
 import Skeleton from 'react-loading-skeleton';
 import { ModalError } from '../components/ModalError';
 import { useGtinNavigation } from '../hooks/useGtinNavigation';
-
-// type Ttips = {
-//   description: string;
-//   list: string[];
-// };
-
-// interface ProductData {
-//   description_model?: any;
-//   information_product?: any;
-//   materials?: any;
-//   packing?: any;
-//   care?: any;
-//   tips?: Ttips[];
-// }
 
 const Home: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -32,15 +16,12 @@ const Home: React.FC = () => {
   const [showModalError, setShowModalError] = useState(false);
   const gtin = getCurrentGtin();
   localStorage.setItem('gtin', gtin);
-  console.log(gtin, 'gtin value');
 
   useEffect(() => {
     if (!data) {
       try {
         fetchData(gtin);
       } catch (error) {
-        console.error('Error fetching data:', error);
-        console.log(error, 'error2222');
         setShowModalError(true);
       }
     }
@@ -270,29 +251,6 @@ const Home: React.FC = () => {
               </ul>
             </AccordionContent>
           </Accordion>
-          {/* <Accordion>
-          <AccordionHead toggleAccordion={() => {}} isOpen={false}>
-            {t('product.tips')}
-          </AccordionHead>
-          <AccordionContent isOpen={false}>
-            <ul className="text-[14px] text-[#45483D] dark:text-white">
-              {data?.tips?.map((item: Ttips, index: number) => (
-                <li key={index}>
-                  <h5 className="text-[#45483D] mt-6 mb-4 dark:text-white">
-                    {item?.description}
-                  </h5>
-                  {item?.list?.map((i: string, index: number) => (
-                    <p key={index} className="flex items-center mb-2">
-                      <FaChevronCircleRight />
-                      <span className="ml-3">{i}</span>
-                    </p>
-                  ))}
-                </li>
-              ))}
-            </ul>
-            <br />
-          </AccordionContent>
-        </Accordion> */}
         </>
       )}
     </div>

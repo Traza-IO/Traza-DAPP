@@ -30,7 +30,6 @@ const SliderProduct = () => {
       const blob = new Blob([new Uint8Array(bytes[0])], { type: 'image/jpeg' });
       component(URL.createObjectURL(blob));
     };
-    console.log(data, 'data initial');
     if (data) {
       fetchImage(data.photo_product.frontal,setCarousel1);
       fetchImage(data.photo_product.left,setCarousel2);

@@ -44,9 +44,11 @@ export const useTraceabilityStore = create<TraceabilityStore>((set) => ({
     
     if (!currentGtin) throw new Error('No gtin found');
     
+    // GetColorBrand
     try {
       const backend = createActor(canisterId);
       const res = await backend.getInfo(currentGtin);
+      const colorBrand = await backend.getColorBrand(currentGtin);
       if (!res || res.length === 0) throw new Error('No data found');
       set({ data: res[0] });
       console.log(res[0], 'res');
