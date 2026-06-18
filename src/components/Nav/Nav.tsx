@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 
 const Nav = () => {
   const location = useLocation();
-  const { lng } = useParams<{ lng: string }>(); // Extrae el idioma dinámico
+  const { lng } = useParams<{ lng: string }>();
   const { t } = useTranslation();
   const pathname = location.pathname;
 

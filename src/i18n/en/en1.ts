@@ -46,6 +46,8 @@ export default {
     title_social: 'Share Social Networks',
     description_social:
       'Together we can make a positive difference in the fashion industry!',
+    compliance: 'Compliance with inputs',
+    production_process: 'Production process',
   },
   footer: {
     description: 'With traceability, each garment tells its story ...',

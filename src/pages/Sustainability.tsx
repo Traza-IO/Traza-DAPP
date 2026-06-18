@@ -1,25 +1,19 @@
 import Accordion from '../components/Accordion/Accordion';
 import AccordionContent from '../components/Accordion/components/AccordionContent';
 import AccordionHead from '../components/Accordion/components/AccordionHead';
-import image1_1 from '../assets/1_1.jpg';
-import image2_1 from '../assets/2_1.png';
-import image2_2 from '../assets/2_2.png';
-import image2_3 from '../assets/2_3.png';
-import image2_4 from '../assets/2_4.png';
-import image2_5 from '../assets/2_5.png';
-import image2_6 from '../assets/2_6.png';
-import image3_1 from '../assets/3_1.png';
-import image3_2 from '../assets/3_2.png';
-import huella_1 from '../assets/huella-1.png';
-import huella_2 from '../assets/huella-2.png';
-import huella_3 from '../assets/huella-3.png';
-import huella_4 from '../assets/huella-4.png';
-import image4 from '../assets/4.png';
-import image5 from '../assets/5.jpg';
-import odac from '../assets/odac.jpg';
-import aenor from '../assets/aenor.jpg';
+import { useTranslation } from 'react-i18next';
+import { useQueryCall } from '@ic-reactor/react';
 
 export const Sustainability: React.FC = () => {
+  const { t } = useTranslation();
+  const { data: data1, call: call2 } = useQueryCall({
+    functionName: 'readLotId',
+    args: ['M0000001'],
+  });
+
+  const blockchain = Array.isArray(data1) ? data1[0] : {};
+
+  console.log('blockchain', blockchain);
   return (
     <div className="max-w-[1024px] mx-auto mt-8 px-5">
       <div className="text-center px-5 text-[#45483d] mb-4 dark:text-white">
@@ -31,10 +25,39 @@ export const Sustainability: React.FC = () => {
       </div>
       <Accordion>
         <AccordionHead toggleAccordion={() => {}} isOpen={true}>
-          Cumplimiento de Insumos
+          {t('product.compliance')}
         </AccordionHead>
         <AccordionContent isOpen={true}>
-          <h5 className="mt-5 p-3 bg-[#acb2a8] font-bold dark:text-white dark:bg-[#5f6259]">
+          {blockchain?.compliance_supplier?.map((item: any, index: number) => (
+            <div className="px-5" key={index}>
+              <h5 className="mt-5 p-3 bg-[#acb2a8] font-bold dark:text-white dark:bg-[#5f6259]">
+                {item?.supplier}
+              </h5>
+              <div className="px-5">
+                <ul>
+                  {item?.certifications?.map((item: any, index: number) => (
+                    <li className="w-full flex items-center justify-between border-b border-solid border-[#cccccc] py-2">
+                      <p className="text-[13px] dark:text-white">
+                        Certificado Numero: <br />
+                        {item?.number} <br />
+                        Valido hasta {item?.effective_date} <br />
+                        {item?.organization}
+                      </p>
+                      <img
+                        src={
+                          new URL(`../assets/${item?.logo}`, import.meta.url)
+                            .href
+                        }
+                        alt=""
+                        className="w-auto max-w-[120px]"
+                      />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))}
+          {/* <h5 className="mt-5 p-3 bg-[#acb2a8] font-bold dark:text-white dark:bg-[#5f6259]">
             Tela de Algodón Tanguis
           </h5>
           <div className="px-5">
@@ -119,141 +142,49 @@ export const Sustainability: React.FC = () => {
               Reconocimiento a las mejores prácticas y cumplimiento de
               estándares internacionales.
             </p>
-          </div>
-
-          <h5 className="mt-5 p-3 bg-[#acb2a8] font-bold dark:text-white dark:bg-[#5f6259]">
-            Hilos de Coser
-          </h5>
-          <div className="px-5">
-            <p className="mt-5 text-[#45483d] dark:text-white">
-              Certificaciones de EL TREN
-            </p>
-            <ul className="flex justify-around">
-              <li>
-                <img src={image3_1} alt="" width={95} />
-                <span className="text-[#45483d] text-[12px] dark:text-white">
-                  -641.22t CO2e
-                </span>
-              </li>
-              <li>
-                <img src={image3_2} alt="" width={95} />
-                <span className="text-[#45483d] text-[12px] dark:text-white">
-                  -641.22t CO2e
-                </span>
-              </li>
-            </ul>
-            <h6 className="p-3 bg-[#e3e3db] text-[13px] dark:text-white dark:bg-[#5f6259]">
-              Empresa peruana de moda sostenible, con gran compromiso con el
-              ecosistema ambiental
-            </h6>
-            <p className="mt-5 text-[#45483d] dark:text-white">
-              Certificaciones de EL TREN
-            </p>
-            <ul>
-              <li className="w-full flex items-center justify-between border-b border-solid border-[#cccccc] py-2">
-                <p className="text-[13px] dark:text-white">
-                  Huella de Carbono *<br />
-                  Cálculo y generación de reporte de la huella de carbono.
-                </p>
-                <img src={huella_1} alt="" className="w-auto max-w-[120px]" />
-              </li>
-              <li className="w-full flex items-center justify-between border-b border-solid border-[#cccccc] py-2">
-                <p className="text-[13px] dark:text-white">
-                  Huella de Carbono *<br />
-                  Cálculo y generación de reporte de la huella de carbono.
-                </p>
-                <img src={huella_2} alt="" className="w-auto max-w-[120px]" />
-              </li>
-              <li className="w-full flex items-center justify-between border-b border-solid border-[#cccccc] py-2">
-                <p className="text-[13px] dark:text-white">
-                  Huella de Carbono *<br />
-                  Cálculo y generación de reporte de la huella de carbono.
-                </p>
-                <img src={huella_3} alt="" className="w-auto max-w-[120px]" />
-              </li>
-              <li className="w-full flex items-center justify-between border-b border-solid border-[#cccccc] py-2">
-                <p className="text-[13px] dark:text-white">
-                  Huella de Carbono *<br />
-                  Cálculo y generación de reporte de la huella de carbono.
-                </p>
-                <img src={huella_4} alt="" className="w-auto max-w-[120px]" />
-              </li>
-            </ul>
-            <p className="p-3 bg-[#e3e3db] text-[13px] dark:bg-[#5f6259] dark:text-white">
-              Los certificados de reconocimiento y los reportes obtenidos por EL
-              TREN, para neutralizar sus emisiones de GEI. Otorgados por el
-              Ministerio del Ambiente.
-            </p>
-            <p className="mt-5 text-[#45483d] dark:text-white">
-              Huella Hidrica Peru:
-            </p>
-            <ul>
-              <li className="w-full flex items-center justify-between border-b border-solid border-[#cccccc] py-2">
-                <p className="text-[13px] dark:text-white">
-                  Certificado otorgado por la Autoridad Nacional del Agua - ANA
-                </p>
-                <img src={image4} alt="" className="w-auto max-w-[120px]" />
-              </li>
-            </ul>
-            <p className="p-3 bg-[#e3e3db] text-[13px] dark:bg-[#5f6259] dark:text-white">
-              El Certificado Azul es un reconocimiento a las buenas practicas
-              aplicadas por EL TREN, en el uso eficiente de los recursos
-              hidricos.
-            </p>
-
-            <h5 className="mt-5 p-3 bg-[#acb2a8] font-bold dark:text-white dark:bg-[#5f6259]">
-              Pasadores de Algodón
-            </h5>
-            <div className="px-5">
-              <p className="mt-5 text-[#45483d] dark:text-white">
-                Certificaciones de BERGMAN / RIBERA
-              </p>
-              <ul>
-                <li className="w-full flex items-center justify-between border-b border-solid border-[#cccccc] py-2">
-                  <p className="text-[13px] dark:text-white">
-                    Certificaciones de TEXTILASA
-                  </p>
-                  <img src={image5} alt="" className="w-auto max-w-[120px]" />
-                </li>
-              </ul>
-              <p className="p-3 bg-[#e3e3db] text-[13px] dark:bg-[#5f6259] dark:text-white">
-                El Certificado Azul es un reconocimiento a las buenas practicas
-                aplicadas por EL TREN, en el uso eficiente de los recursos
-                hidricos.
-              </p>
-            </div>
-          </div>
+          </div> */}
         </AccordionContent>
       </Accordion>
       <Accordion>
         <AccordionHead toggleAccordion={() => {}} isOpen={false}>
-          Proceso de Producción
+          {t('product.production_process')}
         </AccordionHead>
         <AccordionContent isOpen={false}>
           <h5 className="mt-5 p-3 bg-[#acb2a8] font-bold dark:text-white dark:bg-[#5f6259]">
-            Pasadores de Algodón
+            {blockchain?.compliance_process?.process}
           </h5>
           <div className="px-5">
-            <p className="mt-5 text-[#45483d] dark:text-white">
-              Certificado de ISO 9001:2015
-            </p>
             <ul>
-              <li className="w-full flex items-center justify-between border-b border-solid border-[#cccccc] py-2">
-                <p className="text-[13px] dark:text-white">
-                  PE19/9518 <br />
-                  Valido desde 16 Mayo <br />
-                  2023 al 19 junio 2024
-                </p>
-                <img src={odac} alt="" className="w-auto max-w-[120px]" />
-              </li>
-              <li className="w-full flex items-center justify-between border-b border-solid border-[#cccccc] py-2">
-                <p className="text-[13px] dark:text-white">
-                  PE19/9518 <br />
-                  Valido desde 16 Mayo <br />
-                  2023 al 19 junio 2024
-                </p>
-                <img src={aenor} alt="" className="w-auto max-w-[120px]" />
-              </li>
+              {blockchain?.compliance_process?.certifications?.map(
+                (item: any, index: number) => (
+                  <li
+                    className="w-full flex items-center justify-between border-b border-solid border-[#cccccc] py-2"
+                    key={index}
+                  >
+                    <div>
+                      <p className="mt-5 text-[#45483d] dark:text-white">
+                        {item?.name}
+                      </p>
+                      <p className="text-[13px] dark:text-white">
+                        {item?.number}
+                        <br />
+                        {item?.effective_date}
+                        <br />
+                        {item?.audit_date}
+                        <br />
+                        {item?.organization}
+                      </p>
+                    </div>
+                    <img
+                      src={
+                        new URL(`../assets/${item?.logo}`, import.meta.url).href
+                      }
+                      alt=""
+                      className="w-auto max-w-[120px]"
+                    />
+                  </li>
+                ),
+              )}
             </ul>
           </div>
         </AccordionContent>

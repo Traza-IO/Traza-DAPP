@@ -46,6 +46,8 @@ export default {
     title_social: 'Compartir Redes Sociales',
     description_social:
       '¡Juntos podemos hacer una diferencia positiva en la industria de la moda!',
+    compliance: 'Cumplimiento de insumos',
+    production_process: 'Proceso de producción',
   },
   footer: {
     description: 'Con trazabilidad cada prenda cuenta su historia ...',

@@ -21,7 +21,6 @@ const Materials = () => {
   });
 
   const product = Array.isArray(data2) ? data2[0] : {};
-  const product2 = Array.isArray(data2) ? data2[0] : {};
 
   return (
     <div className="flex items-start justify-between max-w-[1024px] mx-auto mt-4 px-4 w-full">
