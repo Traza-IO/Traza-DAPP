@@ -32,7 +32,7 @@ const Information = () => {
           </li>
           <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
             <strong className="text-[#45483D] dark:text-white">GTIN:</strong>
-            <p className="text-right">17751234567890</p>
+            <p className="text-right">17550123456789</p>
           </li>
           <li className="text-[13px] flex w-full justify-between py-[10px] border-solid border-b-[1px] dark:border-[#fff]">
             <strong className="text-[#45483D] dark:text-white">

@@ -1,1 +1,1 @@
-export { ModalCoockies } from './ModalCoockies'
+export { ModalCoockies } from './ModalCoockies';

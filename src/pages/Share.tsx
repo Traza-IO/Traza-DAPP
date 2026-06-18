@@ -2,7 +2,7 @@ import { ModalSocial } from '../components/ModalSocial';
 
 const Share = () => {
   return (
-    <div className="min-h-[330px]">
+    <div className="">
       <ModalSocial />
     </div>
   );

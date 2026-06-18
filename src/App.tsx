@@ -11,7 +11,7 @@ function App() {
   return (
     <div className="App">
       <h1>{t('welcome')}</h1>
-      <div className='flex gap-3 bg-red'>
+      <div className="flex gap-3 bg-red">
         <button onClick={() => changeLanguage('en')}>English</button>
         <button onClick={() => changeLanguage('es')}>Español</button>
       </div>

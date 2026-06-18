@@ -1,0 +1,25 @@
+[
+  {
+    "match": "**/*",
+    "cache": {
+      "max_age": 20
+    },
+    "headers": {
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "same-origin"
+    }
+  },
+  {
+    "match": "index.html",
+    "cache": {
+      "max_age": 0
+    },
+    "headers": null
+  },
+  {
+    "match": "**/*",
+    "headers": {
+      "Content-Security-Policy": "default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https:; img-src 'self' data: https:; font-src 'self' data: https:; connect-src 'self' https:; style-src 'self' 'unsafe-inline' https:;"
+    }
+  }
+]

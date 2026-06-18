@@ -1,56 +1,78 @@
 import Text "mo:base/Text";
 import Trie "mo:base/Trie";
+import Debug "mo:base/Debug";
 import Types "../types/types";
-actor class Product() {
- 
 
-  private stable var modelsDPP : Trie.Trie<Text, Types.ModelDPP_Type> = Trie.empty();
+persistent actor class Product() {
+
+  private stable var traceabilityDPP : Trie.Trie<Text, Types.traceability_consolidate> = Trie.empty();
+
   type Key<K> = Trie.Key<K>;
   func key(t : Text) : Key<Text> { { hash = Text.hash t; key = t } };
 
-  public func createModel(model : Types.ModelDPP_Type) : async Text {
-    modelsDPP := Trie.replace(
-      modelsDPP,
-      key(model.id_model),
+  public func createUnitData(unit : Types.traceability_consolidate) : async Text {
+    traceabilityDPP := Trie.replace(
+      traceabilityDPP,
+      key(unit.gtin_product),
       Text.equal,
-      ?model,
+      ?unit,
     ).0;
-    return model.id_model;
-  };
-  public query func readModelId(idModel : Text) : async ?Types.ModelDPP_Type {
-    let result = Trie.find(modelsDPP, key(idModel), Text.equal);
-    return result;
+    return unit.gtin_product;
   };
 
-  private stable var lotsDPP : Trie.Trie<Text, Types.lotdpp_type> = Trie.empty();
+  public query func getInfo(gtin_product : Text) : async ?Types.traceability_consolidate {
+    Debug.print("getInfo Prototipador called with gtin_product: " # gtin_product);
+    Trie.find(traceabilityDPP, key(gtin_product), Text.equal);
+  };
 
-  public func createLot(lotDpp : Types.lotdpp_type) : async Text {
-    lotsDPP := Trie.replace(
-      lotsDPP,
-      key(lotDpp.id_lot),
+  public query func getAllElements() : async  [{gtin: Text; description: Text}]{
+    let array = Trie.toArray(traceabilityDPP, func (k, v) = {gtin = v.gtin_product ; description = v.description_model.name});
+    return array;
+  };
+
+  stable var imagesDPP : Trie.Trie<Text, Blob> = Trie.empty();
+
+  public func uploadImage(name : Text, content : Blob) : async Text {
+    Debug.print("uploadImage Prototipador called with img name: " # name);
+    imagesDPP := Trie.replace(
+      imagesDPP,
+      key(name),
       Text.equal,
-      ?lotDpp,
+      ?content,
     ).0;
-    return lotDpp.id_lot;
-  };
-  public query func readLotId(idLot : Text) : async ?Types.lotdpp_type {
-    let result = Trie.find(lotsDPP, key(idLot), Text.equal);
-    return result;
+    return name;
   };
 
-  private stable var productsDPP : Trie.Trie<Text, Types.product_dpp_type> = Trie.empty();
+  public query func getImage(name : Text) : async ?Blob {
+    Debug.print("uploadImage Prototipador called with img name: " # name);
+    return Trie.find(imagesDPP, key(name), Text.equal);
+  };
+  
+  public query func getAllImages() : async  [{name: Text}]{
+    let names = Trie.toArray(imagesDPP, func (k, v) = {name = k});
+    return names;
+  };
 
-  public func createProductDpp(prodDPP : Types.product_dpp_type) : async Text {
-    productsDPP := Trie.replace(
-      productsDPP,
-      key(prodDPP.id_product),
+  stable var colorBrandsDPP : Trie.Trie<Text, Text> = Trie.empty();
+
+  public func uploadColorBrand(gtin : Text, content : Text) : async Text {
+    Debug.print("uploadColorBrand Prototipador called with gtin: " # gtin);
+    colorBrandsDPP := Trie.replace(
+      colorBrandsDPP,
+      key(gtin),
       Text.equal,
-      ?prodDPP,
+      ?content,
     ).0;
-    return prodDPP.id_product;
+    return gtin;
   };
-  public query func readProductDpp(idProd:Text) : async ?Types.product_dpp_type {
-    let result = Trie.find(productsDPP, key(idProd) ,Text.equal);
-    return result;
+
+  public query func getColorBrand(gtin : Text) : async ?Text {
+    Debug.print("getColorBrand Prototipador called with gtin: " # gtin);
+    return Trie.find(colorBrandsDPP, key(gtin), Text.equal);
+  };
+  
+  public query func getAllColorBrands() : async  [{gtin: Text}]{
+    let gtins = Trie.toArray(colorBrandsDPP, func (k, v) = {gtin = k});
+    return gtins;
   };
 };
