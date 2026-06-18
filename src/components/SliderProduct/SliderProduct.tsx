@@ -58,9 +58,10 @@ const SliderProduct = () => {
   };
 
   return (
+    // necesito que el bgCarousel sea la imagen del colorBrand
     <div
-      style={{ backgroundImage: `url(${bgCarousel})` }}
-      className="bg-cover w-full bg-fixed bg-center bg-no-repeat py-8 max-w-[1024px] mx-auto overflow-hidden"
+      style={{ backgroundColor: `${data?.colorBrand}` }}
+      className="w-full bg-fixed bg-center bg-no-repeat py-8 max-w-[1024px] mx-auto overflow-hidden"
     >
       {isLoading ? (
         <div className="flex flex gap-2 w-full">
@@ -71,7 +72,7 @@ const SliderProduct = () => {
         </div>
       ) : (
         <>
-          <Slider {...settings} className="p-4 bg-gray-100 rounded-lg shadow-lg">
+          <Slider {...settings} className="p-4 bg-gray-100 rounded-lg shadow-none">
             <div className="">
               {carousel1 && <img src={carousel1}  width={200}
                 height={300}

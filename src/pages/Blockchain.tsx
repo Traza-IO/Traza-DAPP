@@ -19,7 +19,7 @@ const Blockchain = () => {
   const { t, i18n } = useTranslation();
   const { getCurrentGtin } = useGtinNavigation();
   const { data, isLoading, fetchData } = useTraceabilityStore();
-  const gtin = getCurrentGtin() || '17751234567890';
+  const gtin = getCurrentGtin();
 
   useEffect(() => {
     if (!data) {

@@ -6,7 +6,7 @@ import { FaFacebookSquare } from 'react-icons/fa';
 import { FaInstagram } from 'react-icons/fa';
 import { FaWhatsapp } from 'react-icons/fa';
 import { IoCart } from 'react-icons/io5';
-import { SetStateAction, useEffect, useState } from 'react';
+import { SetStateAction, useEffect, useState, useRef } from 'react';
 import { useTraceabilityStore } from '../../store/useTraceabilityStore';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
@@ -20,6 +20,8 @@ const Materials = () => {
   const backend = createActor(canisterId);
   const loading = isLoading;
   const [logoMestiza, setLogoMestiza] = useState<string>('');
+  const logoUrlRef = useRef<string>('');
+  
   useEffect(() => {
     if (!data) {
       fetchData();
@@ -27,15 +29,32 @@ const Materials = () => {
   }, [data, fetchData]);
   
   useEffect(() => {
-    const fetchImage = async (name: string,component: { (value: SetStateAction<string>): void; (arg0: string): void; }) => {
+    const fetchImage = async (name: string, component: { (value: SetStateAction<string>): void; (arg0: string): void; }) => {
       const bytes = await backend.getImage(name);
       if (!bytes || !Array.isArray(bytes) || bytes.length === 0) return;
       const blob = new Blob([new Uint8Array(bytes[0])], { type: 'image/jpeg' });
-      component(URL.createObjectURL(blob));
+      const imageUrl = URL.createObjectURL(blob);
+      
+      // Revoke previous URL if it exists
+      if (logoUrlRef.current) {
+        URL.revokeObjectURL(logoUrlRef.current);
+      }
+      
+      logoUrlRef.current = imageUrl;
+      component(imageUrl);
     };
-    if (data) {
-      fetchImage(data?.brand_information.logo_mestiza, setLogoMestiza);
+    
+    if (data?.brand_information?.logo_mestiza) {
+      fetchImage(data.brand_information.logo_mestiza, setLogoMestiza);
     }
+    
+    // Cleanup: revoke object URL when component unmounts or data changes
+    return () => {
+      if (logoUrlRef.current) {
+        URL.revokeObjectURL(logoUrlRef.current);
+        logoUrlRef.current = '';
+      }
+    };
   }, [data]);
 
   return (
@@ -78,12 +97,14 @@ const Materials = () => {
               {t('product.company')}
             </h4> */}
             <figure>
-              <img
-                src={logoMestiza}
-                width={100}
-                alt={logoMestiza}
-                className="block mx-auto"
-              />
+              {logoMestiza && (
+                <img
+                  src={logoMestiza}
+                  width={100}
+                  alt="Logo Mestiza"
+                  className="block mx-auto"
+                />
+              )}
             </figure>
             <div className="w-full flex justify-between max-w-[90px] mx-auto mt-2">
               <Link to={data?.brand_information.facebook} target="_blank">

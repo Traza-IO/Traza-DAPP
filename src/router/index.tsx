@@ -1,81 +1,29 @@
 import React from 'react';
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Navigate,
-} from 'react-router-dom';
-import { Traceability } from '../pages/Traceability';
-import { Sustainability } from '../pages/Sustainability';
-import Home from '../pages/Home';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from '../components/Layout';
-import Blockchain from '../pages/Blockchain';
-import Share from '../pages/Share';
 import AdminDPP from '../pages/AdminDPP';
 import AdminIMG from '../pages/AdminIMG';
-
-
+import NotFound from '../pages/NotFound';
+import RequireValidGtin from './RequireValidGtin';
+import { DEFAULT_PATH } from '../utils/constants';
 
 const AppRouter: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Redirigir la raíz a un GTIN por defecto */}
-        <Route path="/" element={<Navigate to="/17751234567890/product" />} />
-
-        {/* Rutas dinámicas con GTIN */}
+        <Route path="/" element={<Navigate to={DEFAULT_PATH} replace />} />
         <Route
-          path="/:gtin/product"
+          path="/01/:gtin/10/:lot/21/:serial"
           element={
-            <Layout>
-              <Home />
-            </Layout>
+            <RequireValidGtin>
+              <Layout />
+            </RequireValidGtin>
           }
         />
-        <Route
-          path="/:gtin/traceability"
-          element={
-            <Layout>
-              <Traceability />
-            </Layout>
-          }
-        />
-        <Route
-          path="/:gtin/sustainability"
-          element={
-            <Layout>
-              <Sustainability />
-            </Layout>
-          }
-        />
-        <Route
-          path="/:gtin/blockchain"
-          element={
-            <Layout>
-              <Blockchain />
-            </Layout>
-          }
-        />
-        <Route
-          path="/:gtin/share"
-          element={
-            <Layout>
-              <Share />
-            </Layout>
-          }
-        />
-        <Route
-          path="/admin/dpp"
-          element={
-            <AdminDPP />
-          }
-        />
-        <Route
-          path="/admin/img"
-          element={
-              <AdminIMG />
-          }
-        />
+        <Route path="/admin/dpp" element={<AdminDPP />} />
+        <Route path="/admin/img" element={<AdminIMG />} />
+        <Route path="/not-found" element={<NotFound />} />
+        <Route path="*" element={<Navigate to={DEFAULT_PATH} replace />} />
       </Routes>
     </BrowserRouter>
   );

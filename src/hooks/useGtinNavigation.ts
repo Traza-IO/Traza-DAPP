@@ -1,33 +1,28 @@
 import { useParams } from 'react-router-dom';
+import { DEFAULT_GTIN, DEMO_LOT, DEMO_SERIAL } from '../utils/constants';
 
 /**
- * Hook personalizado para manejar la navegación preservando el parámetro gtin
- * @returns Objeto con funciones para construir URLs con gtin preservado
+ * Hook de lectura: expone los identificadores GS1 actuales del path
+ * `/01/:gtin/10/:lot/21/:serial`. Si algún segmento no está presente
+ * (rutas legacy o landing) cae a los valores demo por defecto.
  */
 export const useGtinNavigation = () => {
-  const { gtin } = useParams<{ gtin: string }>();
+  const { gtin, lot, serial } = useParams<{
+    gtin: string;
+    lot: string;
+    serial: string;
+  }>();
 
-  /**
-   * Construye una URL preservando el parámetro gtin si existe
-   * @param page - Página a la que navegar (product, traceability, sustainability, blockchain, share)
-   * @returns URL completa con el parámetro gtin incluido en la ruta
-   */
-  const buildUrlWithGtin = (page: string): string => {
-    const currentGtin = gtin || '17751234567890'; // GTIN por defecto si no existe
-    return `/${currentGtin}/${page}`;
-  };
-
-  /**
-   * Obtiene el valor actual del parámetro gtin
-   * @returns El valor del gtin o un valor por defecto si no existe
-   */
-  const getCurrentGtin = (): string => {
-    return gtin || '17751234567890';
-  };
+  const getCurrentGtin = (): string => gtin || DEFAULT_GTIN;
+  const getCurrentLot = (): string => lot || DEMO_LOT;
+  const getCurrentSerial = (): string => serial || DEMO_SERIAL;
 
   return {
-    buildUrlWithGtin,
+    gtin: getCurrentGtin(),
+    lot: getCurrentLot(),
+    serial: getCurrentSerial(),
     getCurrentGtin,
-    gtin,
+    getCurrentLot,
+    getCurrentSerial,
   };
 };
