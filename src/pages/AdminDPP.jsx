@@ -2,6 +2,11 @@
 import { useState, useEffect } from 'react';
 import { createActor } from '../declarations/backend';
 import { useForm, useFieldArray } from 'react-hook-form';
+import {
+  fetchDppPassport,
+  mapPassportToConsolidate,
+  DEFAULT_DPP_URL,
+} from '../services/dppPassport';
 
 
 const AdminDPP = () => {
@@ -11,6 +16,8 @@ const AdminDPP = () => {
   const [products, setProducts] = useState([]);
   const [gtinData, setGtinData] = useState({})
   const [colorBrand, setColorBrand] = useState('')
+  const [dppUrl, setDppUrl] = useState(DEFAULT_DPP_URL)
+  const [importing, setImporting] = useState(false)
 
   const { register, handleSubmit, reset, control, watch, setValue } = useForm();
    const careArray = watch('care.care') || [];
@@ -80,6 +87,33 @@ const { fields: trproTimeLineFields, append: appendtrproTimeLineFields, remove: 
       setColorBrand(colorBrandResp[0] || '')
   };
 
+  // Trae el passport del endpoint externo, sube las imágenes al canister por
+  // nombre y precarga el formulario. Las secciones que el endpoint no provee
+  // (compliance y blockchain) quedan vacías para completarlas antes de guardar.
+  const handleImport = async () => {
+    if (!dppUrl) return;
+    setImporting(true);
+    try {
+      const passport = await fetchDppPassport(dppUrl);
+      const { consolidate, images } = mapPassportToConsolidate(passport);
+
+      for (const img of images) {
+        await backend.uploadImage(img.name, img.bytes);
+      }
+
+      reset(consolidate);
+      setColorBrand('');
+      alert(
+        'Datos importados desde el endpoint. Revisa compliance y blockchain (no vienen en el endpoint) y luego pulsa "Save Product".',
+      );
+    } catch (error) {
+      console.error('Error importando passport:', error);
+      alert('Error al importar: ' + (error?.message || error));
+    } finally {
+      setImporting(false);
+    }
+  };
+
    const onSubmit = async (data) => {
     await backend.createUnitData(data);
     await backend.uploadColorBrand(data.information_product.gtin, colorBrand);
@@ -139,6 +173,25 @@ const { fields: trproTimeLineFields, append: appendtrproTimeLineFields, remove: 
               <span className="string-lg string-white font-bold">
                Formularios
               </span>
+              <div className="flex flex-col gap-2 mt-2 mb-3 bg-blue-700 p-3 rounded">
+                <label className="string-white font-bold">
+                  Importar desde endpoint (URL GS1 del DPP)
+                </label>
+                <input
+                  value={dppUrl}
+                  onChange={(e) => setDppUrl(e.target.value)}
+                  placeholder="https://dpp.qapary.com/01/<gtin>/10/<lote>/21/<serial>"
+                  className="border p-2 rounded w-full"
+                />
+                <button
+                  type="button"
+                  onClick={handleImport}
+                  disabled={importing}
+                  className="bg-green-600 string-white px-6 py-3 rounded string-lg font-bold w-full disabled:opacity-50"
+                >
+                  {importing ? 'Importando...' : 'Importar desde endpoint'}
+                </button>
+              </div>
                     <button
         type="submit" form="myForm"
         className="bg-blue-600 string-white px-6 py-3 rounded string-lg font-bold w-full"
